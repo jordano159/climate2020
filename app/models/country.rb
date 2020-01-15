@@ -17,6 +17,7 @@ class Country < ApplicationRecord
   validates :life_level,    numericality: { only_integer: true, greater_than_or_equal_to: 0, less_than_or_equal_to: 10 }
   validates :score,         numericality: { only_integer: true, greater_than_or_equal_to: 0 }
   validates :year,          numericality: { only_integer: true, greater_than_or_equal_to: 2020, less_than_or_equal_to: 2100 }
+  validates :budget,        numericality: { only_integer: true, greater_than_or_equal_to: 0 }
   validates :is_conquered,  inclusion: { in: [true, false] }
   validates :resilience,    inclusion: { in: Country.resiliences.keys }
   validates :reg_rel,       inclusion: { in: Country.reg_rels.keys }

@@ -1,0 +1,61 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Countries</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Resilience</th>
+      <th>Init civ</th>
+      <th>Civ num</th>
+      <th>Deg</th>
+      <th>Life level</th>
+      <th>Score</th>
+      <th>Year</th>
+      <th>Reg rel</th>
+      <th>Is conquered</th>
+      <th>Agriculture</th>
+      <th>Education</th>
+      <th>Security</th>
+      <th>Comms</th>
+      <th>Social sec</th>
+      <th>Health</th>
+      <th>Water</th>
+      <th>Energy</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @countries.each do |country| %>
+      <tr>
+        <td><%= country.name %></td>
+        <td><%= country.resilience %></td>
+        <td><%= country.init_civ %></td>
+        <td><%= country.civ_num %></td>
+        <td><%= country.deg %></td>
+        <td><%= country.life_level %></td>
+        <td><%= country.score %></td>
+        <td><%= country.year %></td>
+        <td><%= country.reg_rel %></td>
+        <td><%= country.is_conquered %></td>
+        <td><%= country.agriculture %></td>
+        <td><%= country.education %></td>
+        <td><%= country.security %></td>
+        <td><%= country.comms %></td>
+        <td><%= country.social_sec %></td>
+        <td><%= country.health %></td>
+        <td><%= country.water %></td>
+        <td><%= country.energy %></td>
+        <td><%= link_to 'Show', country %></td>
+        <td><%= link_to 'Edit', edit_country_path(country) %></td>
+        <td><%= link_to 'Destroy', country, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Country', new_country_path %>

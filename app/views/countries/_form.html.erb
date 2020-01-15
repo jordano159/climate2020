@@ -1,0 +1,29 @@
+<%= simple_form_for(@country, html: { class: 'form-inline' }) do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+  <div class="form-inputs">
+    <%= f.input :name %>
+    <%= f.input :init_civ %>
+    <%= f.input :civ_num %>
+    <%= f.input :deg %>
+    <%= f.input :life_level %>
+    <%= f.input :score %>
+    <%= f.input :year %>
+    <%= f.input :is_conquered %>
+    <%= f.input :resilience,    collection: Country.resiliences.keys %>
+    <%= f.input :reg_rel,       collection: Country.reg_rels.keys %>
+    <%= f.input :agriculture,   collection: Country.agricultures.keys %>
+    <%= f.input :education,     collection: Country.educations.keys %>
+    <%= f.input :security,      collection: Country.securities.keys %>
+    <%= f.input :comms,         collection: Country.comms.keys %>
+    <%= f.input :social_sec,    collection: Country.social_secs.keys %>
+    <%= f.input :health,        collection: Country.healths.keys %>
+    <%= f.input :water,         collection: Country.waters.keys %>
+    <%= f.input :energy,        collection: Country.energies.keys %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, class: "btn btn-success" %>
+  </div>
+<% end %>

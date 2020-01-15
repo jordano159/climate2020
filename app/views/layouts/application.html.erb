@@ -1,13 +1,19 @@
 <!DOCTYPE html>
-<html>
+<html lang="he">
   <head>
-    <title>Climate</title>
+    <title>שינוי כיוון 2020</title>
+    <meta property="og:title" content="שינוי כיוון 2020" />
+    <meta property="og:description" content="חושבים שאתם יכולים לשמור על המדינה שלכם בחיים עד 2100?" />
+    <meta property="og:type" content="website" />
+    <!-- <meta property="og:image" content="<%# image_url('logo.png') %>" /> -->
     <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link href="https://fonts.googleapis.com/css?family=Rubik" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Suez+One" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Secular+One" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
 
   <body>
     <%= yield %>

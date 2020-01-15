@@ -4,8 +4,6 @@
 
   <div class="form-inputs">
     <%= f.input :name %>
-    <%= f.input :resilience,    collection: Country.resiliences.keys %>
-    <%= f.input :reg_rel,       collection: Country.reg_rels.keys %>
     <%= f.input :agriculture,   collection: Country.agricultures.keys %>
     <%= f.input :education,     collection: Country.educations.keys %>
     <%= f.input :security,      collection: Country.securities.keys %>

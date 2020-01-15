@@ -26,7 +26,9 @@ class CountriesController < ApplicationController
   # POST /countries.json
   def create
     @country = Country.new(country_params)
-    
+
+    @country.resilience = :excellent
+    @country.reg_rel = :excellent 
     @country.init_civ = rand(10.0..80.0)
     @country.civ_num = @country.init_civ
     @country.deg = 1.0

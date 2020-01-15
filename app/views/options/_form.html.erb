@@ -1,0 +1,30 @@
+
+<%= simple_form_for(@option, html: { class: 'form-inline' }) do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+  <div class="form-inputs">
+    <%= f.input :title %>
+    <%= f.input :operator,  collection: Option.operators.keys %>
+    <%= f.input :amount %>
+    <%  columns = %i[budget resilience civ_num deg life_level score year reg_rel is_conquered agriculture education security comms social_sec health water energy] %>
+    <%= f.input :on_what,   collection: columns %>
+    <%= f.association :event %>
+    <%= f.input :min_resilience,  collection: Option.min_resiliences.keys %>
+    <%= f.input :min_budget %>
+    <%= f.input :min_civ_num %>
+    <%= f.input :min_reg_rel,  collection: Option.min_reg_rels.keys %>
+    <%= f.input :min_agriculture,  collection: Option.min_agricultures.keys %>
+    <%= f.input :min_education,  collection: Option.min_educations.keys %>
+    <%= f.input :min_security,  collection: Option.min_securities.keys %>
+    <%= f.input :min_comms,  collection: Option.min_comms.keys %>
+    <%= f.input :min_social_sec,  collection: Option.min_social_secs.keys %>
+    <%= f.input :min_health,  collection: Option.min_healths.keys %>
+    <%= f.input :min_water,  collection: Option.min_waters.keys %>
+    <%= f.input :min_energy,  collection: Option.min_energies.keys %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, class: "btn btn-success" %>
+  </div>
+<% end %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_15_151403) do
+ActiveRecord::Schema.define(version: 2020_01_15_185901) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,4 +39,36 @@ ActiveRecord::Schema.define(version: 2020_01_15_151403) do
     t.integer "budget"
   end
 
+  create_table "events", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.float "min_deg"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "options", force: :cascade do |t|
+    t.string "title"
+    t.integer "operator"
+    t.float "amount"
+    t.string "on_what"
+    t.bigint "event_id", null: false
+    t.integer "min_resilience"
+    t.integer "min_budget"
+    t.float "min_civ_num"
+    t.integer "min_reg_rel"
+    t.integer "min_agriculture"
+    t.integer "min_education"
+    t.integer "min_security"
+    t.integer "min_comms"
+    t.integer "min_social_sec"
+    t.integer "min_health"
+    t.integer "min_water"
+    t.integer "min_energy"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["event_id"], name: "index_options_on_event_id"
+  end
+
+  add_foreign_key "options", "events"
 end

@@ -1,14 +1,14 @@
 class Country < ApplicationRecord
-  enum resilience:  %i[excellent good neutral bad terrible revolution], _prefix: true
-  enum reg_rel:     %i[excellent good neutral bad terrible revolution], _prefix: true
-  enum agriculture: %i[high medium low], _prefix: true
-  enum education:   %i[high medium low], _prefix: true
-  enum security:    %i[high medium low], _prefix: true
-  enum comms:       %i[high medium low], _prefix: true
-  enum social_sec:  %i[high medium low], _prefix: true
-  enum health:      %i[high medium low], _prefix: true
-  enum water:       %i[high medium low], _prefix: true
-  enum energy:      %i[high medium low], _prefix: true
+  enum resilience:          %i[excellent good neutral bad terrible revolution], _prefix: true
+  enum reg_rel:             %i[excellent good neutral bad terrible revolution], _prefix: true
+  enum agriculture:         %i[high medium low], _prefix: true
+  enum education:           %i[high medium low], _prefix: true
+  enum security:            %i[high medium low], _prefix: true
+  enum comms:               %i[high medium low], _prefix: true
+  enum social_sec:          %i[high medium low], _prefix: true
+  enum health:              %i[high medium low], _prefix: true
+  enum water:               %i[high medium low], _prefix: true
+  enum energy:              %i[high medium low], _prefix: true
 
   validates :name,          presence: true
   validates :init_civ,      numericality: { greater_than: 0 }
@@ -29,5 +29,18 @@ class Country < ApplicationRecord
   validates :health,        inclusion: { in: Country.healths.keys }
   validates :water,         inclusion: { in: Country.waters.keys }
   validates :energy,        inclusion: { in: Country.energies.keys }
+
+  # f = :+
+  # puts 1.public_send(f, 2) # => 3
+  #
+  # enum operator: ["plus", "minus"]
+  #
+  # def method(option)
+  #   operator.plus? ? operator = :+ : operator = :-
+  #   @country.send(option.column) = @country.send(option.column).public_send(operator, option.val)
+  #   @country.save
+  # end
+  #
+  # @country.method(@option)
 
 end

@@ -4,14 +4,6 @@
 
   <div class="form-inputs">
     <%= f.input :name %>
-    <%# f.input :init_civ %>
-    <%# f.input :civ_num %>
-    <%# f.input :deg %>
-    <%# f.input :life_level %>
-    <%# f.input :score %>
-    <%# f.input :year %>
-    <%# f.input :budget %>
-    <%# f.input :is_conquered %>
     <%= f.input :resilience,    collection: Country.resiliences.keys %>
     <%= f.input :reg_rel,       collection: Country.reg_rels.keys %>
     <%= f.input :agriculture,   collection: Country.agricultures.keys %>

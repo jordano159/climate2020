@@ -1,0 +1,59 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Options</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Operator</th>
+      <th>Amount</th>
+      <th>On_what</th>
+      <th>Event</th>
+      <th>Min resilience</th>
+      <th>Min budget</th>
+      <th>Min civ num</th>
+      <th>Min reg rel</th>
+      <th>Min agriculture</th>
+      <th>Min education</th>
+      <th>Min security</th>
+      <th>Min comms</th>
+      <th>Min social sec</th>
+      <th>Min health</th>
+      <th>Min water</th>
+      <th>Min energy</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @options.each do |option| %>
+      <tr>
+        <td><%= option.title %></td>
+        <td><%= option.operator %></td>
+        <td><%= option.amount %></td>
+        <td><%= option.on_what %></td>
+        <td><%= option.event.title %></td>
+        <td><%= option.min_resilience %></td>
+        <td><%= option.min_budget %></td>
+        <td><%= option.min_civ_num %></td>
+        <td><%= option.min_reg_rel %></td>
+        <td><%= option.min_agriculture %></td>
+        <td><%= option.min_education %></td>
+        <td><%= option.min_security %></td>
+        <td><%= option.min_comms %></td>
+        <td><%= option.min_social_sec %></td>
+        <td><%= option.min_health %></td>
+        <td><%= option.min_water %></td>
+        <td><%= option.min_energy %></td>
+        <td><%= link_to 'Show', option %></td>
+        <td><%= link_to 'Edit', edit_option_path(option) %></td>
+        <td><%= link_to 'Destroy', option, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Option', new_option_path %>

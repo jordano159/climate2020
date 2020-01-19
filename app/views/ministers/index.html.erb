@@ -1,4 +1,10 @@
-<p id="notice"><%= notice %></p>
+<script>
+$(document).ready(function(){
+  $("td").click(function(){
+    $(this).hide(100);
+  });
+});
+</script>
 
 <h1>Ministers</h1>
 
@@ -26,4 +32,5 @@
 
 <br>
 
+<%= link_to 'Next', new_country_path, class: "btn btn-success" %>
 <%= link_to 'New Minister', new_minister_path %>

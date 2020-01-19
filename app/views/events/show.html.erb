@@ -17,3 +17,5 @@
 
 <%= link_to 'Edit', edit_event_path(@event) %> |
 <%= link_to 'Back', events_path %>
+
+<%= link_to 'Next Turn', event_path(@event, country_id: params[:country_id]), class: "btn btn-success" %>

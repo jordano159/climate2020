@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  before_action :set_event, only: [:show, :edit, :update, :destroy]
+  before_action :set_event, only: [:edit, :update, :destroy]
 
   # GET /events
   # GET /events.json
@@ -10,6 +10,11 @@ class EventsController < ApplicationController
   # GET /events/1
   # GET /events/1.json
   def show
+    if params[:country_id]
+      @event = Event.where("min_deg <= ?", Country.find(params[:country_id]).deg).sample
+    else
+      @event = Event.find(params[:id])
+    end
   end
 
   # GET /events/new

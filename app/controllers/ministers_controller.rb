@@ -4,7 +4,11 @@ class MinistersController < ApplicationController
   # GET /ministers
   # GET /ministers.json
   def index
-    @ministers = Minister.all
+    if params[:game]
+      @ministers = Minister.rand_ministers(params[:game].to_i)
+    else
+      @ministers = Minister.all
+    end
   end
 
   # GET /ministers/1

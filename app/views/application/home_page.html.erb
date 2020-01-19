@@ -1,3 +1,8 @@
 <h1>Welcome to the game</h1>
-
-<%= link_to "New Game", new_country_path %>
+<p>Capitalism is destoying the planet. Think you can handle it?</p>
+<%= form_with(url: ministers_path, method: "get", local: true) do %>
+  <%= label_tag(:game, "How many players:") %>
+  <%= text_field_tag(:game) %>
+  <%= submit_tag("New Game") %>
+<% end %>
+<%# link_to "New Game", new_country_path %>

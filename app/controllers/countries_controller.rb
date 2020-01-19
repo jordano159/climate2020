@@ -28,8 +28,8 @@ class CountriesController < ApplicationController
     @country = Country.new(country_params)
 
     @country.resilience = :excellent
-    @country.reg_rel = :excellent 
-    @country.init_civ = rand(10.0..80.0)
+    @country.reg_rel = :excellent
+    @country.init_civ = rand(10.0..80.0).round(2)
     @country.civ_num = @country.init_civ
     @country.deg = 1.0
     @country.life_level = 10

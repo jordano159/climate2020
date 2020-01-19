@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :goals
+  resources :ministers
   resources :options
   resources :events
   resources :countries

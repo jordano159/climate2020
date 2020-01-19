@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Ministers</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Role</th>
+      <th>Description</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @ministers.each do |minister| %>
+      <tr>
+        <td><%= minister.role %></td>
+        <td><%= minister.description %></td>
+        <td><%= link_to 'Show', minister %></td>
+        <td><%= link_to 'Edit', edit_minister_path(minister) %></td>
+        <td><%= link_to 'Destroy', minister, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Minister', new_minister_path %>

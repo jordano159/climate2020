@@ -10,6 +10,11 @@ class CountriesController < ApplicationController
   # GET /countries/1
   # GET /countries/1.json
   def show
+    if params[:option_id]
+      option = Option.find(params[:option_id])
+      consequence_too(option, @country)
+      redirect_to event_path(id: 1, country_id: @country.id, turn: true)
+    end
   end
 
   # GET /countries/new
@@ -74,6 +79,23 @@ class CountriesController < ApplicationController
   end
 
   private
+
+    def consequence_too(option, country)
+      # operator.plus? ? operator = :+ : operator = :-
+      puts "****************************************"
+      puts "#{option.on_what}: #{country.send(option.on_what)} + #{option.amount}"
+      case option.on_what
+      when "budget", "life_level"
+        country.send "#{option.on_what}=".to_sym, country.send(option.on_what) + option.amount.to_i
+      when "civ_num", "deg"
+        country.send "#{option.on_what}=".to_sym, country.send(option.on_what) + option.amount
+      when "resilience", "reg_rel", "agriculture", "education", "security", "comms", "social_sec", "health", "water", "energy"
+        country.send "#{option.on_what}=".to_sym, country.read_attribute_before_type_cast(option.on_what.to_sym) + option.amount
+      end
+      puts "#{option.on_what}: #{country.send(option.on_what)}"
+      country.save!
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_country
       @country = Country.find(params[:id])

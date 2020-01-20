@@ -49,13 +49,15 @@ class Country < ApplicationRecord
     end
   end
 
-  def consequence(option)
-    # operator.plus? ? operator = :+ : operator = :-
-    puts "****************************************"
-    puts "#{@country.send(option.on_what)}"
-    @country.send(option.on_what) = @country.send(option.on_what) + option.amount
-    @country.save
-  end
+  # def consequence(option)
+  #   # operator.plus? ? operator = :+ : operator = :-
+  #   puts "****************************************"
+  #   puts "#{send(option.on_what)}"
+  #   o.send "#{key}=".to_sym, true
+  #   budget = send(option.on_what) + option.amount
+  #   # send(option.on_what) = send(option.on_what) + option.amount
+  #   save
+  # end
   # f = :+
   # puts 1.public_send(f, 2) # => 3
   #

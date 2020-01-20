@@ -11,10 +11,17 @@ class EventsController < ApplicationController
   # GET /events/1.json
   def show
     if params[:country_id]
-      @event = Event.where("min_deg <= ?", Country.find(params[:country_id]).deg).sample
+      c = Country.find(params[:country_id])
+      @event = Event.where("min_deg <= ?", c.deg).sample
+      if params[:turn] == "true"
+        c.year = c.year + 5
+        c.deg = c.deg + 0.05
+        c.save
+      end
     else
       @event = Event.find(params[:id])
     end
+
   end
 
   # GET /events/new

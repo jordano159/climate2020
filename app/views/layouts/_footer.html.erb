@@ -1,10 +1,25 @@
 <footer class="footer">
   <% if params[:country_id] %>
-    <% country = Country.find(params[:country_id]) %>
-    Year: <%= country.year %>
-    Current Degree: <%= country.deg %>
-    Citizens Alive: <%= country.civ_num %>
-    Life level: <%= country.life_level %>
-    Budget: <%= country.budget %>
+    <div>
+      <% country = Country.find(params[:country_id]) %>
+      <strong>Name:</strong>            <%= country.name %>
+      <strong>Year:</strong>            <%= country.year %>
+      <strong>Current Degree:</strong>  <%= country.deg %>
+      <strong>Citizens Alive:</strong>  <%= country.civ_num %>
+      <strong>Life level:</strong>      <%= country.life_level %>
+      <strong>Budget:</strong>          <%= country.budget %>
+    </div>
+    <div>
+    <strong>Resilience:</strong>        <%= country.resilience %>
+    <strong>Reg rel:</strong>           <%= country.reg_rel %>
+    <strong>Agriculture:</strong>       <%= country.agriculture %>
+    <strong>Education:</strong>         <%= country.education %>
+    <strong>Security:</strong>          <%= country.security %>
+    <strong>Comms:</strong>             <%= country.comms %>
+    <strong>Social sec:</strong>        <%= country.social_sec %>
+    <strong>Health:</strong>            <%= country.health %>
+    <strong>Water:</strong>             <%= country.water %>
+    <strong>Energy:</strong>            <%= country.energy %>
+    </div>
   <% end %>
 </footer>

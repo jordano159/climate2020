@@ -16,8 +16,8 @@ class Option < ApplicationRecord
 
   validates :title,             presence: true
   validates :operator,          inclusion: { in: Option.operators.keys }
-  validates :amount,            numericality: { greater_than: 0 }
-  validates :on_what,           inclusion: { in: %w(budget resilience civ_num deg life_level score year reg_rel is_conquered agriculture education security comms social_sec health water energy) }
+  validates :amount,            numericality: true
+  validates :on_what,           inclusion: { in: %w(budget resilience civ_num deg life_level reg_rel agriculture education security comms social_sec health water energy) }
   validates :min_civ_num,       numericality: { greater_than_or_equal_to: 0 }, allow_nil: true
   validates :min_budget,        numericality: { only_integer: true, greater_than_or_equal_to: 0 }, allow_nil: true
   validates :min_resilience,    inclusion: { in: Option.min_resiliences.keys }, allow_nil: true

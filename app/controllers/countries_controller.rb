@@ -40,7 +40,7 @@ class CountriesController < ApplicationController
 
     respond_to do |format|
       if @country.save
-        format.html { redirect_to event_path(id: 1), country_id: @country.id }
+        format.html { redirect_to event_path(id: 1, country_id: @country.id) }
         format.json { render :show, status: :created, location: @country }
       else
         format.html { render :new }

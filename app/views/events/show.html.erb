@@ -1,14 +1,22 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Title:</strong>
-  <%= @event.title %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @event.description %>
-</p>
+<div class="card" style="width: 22rem;">
+  <div class="card-body">
+    <h5 class="card-title"><%= @event.title %></h5>
+    <p class="card-text"><%= @event.description %></p>
+    <% @event.options.each do |option| %>
+      <div class="card" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title"><%= option.title %></h5>
+          <p class="card-text"><%= "Consequence: #{option.operator} #{option.amount} #{option.on_what}" %></p>
+          <% if params[:country_id] && Country.find(params[:country_id]).is_option_available(option) %>
+            <a href="#" class="btn btn-primary">Choose Option</a>
+          <% else %>
+            <a href="#" class="btn btn-primary disabled">Choose Option</a>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
 
 <p>
   <strong>Min deg:</strong>

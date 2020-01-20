@@ -12,6 +12,8 @@ class Option < ApplicationRecord
   enum min_water:               Country.waters.keys, _prefix: true
   enum min_energy:              Country.energies.keys, _prefix: true
 
+  after_initialize :set_defaults
+
   validates :title,             presence: true
   validates :operator,          inclusion: { in: Option.operators.keys }
   validates :amount,            numericality: { greater_than: 0 }
@@ -29,4 +31,20 @@ class Option < ApplicationRecord
   validates :min_water,         inclusion: { in: Option.min_waters.keys }, allow_nil: true
   validates :min_energy,        inclusion: { in: Option.min_energies.keys }, allow_nil: true
 
+
+
+  def set_defaults
+    if self.new_record?
+      self.min_resilience   ||= :revolution
+      self.min_reg_rel      ||= :war
+      self.min_agriculture  ||= :low
+      self.min_education    ||= :low
+      self.min_security     ||= :low
+      self.min_comms        ||= :low
+      self.min_social_sec   ||= :low
+      self.min_health       ||= :low
+      self.min_water        ||= :low
+      self.min_energy       ||= :low
+    end
+  end
 end

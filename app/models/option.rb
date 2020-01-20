@@ -15,7 +15,7 @@ class Option < ApplicationRecord
   after_initialize :set_defaults
 
   validates :title,             presence: true
-  validates :operator,          inclusion: { in: Option.operators.keys }
+  # validates :operator,          inclusion: { in: Option.operators.keys }
   validates :amount,            numericality: true
   validates :on_what,           inclusion: { in: %w(budget resilience civ_num deg life_level reg_rel agriculture education security comms social_sec health water energy) }
   validates :min_civ_num,       numericality: { greater_than_or_equal_to: 0 }, allow_nil: true

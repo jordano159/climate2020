@@ -11,7 +11,11 @@
     </div>
     <div>
     <strong>Resilience:</strong>        <%= country.resilience %>
+    <% if country.reg_rel == "war" %>
+      <strong>Reg rel:</strong>           <span style="color: red"><%= country.reg_rel %> (civ_num and budget declining)</span>
+    <% else %>
     <strong>Reg rel:</strong>           <%= country.reg_rel %>
+    <% end %>
     <strong>Agriculture:</strong>       <%= country.agriculture %>
     <strong>Education:</strong>         <%= country.education %>
     <strong>Security:</strong>          <%= country.security %>

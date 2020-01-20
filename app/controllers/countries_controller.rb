@@ -13,7 +13,16 @@ class CountriesController < ApplicationController
     if params[:option_id]
       option = Option.find(params[:option_id])
       consequence_too(option, @country)
-      redirect_to event_path(id: 1, country_id: @country.id, turn: true)
+      if params[:turn] == "true"
+        c.year += 5
+        c.deg += 0.05
+        if reg_rel == "war"
+          c.civ_num -= 1
+          c.budget -= 1
+        end
+        c.save
+      end
+      redirect_to event_path(id: 1, country_id: @country.id)
     end
   end
 

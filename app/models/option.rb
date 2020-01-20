@@ -35,6 +35,8 @@ class Option < ApplicationRecord
 
   def set_defaults
     if self.new_record?
+      self.min_budget   ||= 0
+      self.min_civ_num   ||= 0
       self.min_resilience   ||= :revolution
       self.min_reg_rel      ||= :war
       self.min_agriculture  ||= :low

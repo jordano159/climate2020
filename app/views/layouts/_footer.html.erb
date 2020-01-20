@@ -10,9 +10,13 @@
       <strong>Budget:</strong>          <%= country.budget %>
     </div>
     <div>
-    <strong>Resilience:</strong>        <%= country.resilience %>
+    <% if country.resilience == "civil_war" %>
+      <strong>Resilience:</strong>           <span style="color: red"><%= country.resilience %> (civ_num and budget declining)</span>
+    <% else %>
+    <strong>Resilience:</strong>           <%= country.reg_rel %>
+    <% end %>
     <% if country.reg_rel == "war" %>
-      <strong>Reg rel:</strong>           <span style="color: red"><%= country.reg_rel %> (civ_num and budget declining)</span>
+      <strong>Reg rel:</strong>           <span style="color: red"><%= country.resilience %> (civ_num and budget declining)</span>
     <% else %>
     <strong>Reg rel:</strong>           <%= country.reg_rel %>
     <% end %>

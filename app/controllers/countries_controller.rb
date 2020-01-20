@@ -14,13 +14,35 @@ class CountriesController < ApplicationController
       option = Option.find(params[:option_id])
       consequence_too(option, @country)
       if params[:turn] == "true"
-        c.year += 5
-        c.deg += 0.05
-        if reg_rel == "war"
-          c.civ_num -= 1
-          c.budget -= 1
+        @country.year += 5
+        @country.deg += 0.05
+        if @country.reg_rel == "war"
+          if @country.civ_num > 1.1
+            @country.civ_num -= 1
+          else
+            @country.lose = true
+            @country.is_conquered = true
+          end
+          if @country.budget > 1.01
+            @country.budget -= 1
+          else
+            @country.lose = true
+            @country.is_conquered = true
+          end
         end
-        c.save
+        if @country.resilience == "civil_war"
+          if @country.civ_num > 1.1
+            @country.civ_num -= 1
+          else
+            @country.lose = true
+          end
+          if @country.budget > 1.01
+            @country.budget -= 1
+          else
+            @country.lose = true
+          end
+        end
+        @country.save
       end
       redirect_to event_path(id: 1, country_id: @country.id)
     end

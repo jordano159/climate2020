@@ -1,5 +1,5 @@
 class Country < ApplicationRecord
-  enum resilience:          %i[revolution terrible bad neutral good excellent], _prefix: true
+  enum resilience:          %i[civil_war terrible bad neutral good excellent], _prefix: true
   enum reg_rel:             %i[war terrible bad neutral good excellent], _prefix: true
   enum agriculture:         %i[low medium high], _prefix: true
   enum education:           %i[low medium high], _prefix: true

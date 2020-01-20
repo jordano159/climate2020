@@ -33,8 +33,8 @@ class Country < ApplicationRecord
   def is_option_available(option)
     if   option.read_attribute_before_type_cast(:min_resilience)      <= read_attribute_before_type_cast(:resilience)   &&
             option.read_attribute_before_type_cast(:min_reg_rel)      <= read_attribute_before_type_cast(:reg_rel)      &&
-            option.(:min_budget)                                      <= (:budget)                                      &&
-            option.(:min_civ_num)                                     <= (:civ_num)                                     &&
+            option.min_budget                                         <= budget                                         &&
+            option.min_civ_num                                        <= civ_num                                        &&
             option.read_attribute_before_type_cast(:min_agriculture)  <= read_attribute_before_type_cast(:agriculture)  &&
             option.read_attribute_before_type_cast(:min_education)    <= read_attribute_before_type_cast(:education)    &&
             option.read_attribute_before_type_cast(:min_security)     <= read_attribute_before_type_cast(:security)     &&
@@ -47,6 +47,14 @@ class Country < ApplicationRecord
     else
       return false
     end
+  end
+
+  def consequence(option)
+    # operator.plus? ? operator = :+ : operator = :-
+    puts "****************************************"
+    puts "#{@country.send(option.on_what)}"
+    @country.send(option.on_what) = @country.send(option.on_what) + option.amount
+    @country.save
   end
   # f = :+
   # puts 1.public_send(f, 2) # => 3

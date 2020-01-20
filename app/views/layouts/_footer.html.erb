@@ -1,0 +1,10 @@
+<footer class="footer">
+  <% if params[:country_id] %>
+    <% country = Country.find(params[:country_id]) %>
+    Year: <%= country.year %>
+    Current Degree: <%= country.deg %>
+    Citizens Alive: <%= country.civ_num %>
+    Life level: <%= country.life_level %>
+    Budget: <%= country.budget %>
+  <% end %>
+</footer>

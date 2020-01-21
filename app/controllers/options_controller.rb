@@ -1,5 +1,6 @@
 class OptionsController < ApplicationController
   before_action :set_option, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_admin!, only: [:index, :show, :new, :edit, :create, :update, :destroy]
 
   # GET /options
   # GET /options.json

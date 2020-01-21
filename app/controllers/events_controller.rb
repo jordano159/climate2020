@@ -1,5 +1,6 @@
 class EventsController < ApplicationController
   before_action :set_event, only: [:edit, :update, :destroy]
+  before_action :authenticate_admin!, only: [:index, :new, :edit, :create, :update, :destroy]
 
   # GET /events
   # GET /events.json
@@ -19,9 +20,6 @@ class EventsController < ApplicationController
     else
       @event = Event.find(params[:id])
     end
-
-
-
   end
 
   # GET /events/new

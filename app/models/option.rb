@@ -1,5 +1,8 @@
 class Option < ApplicationRecord
+  after_initialize :set_defaults
+
   belongs_to :event
+
   enum operator:                %i[plus minus], _prefix: true
   enum min_resilience:          Country.resiliences.keys, _prefix: true
   enum min_reg_rel:             Country.reg_rels.keys, _prefix: true
@@ -12,7 +15,6 @@ class Option < ApplicationRecord
   enum min_water:               Country.waters.keys, _prefix: true
   enum min_energy:              Country.energies.keys, _prefix: true
 
-  after_initialize :set_defaults
 
   validates :title,             presence: true
   # validates :operator,          inclusion: { in: Option.operators.keys }
@@ -49,4 +51,5 @@ class Option < ApplicationRecord
       self.min_energy       ||= :low
     end
   end
+  
 end

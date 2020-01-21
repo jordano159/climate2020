@@ -1,5 +1,6 @@
 class MinistersController < ApplicationController
   before_action :set_minister, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_admin!, only: [:show, :new, :edit, :create, :update, :destroy]
 
   # GET /ministers
   # GET /ministers.json

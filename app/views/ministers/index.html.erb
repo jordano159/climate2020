@@ -1,26 +1,48 @@
 <script>
 $(document).ready(function(){
-  $("td").click(function(){
-    $(this).hide(100);
-  });
+	jQuery.fn.exists = function(){ return this.length > 0; }
+	minister_num = 0
+ // $("#minister-0").toggleClass('d-none');
+ $("#between").toggleClass('d-none');
+
+ $(".next").click(function(event) {
+	 $(this).parents(".card").toggleClass('d-none')
+	 if ( $(this).parents("#between").exists()) {
+		 $("#minister-" + minister_num).toggleClass('d-none');
+	 }
+	 else {
+		 minister_num += 1
+	 	$("#between").toggleClass('d-none');
+	 }
+	 if (!$("#minister-" + minister_num).exists()) {
+		 $("#next-title").html("Start Game");
+		 $("#next").toggleClass('d-none');
+		 $("#start-game").toggleClass('d-none');
+	 }
+ });
 });
 </script>
 
 <% if params[:game] %>
-  <div class="card" style="width: 22rem;">
     <div class="card-body">
       <h5 class="card-title">Ministers</h5>
-      <% @ministers.each do |minister| %>
-        <div class="card" style="width: 18rem;">
+      <% @ministers.each_with_index do |minister, index| %>
+        <div class="card d-none h-100" id="minister-<%= index %>">
           <div class="card-body">
             <h5 class="card-title"><%= minister.role %></h5>
             <p class="card-text"><%= minister.description %></p>
-              <a href="#" class="btn btn-primary">Choose Option</a>
+						<button class="next btn btn-primary" type="button" name="button">next</button>
           </div>
         </div>
       <% end %>
+			<div class="card d-none" id="between">
+				<div class="card-body">
+					<h5 class="card-title" id="next-title">next player</h5>
+					<%= link_to 'Start Game', new_country_path, class: "btn btn-success d-none", id:"start-game" %>
+					<button id="next" class="next btn btn-primary" type="button" name="button">next</button>
+				</div>
+			</div>
     </div>
-  </div>
 <% else %>
 
   <table>
@@ -44,9 +66,7 @@ $(document).ready(function(){
       <% end %>
     </tbody>
 </table>
+<%= link_to 'New Minister', new_minister_path %>
 <% end %>
 
 <br>
-
-<%= link_to 'Next', new_country_path, class: "btn btn-success" %>
-<%= link_to 'New Minister', new_minister_path %>

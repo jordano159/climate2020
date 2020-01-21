@@ -16,7 +16,6 @@ class ApplicationController < ActionController::Base
       if country.lose?
         redirect_to game_over_path
       end
-
     end
   end
 

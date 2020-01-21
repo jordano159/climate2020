@@ -51,6 +51,46 @@ class CountriesController < ApplicationController
   # GET /countries/new
   def new
     @country = Country.new
+    @agriculture_costs = {
+      high: (@country.init_civ * 0.5 + 3).to_i,
+      medium: (@country.init_civ * 0.3 + 2).to_i,
+      low: (@country.init_civ * 0.1 + 1).to_i,
+    }
+    @education_costs = {
+      high: (@country.init_civ * 0.5 + 3).to_i,
+      medium: (@country.init_civ * 0.3 + 2).to_i,
+      low: (@country.init_civ * 0.1 + 1).to_i,
+    }
+    @security_costs = {
+      high: (@country.init_civ * 0.5 + 3).to_i,
+      medium: (@country.init_civ * 0.3 + 2).to_i,
+      low: (@country.init_civ * 0.1 + 1).to_i,
+    }
+    @comms_costs = {
+      high: (@country.init_civ * 0.5 + 3).to_i,
+      medium: (@country.init_civ * 0.3 + 2).to_i,
+      low: (@country.init_civ * 0.1 + 1).to_i,
+    }
+    @social_sec_costs = {
+      high: (@country.init_civ * 0.5 + 3).to_i,
+      medium: (@country.init_civ * 0.3 + 2).to_i,
+      low: (@country.init_civ * 0.1 + 1).to_i,
+    }
+    @health_costs = {
+      high: (@country.init_civ * 0.5 + 3).to_i,
+      medium: (@country.init_civ * 0.3 + 2).to_i,
+      low: (@country.init_civ * 0.1 + 1).to_i,
+    }
+    @water_costs = {
+      high: (@country.init_civ * 0.5 + 3).to_i,
+      medium: (@country.init_civ * 0.3 + 2).to_i,
+      low: (@country.init_civ * 0.1 + 1).to_i,
+    }
+    @energy_costs = {
+      high: (@country.init_civ * 0.5 + 3).to_i,
+      medium: (@country.init_civ * 0.3 + 2).to_i,
+      low: (@country.init_civ * 0.1 + 1).to_i
+    }
 
   end
 
@@ -62,17 +102,6 @@ class CountriesController < ApplicationController
   # POST /countries.json
   def create
     @country = Country.new(country_params)
-
-    @country.resilience = :excellent
-    @country.reg_rel = :excellent
-    @country.init_civ = rand(10.0..80.0).round(2)
-    @country.civ_num = @country.init_civ
-    @country.deg = 1.0
-    @country.life_level = 10
-    @country.budget = (@country.civ_num * rand(2..4)).to_i
-    @country.score = 0
-    @country.year = 2020
-    @country.is_conquered = false
 
     respond_to do |format|
       if @country.save

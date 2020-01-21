@@ -1,4 +1,6 @@
 class Country < ApplicationRecord
+  after_initialize :set_defaults
+
   enum resilience:          %i[civil_war terrible bad neutral good excellent], _prefix: true
   enum reg_rel:             %i[war terrible bad neutral good excellent], _prefix: true
   enum agriculture:         %i[low medium high], _prefix: true
@@ -46,6 +48,23 @@ class Country < ApplicationRecord
       return true
     else
       return false
+    end
+  end
+
+  private
+
+  def set_defaults
+    if self.new_record?
+      self.resilience ||= :neutral
+      self.reg_rel ||= :neutral
+      self.init_civ ||= rand(10.0..80.0).round(2)
+      self.civ_num ||= self.init_civ
+      self.deg ||= 1.0
+      self.life_level ||= 10
+      self.budget ||= (self.civ_num * rand(2..4)).to_i
+      self.score ||= 0
+      self.year ||= 2020
+      self.is_conquered ||= false
     end
   end
 

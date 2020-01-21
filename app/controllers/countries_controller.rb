@@ -103,7 +103,46 @@ class CountriesController < ApplicationController
   # POST /countries.json
   def create
     @country = Country.new(country_params)
-
+		@agriculture_costs = {
+			high: (@country.init_civ * 0.5 + 3).to_i,
+			medium: (@country.init_civ * 0.3 + 2).to_i,
+			low: (@country.init_civ * 0.1 + 1).to_i,
+		}
+		@education_costs = {
+			high: (@country.init_civ * 0.5 + 3).to_i,
+			medium: (@country.init_civ * 0.3 + 2).to_i,
+			low: (@country.init_civ * 0.1 + 1).to_i,
+		}
+		@security_costs = {
+			high: (@country.init_civ * 0.5 + 3).to_i,
+			medium: (@country.init_civ * 0.3 + 2).to_i,
+			low: (@country.init_civ * 0.1 + 1).to_i,
+		}
+		@comms_costs = {
+			high: (@country.init_civ * 0.5 + 3).to_i,
+			medium: (@country.init_civ * 0.3 + 2).to_i,
+			low: (@country.init_civ * 0.1 + 1).to_i,
+		}
+		@social_sec_costs = {
+			high: (@country.init_civ * 0.5 + 3).to_i,
+			medium: (@country.init_civ * 0.3 + 2).to_i,
+			low: (@country.init_civ * 0.1 + 1).to_i,
+		}
+		@health_costs = {
+			high: (@country.init_civ * 0.5 + 3).to_i,
+			medium: (@country.init_civ * 0.3 + 2).to_i,
+			low: (@country.init_civ * 0.1 + 1).to_i,
+		}
+		@water_costs = {
+			high: (@country.init_civ * 0.5 + 3).to_i,
+			medium: (@country.init_civ * 0.3 + 2).to_i,
+			low: (@country.init_civ * 0.1 + 1).to_i,
+		}
+		@energy_costs = {
+			high: (@country.init_civ * 0.5 + 3).to_i,
+			medium: (@country.init_civ * 0.3 + 2).to_i,
+			low: (@country.init_civ * 0.1 + 1).to_i
+		}
     respond_to do |format|
       if @country.save
         format.html { redirect_to event_path(id: 1, country_id: @country.id) }

@@ -1,22 +1,24 @@
 <%= simple_form_for(@country, html: { class: 'form-inline' }) do |f| %>
   <%= f.error_notification %>
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
-
   <div class="form-inputs">
+		budget: <%= @country.budget %>
+		civ_num: <%= @country.civ_num %>
     <%= f.input :name %>
-    <%= f.input :agriculture,   collection: Country.agricultures.keys %>
-    <%= f.input :education,     collection: Country.educations.keys %>
-    <%= f.input :security,      collection: Country.securities.keys %>
-    <%= f.input :comms,         collection: Country.comms.keys %>
-    <%= f.input :social_sec,    collection: Country.social_secs.keys %>
-    <%= f.input :health,        collection: Country.healths.keys %>
-    <%= f.input :water,         collection: Country.waters.keys %>
-    <%= f.input :energy,        collection: Country.energies.keys %>
+    <%= f.input :agriculture,   collection: Country.agricultures.keys, include_blank: false %>
+    <%= f.input :education,     collection: Country.educations.keys, include_blank: false %>
+    <%= f.input :security,      collection: Country.securities.keys, include_blank: false %>
+    <%= f.input :comms,         collection: Country.comms.keys, include_blank: false %>
+    <%= f.input :social_sec,    collection: Country.social_secs.keys, include_blank: false %>
+    <%= f.input :health,        collection: Country.healths.keys, include_blank: false %>
+    <%= f.input :water,         collection: Country.waters.keys, include_blank: false %>
+    <%= f.input :energy,        collection: Country.energies.keys, include_blank: false %>
+		<%= f.input :budget        %>
+		<div class="form-actions">
+			<%= f.button :submit, class: "btn btn-success" %>
+		</div>
   </div>
 
-  <div class="form-actions">
-    <%= f.button :submit, class: "btn btn-success" %>
-  </div>
 <% end %>
 
 Costs:
@@ -28,3 +30,44 @@ social_sec_costs: <%= @social_sec_costs %>
 health_costs: <%= @health_costs %>
 water_costs: <%= @water_costs %>
 energy_costs: <%= @energy_costs %>
+
+<script type="text/javascript">
+	costs = [<%= @agriculture_costs.values %>,
+		 			 <%= @education_costs.values %>,
+					 <%= @security_costs.values %>,
+					 <%= @comms_costs.values %>,
+					 <%= @social_sec_costs.values %>,
+					 <%= @health_costs.values %>,
+					 <%= @water_costs.values %>,
+					 <%= @energy_costs.values %>]
+	all_costs = 0
+	$.each($("select"),function(index, el) {
+		// console.log(index);
+		$(el).children("option[value='low']").append(" - " + costs[index][2])
+		$(el).children("option[value='medium']").append(" - " + costs[index][1])
+		$(el).children("option[value='high']").append(" - " + costs[index][0])
+		all_costs = all_costs + costs[index][2]
+	});
+	start_budget = $("#country_budget").val() - all_costs
+	$("#country_budget").val(start_budget)
+
+	 agriculture_payed = 0
+	 education_payed = 0
+	 security_payed = 0
+	 comms_payed = 0
+	 social_sec_payed = 0
+	 health_payed = 0
+	 water_payed = 0
+	 energy_payed = 0
+
+	$("select").change(function(event) {
+		$(this).attr("id").replace('country_', '') + "_payed";
+		console.log(comms_payed);
+		cost = $(this).children('option:selected').html().split(" ")[2];
+		new_budget = $("#country_budget").val() - cost
+		$("#country_budget").val(new_budget)
+		// $("#country_budget").val(0)
+	});
+
+	function pay(){}
+</script>

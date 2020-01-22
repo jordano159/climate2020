@@ -25,7 +25,7 @@
 
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
+    <ul class="navbar-nav p-0">
       <li class="nav-item active">
         <% if country.resilience == "civil_war" %>
         <strong>Resilience:</strong>           <span style="color: red"><%= country.resilience %> (civ_num and budget declining)</span>
@@ -33,35 +33,35 @@
         <strong>Resilience:</strong>           <%= country.resilience %>
         <% end %>
       </li>
-      <li class="nav-item active">
+      <li class="nav-item">
         <% if country.reg_rel == "war" %>
         <strong>Reg rel:</strong>           <span style="color: red"><%= country.reg_rel %> (civ_num and budget declining)</span>
         <% else %>
         <strong>Reg rel:</strong>           <%= country.reg_rel %>
         <% end %>
       </li>
-      <li class="nav-item active">
+      <li class="nav-item">
         <strong>Agriculture:</strong>       <%= country.agriculture %>
       </li>
-      <li class="nav-item active">
+      <li class="nav-item">
         <strong>Education:</strong>         <%= country.education %>
       </li>
-      <li class="nav-item active">
+      <li class="nav-item">
         <strong>Security:</strong>          <%= country.security %>
       </li>
-      <li class="nav-item active">
+      <li class="nav-item">
         <strong>Comms:</strong>             <%= country.comms %>
       </li>
-      <li class="nav-item active">
+      <li class="nav-item">
         <strong>Social sec:</strong>        <%= country.social_sec %>
       </li>
-      <li class="nav-item active">
+      <li class="nav-item">
         <strong>Health:</strong>            <%= country.health %>
       </li>
-      <li class="nav-item active">
+      <li class="nav-item">
         <strong>Water:</strong>             <%= country.water %>
       </li>
-      <li class="nav-item active">
+      <li class="nav-item">
         <strong>Energy:</strong>            <%= country.energy %>
       </li>
       </div>

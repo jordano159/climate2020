@@ -17,7 +17,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
 
-  <body>
+  <body class="bg-light">
     <% if admin_signed_in? %>
       <div>
         Hello Admin! Here Are Some Cool Links:
@@ -31,11 +31,10 @@
         <%= Fact.all.sample.content if Fact.first.present? %>
       </div>
     <% end %>
-    <div">
-      <%= link_to_unless_current "English", locale: "en" %>
-      <%= link_to_unless_current "Hebrew", locale: "he" %>
+
+    <div class="" dir="rtl">
+      <%= yield %>
     </div>
-    <%= yield %>
     <%= render 'layouts/navbar' %>
     <div class="menu w-screen h-screen fixed-top bg-transparent p-5 ">
       <%= render 'layouts/data' %>

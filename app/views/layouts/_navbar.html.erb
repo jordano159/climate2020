@@ -1,18 +1,29 @@
 <% if params[:country_id] %>
   <% country = Country.find(params[:country_id]) %>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-bottom">
-    <a class="navbar-brand" href="#"><%= country.name %></a>
-    <!-- <div> -->
-      <strong>Y:</strong>            <%= country.year %>
-      <strong>Current Degree:</strong>  <%= country.deg %>
-      <strong>Citizens Alive:</strong>  <%= country.civ_num %>
-      <strong>Life level:</strong>      <%= country.life_level %>
-      <strong>Budget:</strong>          <%= country.budget %>
-    <!-- </div> -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-bottom" dir="rtl">
+    <div class="d-flex flex-column bd-highlight w-100  line-height-1">
+      <div class="bd-highlight w-100">
+        <div class="d-flex flex-row bd-highlight w-100">
+          <div class="pr-2 bd-highlight flex-fill "><div class="navbar-brand font-bold" ><%= country.name %></div></div>
+          <div class="pr-2 bd-highlight flex-fill "><i class="material-icons">access_time</i><%= country.year %></div>
+          <div class="pr-2 bd-highlight flex-fill "><strong><i class="material-icons">people_outline</i></strong><%= country.civ_num %></div>
+          <div class="pr-2 bd-highlight flex-fill "><strong><i class="material-icons">attach_money</i></strong><%= country.budget %></div>
+        </div>
+      </div>
+      <div class="bd-highlight w-100">
+        <div class="d-flex flex-row bd-highlight">
+          <div class="pr-2 bd-highlight flex-fill"><strong>התחממות:</strong>  <%= country.deg %>°C</div>
+          <div class="pr-2 bd-highlight flex-fill"><strong>איכות חיים:</strong>      <%= country.life_level %></div>
+          <div class="pr-2 bd-highlight flex-fill">
+            <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"> -->
+              <i class="material-icons" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">menu</i>
+            <!-- </button> -->
+          </div>
+        </div>
+      </div>
+    </div>
 <% end %>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">

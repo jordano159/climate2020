@@ -1,4 +1,4 @@
-<div class="card">
+<div class="card js-bottom-margin">
   <div class="card-body">
     <h5 class="card-title"><%= @event.title %></h5>
     <p class="card-text"><%= @event.description %></p>
@@ -26,3 +26,10 @@
   <%= link_to 'Edit', edit_event_path(@event) %>
   <%= link_to 'Back', events_path %>
 <% end %>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  nav_height = $("nav").outerHeight()
+  $(".js-bottom-margin").css("margin-bottom", nav_height)
+});
+</script>

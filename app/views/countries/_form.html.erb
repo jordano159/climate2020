@@ -3,20 +3,23 @@
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
   <div class="form-inputs w-100 mr-10 ml-10">
 		budget: <span id="budget"><%= @country.budget%></span>
+
+
+
     <span class="budget-minus"></span>
 		civ_num: <%= @country.civ_num %>
     <%= f.input :name %>
-    <%= f.input :agriculture,   collection: Country.agricultures.keys, include_blank: false %>
-    <%= f.input :education,     collection: Country.educations.keys, include_blank: false %>
-    <%= f.input :security,      collection: Country.securities.keys, include_blank: false %>
-    <%= f.input :comms,         collection: Country.comms.keys, include_blank: false %>
-    <%= f.input :social_sec,    collection: Country.social_secs.keys, include_blank: false %>
-    <%= f.input :health,        collection: Country.healths.keys, include_blank: false %>
-    <%= f.input :water,         collection: Country.waters.keys, include_blank: false %>
-    <%= f.input :energy,        collection: Country.energies.keys, include_blank: false %>
-		<%= f.input :budget,        as: :hidden%>
+    <%= f.input :agriculture,   collection: agrihash, label_method: :second, value_method: :first, include_blank: false %>
+    <%= f.input :education,     collection: eduhash, label_method: :second, value_method: :first, include_blank: false %>
+    <%= f.input :security,      collection: securityhash, label_method: :second, value_method: :first, include_blank: false %>
+    <%= f.input :comms,         collection: commshash, label_method: :second, value_method: :first, include_blank: false %>
+    <%= f.input :social_sec,    collection: social_sechash, label_method: :second, value_method: :first, include_blank: false %>
+    <%= f.input :health,        collection: healthhash, label_method: :second, value_method: :first, include_blank: false %>
+    <%= f.input :water,         collection: waterhash, label_method: :second, value_method: :first, include_blank: false %>
+    <%= f.input :energy,        collection: energyhash, label_method: :second, value_method: :first, include_blank: false %>
+		<%= f.input :budget,        as: :hidden %>
     <%= f.input :civ_num,       as: :hidden %>
-    <%= f.input :init_civ,      as: :hidden  %>
+    <%= f.input :init_civ,      as: :hidden %>
 		<div class="form-actions">
 			<%= f.button :submit, class: "btn btn-success", id:"submit" %>
       <!-- <div class="budget-minus"></div> -->

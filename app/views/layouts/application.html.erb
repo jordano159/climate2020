@@ -31,6 +31,10 @@
         <%= Fact.all.sample.content if Fact.first.present? %>
       </div>
     <% end %>
+    <div">
+      <%= link_to_unless_current "English", locale: "en" %>
+      <%= link_to_unless_current "Hebrew", locale: "he" %>
+    </div>
     <%= yield %>
     <%= render 'layouts/navbar' %>
     <div class="menu w-screen h-screen fixed-top bg-transparent p-5 ">

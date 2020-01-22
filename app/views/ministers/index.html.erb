@@ -3,7 +3,7 @@ $(document).ready(function(){
 	jQuery.fn.exists = function(){ return this.length > 0; }
 	minister_num = 0
  // $("#minister-0").toggleClass('d-none');
- $("#next-title").html("Ministers");
+ $("#next-title").html('<%= Minister.model_name.human(count: 2) %>');
  $("#between").toggleClass('d-none');
  $(".next").click(function(event) {
 	 $(this).parents(".card").toggleClass('d-none')
@@ -16,14 +16,15 @@ $(document).ready(function(){
 	 	$("#between").toggleClass('d-none');
 	 }
 	 if (!$("#minister-" + minister_num).exists()) {
-		 $("#next-title").html("Start Game");
+		 $("#next-title").html("<%= I18n.t("minister.index.start_game") %>");
 		 $("#next").toggleClass('d-none');
 		 $("#start-game").toggleClass('d-none');
 	 }
  });
 });
 </script>
-
+<%= I18n.t(Minister.model_name.human) %>
+<%= Minister.human_attribute_name("role") %>
 <% if params[:game] %>
 
     <div class="card-body h-screen">
@@ -32,15 +33,15 @@ $(document).ready(function(){
           <div class="card-body h-100 d-flex flex-column justify-content-between">
             <h5 class="card-title"><%= minister.role %></h5>
             <p class="card-text"><%= minister.description %></p>
-							<button class="next btn btn-primary w-100 h-5" type="button" name="button">next</button>
+							<button class="next btn btn-primary w-100 h-5" type="button" name="button"><%= I18n.t("minister.index.next") %></button>
           </div>
         </div>
       <% end %>
 			<div class="card d-none h-100" id="between">
 				<div class="card-body h-100 d-flex flex-column justify-content-between">
-					<h5 class="card-title" id="next-title">next player</h5>
-					<%= link_to 'Start Game', new_country_path, class: "btn btn-success d-none w-100 h-5", id:"start-game" %>
-					<button id="next" class="next btn btn-primary w-100 h-5" type="button" name="button">next</button>
+					<h5 class="card-title" id="next-title"><%= I18n.t("minister.index.next_player") %></h5>
+					<%= link_to I18n.t("minister.index.start_game"), new_country_path, class: "btn btn-success d-none w-100 h-5", id:"start-game" %>
+					<button id="next" class="next btn btn-primary w-100 h-5" type="button" name="button"><%= I18n.t("minister.index.next") %></button>
 				</div>
 			</div>
     </div>
@@ -49,8 +50,8 @@ $(document).ready(function(){
   <table>
     <thead>
       <tr>
-        <th>Role</th>
-        <th>Description</th>
+        <th><%= Minister.human_attribute_name("role") %></th>
+        <th><%= Minister.human_attribute_name("description") %></th>
         <th colspan="3"></th>
       </tr>
     </thead>

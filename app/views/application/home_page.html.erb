@@ -1,9 +1,9 @@
-<h1>Welcome to the game</h1>
-<p>Capitalism is destoying the planet. Think you can handle it?</p>
+<h1><%= t ".title" %></h1>
+<p><%= t ".description" %></p>
 <%= form_with(url: ministers_path, method: "get", local: true) do %>
-  <%= label_tag(:game, "How many players:") %>
+  <%= label_tag(:game, I18n.t("application.home_page.players")) %>
   <%= text_field_tag(:game) %>
-  <%= submit_tag("New Game") %>
+  <%= submit_tag(I18n.t("application.home_page.new_game")) %>
 <% end %>
-<p>Up to <%= Minister.count %> Players</p>
+<p><%= t('.minister_count', count: Minister.count) %></p>
 <%# link_to "New Game", new_country_path %>

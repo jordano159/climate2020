@@ -22,35 +22,51 @@
         </div>
       </div>
     </div>
-<% end %>
 
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        <% if country.resilience == "civil_war" %>
+        <strong>Resilience:</strong>           <span style="color: red"><%= country.resilience %> (civ_num and budget declining)</span>
+        <% else %>
+        <strong>Resilience:</strong>           <%= country.resilience %>
+        <% end %>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
+      <li class="nav-item active">
+        <% if country.reg_rel == "war" %>
+        <strong>Reg rel:</strong>           <span style="color: red"><%= country.reg_rel %> (civ_num and budget declining)</span>
+        <% else %>
+        <strong>Reg rel:</strong>           <%= country.reg_rel %>
+        <% end %>
       </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Dropdown
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
+      <li class="nav-item active">
+        <strong>Agriculture:</strong>       <%= country.agriculture %>
       </li>
-      <li class="nav-item">
-        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+      <li class="nav-item active">
+        <strong>Education:</strong>         <%= country.education %>
       </li>
+      <li class="nav-item active">
+        <strong>Security:</strong>          <%= country.security %>
+      </li>
+      <li class="nav-item active">
+        <strong>Comms:</strong>             <%= country.comms %>
+      </li>
+      <li class="nav-item active">
+        <strong>Social sec:</strong>        <%= country.social_sec %>
+      </li>
+      <li class="nav-item active">
+        <strong>Health:</strong>            <%= country.health %>
+      </li>
+      <li class="nav-item active">
+        <strong>Water:</strong>             <%= country.water %>
+      </li>
+      <li class="nav-item active">
+        <strong>Energy:</strong>            <%= country.energy %>
+      </li>
+      </div>
     </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
+
   </div>
 </nav>
+<% end %>

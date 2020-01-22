@@ -14,7 +14,9 @@
 
 @import "bootstrap";
 
-
+body{
+	direction: rtl;
+}
 .w-screen{
 	width: 100vw;
 }

@@ -30,4 +30,65 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  activerecord:
+    models:
+      country: Country
+      event: Event
+      option: Option
+      minister:
+        one: Minister
+        other: Ministers
+      goal: Goal
+      fact: Fact
+    attributes:
+      country:
+        resilience:     "Resilience"
+        init_civ:       "Initial Number of Civilians"
+        civ_num:        "Current Number of Civilians"
+        deg:            "Warming Level"
+        life_level:     "Quality of Life"
+        score:          "Score"
+        year:           "Year"
+        reg_rel:        "Regional Relations"
+        agriculture:    "Agriculture"
+        education:      "Education"
+        security:       "Security"
+        comms:          "Communication"
+        social_sec:     "Social Security"
+        health:         "Health"
+        water:          "Water"
+        energy:         "Energy"
+        name:           "Name"
+        budget:         "Budget"
+      event:
+        title:          "Title"
+        description:    "Description"
+        min_deg:        "Minimun Warming"
+      option:
+        title:          "Title"
+      Minister:
+        role:           "Role"
+        description:    "Description"
+      Goal:
+        description:    "Description"
+      Fact:
+        content:        "Content"
+
+  application:
+    home_page:
+      title: "Welcome to the gameasdasd"
+      description: "Capitalism is destoying the planet. Think you can handle it?"
+      players: "How many players:"
+      new_game: "New Game"
+      minister_count: "Up to %{count} Players"
+    game_over:
+      title: "Game Over!"
+  minister:
+    index:
+      start_game: "Start Game"
+      next: "Next"
+      next_player: "Next Player"
+  event:
+    show:
+      choose_option: "Choose Option"
+      consequense: "Consequense"

@@ -1,5 +1,8 @@
 class ApplicationController < ActionController::Base
   before_action :did_lose
+  around_action :switch_locale
+
+
 
   def home_page
   end
@@ -17,6 +20,13 @@ class ApplicationController < ActionController::Base
         redirect_to game_over_path
       end
     end
+  end
+
+  private
+
+  def switch_locale(&action)
+    locale = params[:locale] || I18n.default_locale
+    I18n.with_locale(locale, &action)
   end
 
 end

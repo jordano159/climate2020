@@ -28,6 +28,7 @@
         <%= link_to 'Ministers',    ministers_path %>
         <%= link_to 'Goals',        goals_path %>
         <%= link_to('Logout',       destroy_admin_session_path, method: :delete) %>
+        <%= Fact.all.sample.content %>
       </div>
     <% end %>
     <%= yield %>

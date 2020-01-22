@@ -13,6 +13,8 @@ class CountriesController < ApplicationController
   def show
     if params[:option_id]
       option = Option.find(params[:option_id])
+      @country.options << option
+      @country.events << option.event
       consequence_too(option, @country)
       if params[:turn] == "true"
         @country.year += 5
@@ -36,11 +38,13 @@ class CountriesController < ApplicationController
             @country.civ_num -= 1
           else
             @country.lose = true
+            @country.is_torn_apart = true
           end
           if @country.budget > 1.01
             @country.budget -= 1
           else
             @country.lose = true
+            @country.is_torn_apart = true
           end
         end
         @country.save

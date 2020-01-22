@@ -1,4 +1,6 @@
 class Country < ApplicationRecord
+  has_and_belongs_to_many :options, join_table: "countries_options"
+  has_and_belongs_to_many :events, join_table: "countries_events"
   after_initialize :set_defaults
 
   enum resilience:          %i[civil_war terrible bad neutral good excellent], _prefix: true

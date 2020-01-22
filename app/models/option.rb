@@ -1,4 +1,5 @@
 class Option < ApplicationRecord
+  has_and_belongs_to_many :countries, join_table: "countries_options"
   after_initialize :set_defaults
 
   belongs_to :event
@@ -51,5 +52,5 @@ class Option < ApplicationRecord
       self.min_energy       ||= :low
     end
   end
-  
+
 end

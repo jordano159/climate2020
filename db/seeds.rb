@@ -56,3 +56,11 @@ if File.file?(Rails.root.join('lib/goal_seeds.csv'))
     })
   end
 end
+
+if File.file?(Rails.root.join('lib/facts_seeds.csv'))
+  CSV.foreach(Rails.root.join('lib/facts_seeds.csv'), headers: true) do |row|
+    Fact.create({
+      content: row[1]
+    })
+  end
+end

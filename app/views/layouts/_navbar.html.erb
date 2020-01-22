@@ -1,14 +1,15 @@
-<% country = Country.find(params[:country_id]) %>
-<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-bottom">
-  <a class="navbar-brand" href="#"><%= country.name %></a>
-  <!-- <div> -->
-    <strong>Y:</strong>            <%= country.year %>
-    <strong>Current Degree:</strong>  <%= country.deg %>
-    <strong>Citizens Alive:</strong>  <%= country.civ_num %>
-    <strong>Life level:</strong>      <%= country.life_level %>
-    <strong>Budget:</strong>          <%= country.budget %>
-  <!-- </div> -->
-
+<% if params[:country_id] %>
+  <% country = Country.find(params[:country_id]) %>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-bottom">
+    <a class="navbar-brand" href="#"><%= country.name %></a>
+    <!-- <div> -->
+      <strong>Y:</strong>            <%= country.year %>
+      <strong>Current Degree:</strong>  <%= country.deg %>
+      <strong>Citizens Alive:</strong>  <%= country.civ_num %>
+      <strong>Life level:</strong>      <%= country.life_level %>
+      <strong>Budget:</strong>          <%= country.budget %>
+    <!-- </div> -->
+<% end %>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>

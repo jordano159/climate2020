@@ -1,8 +1,9 @@
-<%= simple_form_for(@country, html: { class: 'form-inline' }) do |f| %>
+<%= simple_form_for(@country, defaults: { wrapper_html: { class: 'w-100 pr-2 pl-2' } },html: { class: 'form-inline' }) do |f| %>
   <%= f.error_notification %>
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
-  <div class="form-inputs">
-		budget: <%= @country.budget %>
+  <div class="form-inputs w-100 mr-10 ml-10">
+		budget: <span id="budget"><%= @country.budget%></span>
+    <span class="budget-minus"></span>
 		civ_num: <%= @country.civ_num %>
     <%= f.input :name %>
     <%= f.input :agriculture,   collection: Country.agricultures.keys, include_blank: false %>
@@ -13,23 +14,15 @@
     <%= f.input :health,        collection: Country.healths.keys, include_blank: false %>
     <%= f.input :water,         collection: Country.waters.keys, include_blank: false %>
     <%= f.input :energy,        collection: Country.energies.keys, include_blank: false %>
-		<%= f.input :budget        %>
+		<%= f.input :budget,        as: :hidden%>
+    <%= f.input :civ_num,       as: :hidden %>
+    <%= f.input :init_civ,      as: :hidden  %>
 		<div class="form-actions">
-			<%= f.button :submit, class: "btn btn-success" %>
+			<%= f.button :submit, class: "btn btn-success", id:"submit" %>
+      <!-- <div class="budget-minus"></div> -->
 		</div>
   </div>
-
 <% end %>
-
-Costs:
-agriculture_costs: <%= @agriculture_costs %>
-education_costs: <%= @education_costs %>
-security_costs: <%= @security_costs %>
-comms_costs: <%= @comms_costs %>
-social_sec_costs: <%= @social_sec_costs %>
-health_costs: <%= @health_costs %>
-water_costs: <%= @water_costs %>
-energy_costs: <%= @energy_costs %>
 
 <script type="text/javascript">
 	costs = [<%= @agriculture_costs.values %>,
@@ -46,28 +39,64 @@ energy_costs: <%= @energy_costs %>
 		$(el).children("option[value='low']").append(" - " + costs[index][2])
 		$(el).children("option[value='medium']").append(" - " + costs[index][1])
 		$(el).children("option[value='high']").append(" - " + costs[index][0])
-		all_costs = all_costs + costs[index][2]
+    cost = parseInt($(el).children("option:selected").html().split(" ")[2]);
+		all_costs = all_costs + cost
 	});
 	start_budget = $("#country_budget").val() - all_costs
-	$("#country_budget").val(start_budget)
-
-	 agriculture_payed = 0
-	 education_payed = 0
-	 security_payed = 0
-	 comms_payed = 0
-	 social_sec_payed = 0
-	 health_payed = 0
-	 water_payed = 0
-	 energy_payed = 0
+	$("#budget").html(start_budget)
 
 	$("select").change(function(event) {
-		$(this).attr("id").replace('country_', '') + "_payed";
-		console.log(comms_payed);
-		cost = $(this).children('option:selected').html().split(" ")[2];
-		new_budget = $("#country_budget").val() - cost
-		$("#country_budget").val(new_budget)
-		// $("#country_budget").val(0)
+    costs = 0
+    $.each($("select"),function(index, el) {
+  		cost = parseInt($(el).children("option:selected").html().split(" ")[2]);
+      costs = costs + cost
+  	});
+    console.log("costs: " + costs);
+		new_budget = <%= @country.budget %> - costs
+		$("#budget").html(new_budget)
+    // $("#country_budget").val($("#budget").html())
+    if (parseInt($("#budget").html()) < 0) {
+      // $(".budget-minus").removeClass('d-none')
+      $(".budget-minus").append("<%= j (render partial: 'budget_minus') %>")
+    }
+    else {
+      $(".budget-minus-partial").remove()
+    }
 	});
 
-	function pay(){}
+  $('#new_country').validate({ // initialize the plugin
+    submitHandler: function(form) {
+      if (parseInt($("#budget").html()) < 0) {
+        console.log("<0");
+        $(".budget-minus").removeClass('d-none')
+      }
+      else {
+        $("#country_budget").val($("#budget").html())
+        form.submit();
+      }
+    },
+    errorPlacement: function(label, element) {
+     label.addClass('er');
+     label.insertAfter(element);
+    },
+    wrapper: 'span',
+      rules: {
+        "country[name]": {
+            required: true
+        },
+        // "country[budget]": {
+        //     required: true,
+        //     digits: true
+        // }
+      },
+      messages: {
+        "country[name]": {
+        required: "חייב להיות שם"
+      },
+       // "country[budget]": {
+       //   required: "התקציב חייב להיות חיובי",
+       //   digits: "התקציב חייב להיות חיובי"
+       // },
+      }
+    });
 </script>

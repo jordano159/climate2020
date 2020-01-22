@@ -12,6 +12,8 @@
     <link href="https://fonts.googleapis.com/css?family=Rubik" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Suez+One" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Secular+One" rel="stylesheet">
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js'></script>
+    <!-- <script src="https://unpkg.com/@popperjs/core@2.0.0"></script> -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
 
@@ -19,17 +21,33 @@
     <% if admin_signed_in? %>
       <div>
         Hello Admin! Here Are Some Cool Links:
-        <%= link_to 'Home', root_path %>
-        <%= link_to 'Countries', countries_path %>
-        <%= link_to 'Events', events_path %>
-        <%= link_to 'Options', options_path %>
-        <%= link_to 'Ministers', ministers_path %>
-        <%= link_to 'Goals', goals_path %>
-        <%= link_to('Logout', destroy_admin_session_path, method: :delete) %>
+        <%= link_to 'Home',         root_path %>
+        <%= link_to 'Countries',    countries_path %>
+        <%= link_to 'Events',       events_path %>
+        <%= link_to 'Options',      options_path %>
+        <%= link_to 'Ministers',    ministers_path %>
+        <%= link_to 'Goals',        goals_path %>
+        <%= link_to('Logout',       destroy_admin_session_path, method: :delete) %>
       </div>
     <% end %>
     <%= yield %>
-    <%= render 'layouts/footer' %>
+    <%= render 'layouts/navbar' %>
+    <div class="menu w-screen h-screen fixed-top bg-transparent p-5 ">
+      <%= render 'layouts/data' %>
+    </div>
 
-  </body>
+
+  <script type="text/javascript">
+ //  $(document).ready(function() {
+ //   $("#exampleModal").modal();
+ // });
+ sdd = "sds"
+  $(".menu").hide();
+    $("#menu").click(function(event) {
+      $(".menu").toggle();
+    });
+    $("#close").click(function(event) {
+      $(".menu").hide();
+    });
+  </script>
 </html>

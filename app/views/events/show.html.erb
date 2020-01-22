@@ -1,9 +1,9 @@
-<div class="card" style="width: 22rem;">
+<div class="card">
   <div class="card-body">
     <h5 class="card-title"><%= @event.title %></h5>
     <p class="card-text"><%= @event.description %></p>
     <% @event.options.each do |option| %>
-      <div class="card" style="width: 18rem;">
+      <div class="card">
         <div class="card-body">
           <h5 class="card-title"><%= option.title %></h5>
           <p class="card-text"><%= "Consequence: #{option.amount} #{option.on_what}" %></p>
@@ -18,12 +18,11 @@
   </div>
 </div>
 
-<p>
-  <strong>Min deg:</strong>
-  <%= @event.min_deg %>
-</p>
-
-<%= link_to 'Edit', edit_event_path(@event) %> |
-<%= link_to 'Back', events_path %>
-
-<%# link_to 'Next Turn', event_path(@event, country_id: params[:country_id], turn: true), class: "btn btn-success" %>
+<% if admin_signed_in? %>
+  <p>
+    <strong>Min deg:</strong>
+    <%= @event.min_deg %>
+  </p>
+  <%= link_to 'Edit', edit_event_path(@event) %>
+  <%= link_to 'Back', events_path %>
+<% end %>

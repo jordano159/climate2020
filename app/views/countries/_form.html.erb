@@ -2,7 +2,7 @@
   <%= f.error_notification %>
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
   <div class="form-inputs w-100 mr-10 ml-10">
-		<%= Country.human_attribute_name(:budget) %>: <span id="budget"><%= @country.budget%></span>
+		<%= Country.human_attribute_name(:budget) %>: <span id="budget">ddas<%= @country.budget%></span>
 
 
 
@@ -42,16 +42,19 @@
 		$(el).children("option[value='low']").append(" - " + costs[index][2])
 		$(el).children("option[value='medium']").append(" - " + costs[index][1])
 		$(el).children("option[value='high']").append(" - " + costs[index][0])
-    cost = parseInt($(el).children("option:selected").html().split(" ")[2]);
+    cost = parseInt($(el).children("option:selected").html().split(" ")[$(el).children("option:selected").html().split(" ").length-1]);
 		all_costs = all_costs + cost
+    console.log($(el).children("option:selected").html().split(" "));
 	});
-	start_budget = $("#country_budget").val() - all_costs
+	start_budget = <%= @country.budget %> - all_costs
+  // console.log(costs);
 	$("#budget").html(start_budget)
 
 	$("select").change(function(event) {
     costs = 0
     $.each($("select"),function(index, el) {
-  		cost = parseInt($(el).children("option:selected").html().split(" ")[2]);
+  		cost = parseInt($(el).children("option:selected").html().split(" ")[$(el).children("option:selected").html().split(" ").length-1]);
+      console.log("length: " + $(el).children("option:selected").html().length)
       costs = costs + cost
   	});
     console.log("costs: " + costs);

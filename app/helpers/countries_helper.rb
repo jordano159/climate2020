@@ -1,65 +1,87 @@
 module CountriesHelper
   def agrihash
     agri = {
-      low: "רמה נמוכה - חרישה ידנית",
-      medium: "sdfsdf",
-      high: "sdxcvs"
+      low: "נמוך - חרישה ידנית",
+      medium: "בינוני",
+      high: "גבוה"
     }
   end
 
   def eduhash
     edu = {
-      low: "רמה נמוכה - חצי מהתלמידים בבית ספר",
-      medium: "sdfsdf",
-      high: "sdxcvs"
+      low: "נמוך - חצי מהתלמידים בבית ספר",
+      medium: "בינוני",
+      high: "גבוה"
     }
   end
 
   def securityhash
     security = {
-      low: "רמה נמוכה - משהו גרוע",
-      medium: "sdfsdf",
-      high: "sdxcvs"
+      low: "נמוך - משהו גרוע",
+      medium: "בינוני",
+      high: "גבוה"
     }
   end
 
   def commshash
     comms = {
-      low: "רמה נמוכה - רדיו",
-      medium: "sdfsdf",
-      high: "sdxcvs"
+      low: "נמוך - רדיו",
+      medium: "בינוני",
+      high: "גבוה"
     }
   end
 
   def social_sechash
     social_sec = {
-      low: "רמה נמוכה - אין ביטוח לאומי",
-      medium: "sdfsdf",
-      high: "sdxcvs"
+      low: "נמוך - אין ביטוח לאומי",
+      medium: "בינוני",
+      high: "גבוה"
     }
   end
 
   def healthhash
     health = {
-      low: "רמה נמוכה - לא יודעים מה זה אנטיביוטיקה",
-      medium: "sdfsdf",
-      high: "sdxcvs"
+      low: "נמוך - לא יודעים מה זה אנטיביוטיקה",
+      medium: "בינוני",
+      high: "גבוה"
     }
   end
 
   def waterhash
     water = {
-      low: "רמה נמוכה - בארות וכדי מים",
-      medium: "sdfsdf",
-      high: "sdxcvs"
+      low: "נמוך - בארות וכדי מים",
+      medium: "בינוני",
+      high: "גבוה"
     }
   end
 
   def energyhash
     energy = {
-      low: "רמה נמוכה - פחם מזהם",
-      medium: "sdfsdf",
-      high: "sdxcvs"
+      low: "נמוך - פחם מזהם",
+      medium: "בינוני",
+      high: "גבוה"
+    }
+  end
+
+  def reghash
+    reg_rel = {
+      war: "מלחמה",
+      terrible: "נורא",
+      bad: "גרוע",
+      neutral: "נייטרלי",
+      good: "טוב",
+      excellent: "מצויין"
+    }
+  end
+
+  def reshash
+    resilience = {
+      civil_war: "מלחמת אזרחים",
+      terrible: "נורא",
+      bad: "גרוע",
+      neutral: "נייטרלי",
+      good: "טוב",
+      excellent: "מצויין"
     }
   end
 

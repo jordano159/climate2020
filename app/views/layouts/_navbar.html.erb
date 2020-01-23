@@ -28,41 +28,41 @@
     <ul class="navbar-nav p-0">
       <li class="nav-item active">
         <% if country.resilience == "civil_war" %>
-        <strong>Resilience:</strong>           <span style="color: red"><%= country.resilience %> (civ_num and budget declining)</span>
+        <strong><%= Country.human_attribute_name(:resilience) %>:</strong>           <span style="color: red"><%= reshash[country.resilience.to_sym].truncate(6, omission: '') %> <%= I18n.t("navbar.wars") %></span>
         <% else %>
-        <strong>Resilience:</strong>           <%= country.resilience %>
+        <strong><%= Country.human_attribute_name(:resilience) %>:</strong>           <%= reshash[country.resilience.to_sym].truncate(6, omission: '') %>
         <% end %>
       </li>
       <li class="nav-item">
         <% if country.reg_rel == "war" %>
-        <strong>Reg rel:</strong>           <span style="color: red"><%= country.reg_rel %> (civ_num and budget declining)</span>
+        <strong><%= Country.human_attribute_name(:reg_rel) %>:</strong>           <span style="color: red"><%= reghash[country.resilience.to_sym].truncate(6, omission: '') %> <%= I18n.t("navbar.wars") %></span>
         <% else %>
-        <strong>Reg rel:</strong>           <%= country.reg_rel %>
+        <strong><%= Country.human_attribute_name(:reg_rel) %>:</strong>           <%= reghash[country.resilience.to_sym].truncate(6, omission: '') %>
         <% end %>
       </li>
       <li class="nav-item">
-        <strong>Agriculture:</strong>       <%= country.agriculture %>
+        <strong><%= Country.human_attribute_name(:agriculture) %>:</strong>       <%= agrihash[country.agriculture.to_sym].truncate(6, omission: '') %>
       </li>
       <li class="nav-item">
-        <strong>Education:</strong>         <%= country.education %>
+        <strong><%= Country.human_attribute_name(:education) %>:</strong>         <%= eduhash[country.education.to_sym].truncate(6, omission: '') %>
       </li>
       <li class="nav-item">
-        <strong>Security:</strong>          <%= country.security %>
+        <strong><%= Country.human_attribute_name(:security) %>:</strong>          <%= securityhash[country.security.to_sym].truncate(6, omission: '') %>
       </li>
       <li class="nav-item">
-        <strong>Comms:</strong>             <%= country.comms %>
+        <strong><%= Country.human_attribute_name(:comms) %>:</strong>             <%= commshash[country.comms.to_sym].truncate(6, omission: '') %>
       </li>
       <li class="nav-item">
-        <strong>Social sec:</strong>        <%= country.social_sec %>
+        <strong>Social <%= Country.human_attribute_name(:social_sec) %>:</strong> <%= social_sechash[country.social_sec.to_sym].truncate(6, omission: '') %>
       </li>
       <li class="nav-item">
-        <strong>Health:</strong>            <%= country.health %>
+        <strong><%= Country.human_attribute_name(:health) %>:</strong>            <%= healthhash[country.health.to_sym].truncate(6, omission: '') %>
       </li>
       <li class="nav-item">
-        <strong>Water:</strong>             <%= country.water %>
+        <strong><%= Country.human_attribute_name(:water) %>:</strong>             <%= waterhash[country.water.to_sym].truncate(6, omission: '') %>
       </li>
       <li class="nav-item">
-        <strong>Energy:</strong>            <%= country.energy %>
+        <strong><%= Country.human_attribute_name(:energy) %>:</strong>            <%= energyhash[country.energy.to_sym].truncate(6, omission: '') %>
       </li>
       </div>
     </ul>

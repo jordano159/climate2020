@@ -14,7 +14,7 @@ he:
       country:
         resilience:     "חוסן חברתי"
         init_civ:       "מספר התחלתי של אזרחים"
-        civ_num:        "מספר נוכחי של אזרחים"
+        civ_num:        "מיליון אזרחים"
         deg:            "רמת התחממות"
         life_level:     "רמת חיים"
         score:          "תוצאה"
@@ -62,6 +62,11 @@ he:
     show:
       choose_option: "בחירת אפשרות"
       consequense: "השלכה"
+  country:
+    new:
+      title: "בנו את המדינה"
+  navbar:
+    wars: "אזרחים מתים ותקציב מבוזבז"
 
   simple_form:
   #   errors:

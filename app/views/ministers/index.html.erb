@@ -11,7 +11,7 @@ $(document).ready(function(){
 		 $("#minister-" + minister_num).toggleClass('d-none');
 	 }
 	 else {
-		 $("#next-title").html("Next Player");
+		 $("#next-title").html("<%= I18n.t("minister.index.next_player") %>");
 		 minister_num += 1
 	 	$("#between").toggleClass('d-none');
 	 }

@@ -2,12 +2,12 @@
   <%= f.error_notification %>
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
   <div class="form-inputs w-100 mr-10 ml-10">
-		budget: <span id="budget"><%= @country.budget%></span>
+		<%= Country.human_attribute_name(:budget) %>: <span id="budget"><%= @country.budget%></span>
 
 
 
     <span class="budget-minus"></span>
-		civ_num: <%= @country.civ_num %>
+		<!-- civ_num: <%= @country.civ_num %> -->
     <%= f.input :name %>
     <%= f.input :agriculture,   collection: agrihash, label_method: :second, value_method: :first, include_blank: false %>
     <%= f.input :education,     collection: eduhash, label_method: :second, value_method: :first, include_blank: false %>

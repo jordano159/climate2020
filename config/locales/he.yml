@@ -70,7 +70,7 @@ he:
   navbar:
     wars: "אזרחים מתים ותקציב מבוזבז"
 
-  simple_form:
+  # simple_form:
   #   errors:
   #     format: "%{attribute} %{message}"
   #     messages:
@@ -99,13 +99,13 @@ he:
   #       header:
   #         one: 'לא ניתן לשמור את ה%{model}: שגיאה אחת'
   #         other: 'לא ניתן לשמור את ה%{model}: %{count} שגיאות.'
-    helpers:
-      select:
-        prompt: נא לבחור
-      submit:
-        create: יצירת %{model}
-        submit: שמור %{model}
-        update: עדכון %{model}
+  helpers:
+    select:
+      prompt: נא לבחור
+    submit:
+      create: יצירת %{model}
+      submit: שמור %{model}
+      update: עדכון %{model}
   #   labels:
   #     defaults:
   #       username: 'User name'

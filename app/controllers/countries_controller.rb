@@ -68,6 +68,11 @@ class CountriesController < ApplicationController
       end
       redirect_to event_path(id: 1, country_id: @country.id)
     end
+    if params[:lose]
+      @country.lose = true
+      @country.save
+      redirect_to game_over_path
+    end
   end
 
   # GET /countries/new

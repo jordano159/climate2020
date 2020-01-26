@@ -52,6 +52,7 @@ he:
       new_game: "משחק חדש"
       minister_count: "עד %{count} שחקנים ושחקניות"
     game_over:
+      new_game: "משחק חדש"
       title: "המשחק נגמר!"
   minister:
     index:
@@ -62,6 +63,7 @@ he:
     show:
       choose_option: "בחירת אפשרות"
       consequense: "השלכה"
+      lose: "זהו, ויתרנו. נפסיד וחלאס"
   country:
     new:
       title: "בנו את המדינה"

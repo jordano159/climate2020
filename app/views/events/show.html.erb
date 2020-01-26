@@ -6,7 +6,7 @@
       <div class="card">
         <div class="card-body">
           <h5 class="card-title"><%= option.title %></h5>
-          <p class="card-text"><%= "#{I18n.t("event.show.consequense")}: #{option.amount} #{Country.human_attribute_name(option.on_what)}" %></p>
+          <p class="card-text"><%= "#{option.amount} #{Country.human_attribute_name(option.on_what)}" %></p>
           <% if params[:country_id] && Country.find(params[:country_id]).is_option_available(option) %>
             <%= link_to I18n.t("event.show.choose_option"), { controller: "countries", action: "show", id: params[:country_id], option_id: option.id, turn: true }, class: "btn btn-primary" %>
           <% else %>
@@ -15,6 +15,7 @@
         </div>
       </div>
     <% end %>
+    <%= link_to I18n.t("event.show.lose"), { controller: "countries", action: "show", id: params[:country_id], lose: true, turn: true }, class: "btn btn-warning mt-4" %>
   </div>
 </div>
 

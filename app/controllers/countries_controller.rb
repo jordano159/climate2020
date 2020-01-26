@@ -12,39 +12,56 @@ class CountriesController < ApplicationController
   # GET /countries/1.json
   def show
     if params[:option_id]
+      puts "****************** Country Show **********************"
       option = Option.find(params[:option_id])
+      puts option.title
       @country.options << option
       @country.events << option.event
       consequence_too(option, @country)
       if params[:turn] == "true"
+        puts "********************* Params Turn *******************"
         @country.year += 5
         @country.deg += 0.05
         if @country.reg_rel == "war"
+          puts "War"
           if @country.civ_num > 1.1
+            print "@country.civ_num: #{@country.civ_num} >>"
             @country.civ_num -= 1
+            puts " #{@country.civ_num}"
           else
             @country.lose = true
             @country.is_conquered = true
+            puts "Conquered and Lost by Civ_num"
           end
           if @country.budget > 1.01
+            print "@country.budget: #{@country.budget} >>"
             @country.budget -= 1
+            puts " #{@country.budget}"
           else
             @country.lose = true
             @country.is_conquered = true
+            puts "Conquered and Lost by Budget"
           end
         end
         if @country.resilience == "civil_war"
+          puts "Civil War"
           if @country.civ_num > 1.1
+            print "@country.civ_num: #{@country.civ_num} >>"
             @country.civ_num -= 1
+            puts " #{@country.civ_num}"
           else
             @country.lose = true
             @country.is_torn_apart = true
+            puts "Torn Apart and Lost by Civ_num"
           end
           if @country.budget > 1.01
+            print "@country.budget: #{@country.budget} >>"
             @country.budget -= 1
+            puts " #{@country.budget}"
           else
             @country.lose = true
             @country.is_torn_apart = true
+            puts "Torn Apart and Lost by Budget"
           end
         end
         @country.save

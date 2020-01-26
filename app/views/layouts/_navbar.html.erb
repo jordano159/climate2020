@@ -28,16 +28,16 @@
     <ul class="navbar-nav p-0">
       <li class="nav-item active">
         <% if country.resilience == "civil_war" %>
-        <strong><%= Country.human_attribute_name(:resilience) %>:</strong>           <span style="color: red"><%= reshash[country.resilience.to_sym].truncate(6, omission: '') %> <%= I18n.t("navbar.wars") %></span>
+        <strong><%= Country.human_attribute_name(:resilience) %>:</strong>           <%= reshash[country.resilience.to_sym] %> <span style="color: red">(<%= I18n.t("navbar.wars") %>)</span>
         <% else %>
         <strong><%= Country.human_attribute_name(:resilience) %>:</strong>           <%= reshash[country.resilience.to_sym].truncate(6, omission: '') %>
         <% end %>
       </li>
       <li class="nav-item">
         <% if country.reg_rel == "war" %>
-        <strong><%= Country.human_attribute_name(:reg_rel) %>:</strong>           <span style="color: red"><%= reghash[country.resilience.to_sym].truncate(6, omission: '') %> <%= I18n.t("navbar.wars") %></span>
+        <strong><%= Country.human_attribute_name(:reg_rel) %>:</strong>           <span style="color: red"><%= reghash[country.reg_rel.to_sym] %> (<%= I18n.t("navbar.wars") %>)</span>
         <% else %>
-        <strong><%= Country.human_attribute_name(:reg_rel) %>:</strong>           <%= reghash[country.resilience.to_sym].truncate(6, omission: '') %>
+        <strong><%= Country.human_attribute_name(:reg_rel) %>:</strong>           <%= reghash[country.reg_rel.to_sym].truncate(6, omission: '') %>
         <% end %>
       </li>
       <li class="nav-item">

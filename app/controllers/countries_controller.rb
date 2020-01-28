@@ -64,7 +64,7 @@ class CountriesController < ApplicationController
             puts "Torn Apart and Lost by Budget"
           end
         end
-        @country.save
+        @country.save!
       end
       redirect_to event_path(id: 1, country_id: @country.id)
     end

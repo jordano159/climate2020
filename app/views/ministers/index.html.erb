@@ -34,10 +34,10 @@ $(document).ready(function(){
       <% @ministers.each_with_index do |minister, index| %>
         <div class="card d-none h-100" id="minister-<%= index %>">
           <div class="card-body h-100 d-flex flex-column justify-content-between">
-            <h5 class="card-title"><%= minister.role %></h5>
+            <h2 class="card-title"><%= minister.role %></h2>
             <p class="card-text">
-							<%= minister.description %> <br> <br>
-							<%= Goal.all.sample.description if Goal.first.present? %>
+							<span class="font-weight-bold"><%= I18n.t("minister.index.description") %>:</span> <%= minister.description %> <br> <br>
+							<span class="font-weight-bold"><%= I18n.t("minister.index.goal") %>:</span> <%= Goal.all.sample.description if Goal.first.present? %>
 						</p>
 
 							<button class="finished_reading next btn btn-primary w-100 h-5" type="button" name="button"></button>
@@ -46,7 +46,7 @@ $(document).ready(function(){
       <% end %>
 			<div class="card d-none h-100" id="between">
 				<div class="card-body h-100 d-flex flex-column justify-content-between">
-					<h5 class="card-title text-center" id="next-title"></h5> <!-- Content Served from JS -->
+					<h2 class="card-title text-center" id="next-title"></h2> <!-- Content Served from JS -->
 					<%= image_tag "fenix.png", size: "250x250", alt: "Game Logo", class: "mx-auto d-block" %>
 					<%= link_to I18n.t("minister.index.start_game"), new_country_path, class: "btn btn-success d-none w-100 h-5", id:"start-game" %>
 					<button class="open_card next btn btn-primary w-100 h-5" type="button" name="button"></button>

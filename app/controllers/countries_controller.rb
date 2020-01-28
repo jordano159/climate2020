@@ -1,5 +1,5 @@
 class CountriesController < ApplicationController
-  before_action :set_country, only: [:show, :edit, :update, :destroy, :game_over]
+  before_action :set_country, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_admin!, only: [:index, :edit, :update, :destroy]
 
   # GET /countries
@@ -205,6 +205,7 @@ class CountriesController < ApplicationController
   end
 
   def game_over
+    @country = Country.find(params[:country_id])
   end
 
   private

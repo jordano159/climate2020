@@ -13,8 +13,8 @@ class ApplicationController < ActionController::Base
       if country.civ_num <= 0 || country.life_level <= 0
         country.lose = true
       end
-      if country.lose?
-        redirect_to game_over_country_path
+      if country.lose? && action_name != "game_over"
+        redirect_to game_over_country_path(country_id: country.id)
       end
     end
   end

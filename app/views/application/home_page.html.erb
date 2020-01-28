@@ -1,13 +1,31 @@
+
 <h1><%= t ".title" %></h1>
-<p><%= t ".description" %></p>
+<div class="container">
+    <blockquote class="quote-box">
+      <p class="quotation-mark">
+        “
+      </p>
+      <p class="quote-text">
+        <%= t ".quote" %>
+      </p>
+      <hr>
+      <div class="blog-post-actions">
+        <p class="blog-post-bottom pull-left writer">
+          <%= t ".writer" %>
+        </p>
+      </div>
+    </blockquote>
+    <p><%= t ".description" %></p>
+</div>
 <%= form_with(url: ministers_path, method: "get", local: true) do %>
   <%= label_tag(:game, I18n.t("application.home_page.players")) %>
   <%= text_field_tag(:game) %>
   <%= submit_tag(I18n.t("application.home_page.new_game")) %>
 <% end %>
 <p><%= t('.minister_count', count: Minister.count) %></p>
+<p id="notice"><%= notice %></p>
 <%# link_to "New Game", new_country_path %>
-<div>
+<!-- <div> -->
   <%# link_to_unless_current "English", locale: "en" %>
   <%# link_to_unless_current "Hebrew", locale: "he" %>
-</div>
+<!-- </div> -->

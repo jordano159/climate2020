@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="he">
   <head>
-    <title>שינוי כיוון 2020</title>
-    <meta property="og:title" content="שינוי כיוון 2020" />
-    <meta property="og:description" content="חושבים שאתם יכולים לשמור על המדינה שלכם בחיים עד 2100?" />
+    <title>זה משנה הכל: המשחק</title>
+    <meta property="og:title" content="זה משנה הכל: המשחק" />
+    <meta property="og:description" content="הקפיטליזם משמיד את כדור הארץ. חושבות שאתן יכולות להתמודד עם זה?" />
     <meta property="og:type" content="website" />
-    <!-- <meta property="og:image" content="<%# image_url('logo.png') %>" /> -->
+    <meta property="og:image" content="<%= image_url('fenix.png') %>" />
     <%= csrf_meta_tags %>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
@@ -15,12 +15,12 @@
 		<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js'></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%= render 'application/favicon' %>
     </head>
 
   <body class="bg-light">
     <% if admin_signed_in? %>
       <div>
-        Hello Admin! Here Are Some Cool Links:
         <%= link_to 'Home',         root_path %>
         <%= link_to 'Countries',    countries_path %>
         <%= link_to 'Events',       events_path %>

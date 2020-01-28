@@ -7,6 +7,7 @@ class MinistersController < ApplicationController
   def index
     if params[:game]
       @ministers = Minister.rand_ministers(params[:game].to_i)
+      redirect_to root_path, notice: 'יש לשמור על מספר השחקנים המותר' if @ministers == false
     else
       @ministers = Minister.all
     end

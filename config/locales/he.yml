@@ -1,49 +1,5 @@
 ---
 he:
-  activerecord:
-    models:
-      country: מדינה
-      event: אירוע
-      option: אפשרות
-      minister:
-        one: "שר"
-        other: "שרים"
-      goal: מטרה אישית
-      fact: עובדה
-    attributes:
-      country:
-        resilience:     "חוסן חברתי"
-        init_civ:       "מספר התחלתי של אזרחים"
-        civ_num:        "מיליון אזרחים"
-        deg:            "רמת התחממות"
-        life_level:     "רמת חיים"
-        score:          "תוצאה"
-        year:           "שנה"
-        reg_rel:        "יחסים אזוריים"
-        agriculture:    "חקלאות"
-        education:      "חינוך"
-        security:       "ביטחון"
-        comms:          "תקשורת"
-        social_sec:     "ביטוח לאומי"
-        health:         "בריאות"
-        water:          "מים"
-        energy:         "אנרגיה"
-        name:           "שם"
-        budget:         "תקציב"
-      event:
-        title:          "כותרת"
-        description:    "תיאור"
-        min_deg:        "רמת התחממות מינימלית"
-      option:
-        title:          "כותרת"
-      Minister:
-        role:           "תפקיד"
-        description:    "תיאור"
-      Goal:
-        description:    "תיאור"
-      Fact:
-        content:        "תוכן"
-
   application:
     home_page:
       title: "זה משנה הכל: המשחק"
@@ -53,9 +9,6 @@ he:
       minister_count: "עד %{count} שחקנים ושחקניות"
       quote: "אנו נמצאים בשלב ייחודי בהיסטוריה שלנו. מעולם לא הייתה לנו כזאת מודעות לגבי השלכות המעשים שלנו על הכדור, ומעולם לא היה לנו הכח לעשות משהו בנידון. עתיד האנושות, ועתיד כלל החיים על פני האדמה, תלוי כעת בנו."
       writer: " - דיוויד אטינבורו"
-    game_over:
-      new_game: "משחק חדש"
-      title: "המשחק נגמר!"
   minister:
     index:
       start_game: "התחלה"
@@ -73,6 +26,15 @@ he:
   country:
     new:
       title: "בנו את המדינה"
+    game_over:
+      new_game: "משחק חדש"
+      title: "המשחק נגמר!"
+      year_survived: "שרדתם %{count} שנים"
+      turns_survived: "שרדתם %{count} תורות"
+      lives_lost: "נהרגו לכם %{count} מיליון אזרחים"
+      civil_war: "הפסדתם בעקבות מלחמת אזרחים"
+      war: "מדינה אחרת כבשה אתכם"
+      options: "אלה האפשרויות שבחרתם בהן"
   navbar:
     wars: "אזרחים מתים ותקציב מבוזבז"
 
@@ -128,6 +90,48 @@ he:
   #       password: '****'
   #
   activerecord:
+    models:
+      country: מדינה
+      event: אירוע
+      option: אפשרות
+      minister:
+        one: "שר"
+        other: "שרים"
+      goal: מטרה אישית
+      fact: עובדה
+    attributes:
+      country:
+        resilience:     "חוסן חברתי"
+        init_civ:       "מספר התחלתי של אזרחים"
+        civ_num:        "מיליון אזרחים"
+        deg:            "רמת התחממות"
+        life_level:     "רמת חיים"
+        score:          "תוצאה"
+        year:           "שנה"
+        reg_rel:        "יחסים אזוריים"
+        agriculture:    "חקלאות"
+        education:      "חינוך"
+        security:       "ביטחון"
+        comms:          "תקשורת"
+        social_sec:     "ביטוח לאומי"
+        health:         "בריאות"
+        water:          "מים"
+        energy:         "אנרגיה"
+        name:           "שם"
+        budget:         "תקציב"
+      event:
+        title:          "כותרת"
+        description:    "תיאור"
+        min_deg:        "רמת התחממות מינימלית"
+      option:
+        title:          "כותרת"
+      Minister:
+        role:           "תפקיד"
+        description:    "תיאור"
+      Goal:
+        description:    "תיאור"
+      Fact:
+        content:        "תוכן"
     errors:
       messages:
         record_invalid: 'האימות נכשל: %{errors}'

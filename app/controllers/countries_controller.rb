@@ -1,5 +1,5 @@
 class CountriesController < ApplicationController
-  before_action :set_country, only: [:show, :edit, :update, :destroy]
+  before_action :set_country, only: [:show, :edit, :update, :destroy, :game_over]
   before_action :authenticate_admin!, only: [:index, :edit, :update, :destroy]
 
   # GET /countries
@@ -71,7 +71,7 @@ class CountriesController < ApplicationController
     if params[:lose]
       @country.lose = true
       @country.save
-      redirect_to game_over_path
+      redirect_to game_over_country_path(country_id: @country.id)
     end
   end
 
@@ -202,6 +202,9 @@ class CountriesController < ApplicationController
       format.html { redirect_to countries_url, notice: 'Country was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def game_over
   end
 
   private

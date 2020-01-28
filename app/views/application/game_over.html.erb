@@ -1,2 +1,34 @@
-<h1><%= t ".title" %></h1>
-<%= link_to I18n.t("application.game_over.new_game"), root_path %>
+<h1><%= t "country.game_over.title" %></h1>
+
+<div class="">
+  <%= t('country.game_over.year_survived', count: (@country.year - 2020)) %>
+</div>
+<div class="">
+  <%= t('country.game_over.turns_survived', count: @country.options.count) %>
+</div>
+<div class="">
+  <%= t('country.game_over.turns_survived', count: (@country.year - 2020) / 5) %>
+</div>
+<div class="">
+  <%= t('country.game_over.lives_lost', count: @country.init_civ - @country.civ_num) %>
+</div>
+<div class="">
+  <%= t('country.game_over.civil_war') if @country.is_torn_apart %>
+</div>
+<div class="">
+  <%= t('country.game_over.war') if @country.is_conquered %>
+</div>
+<div class="">
+  <%= t('country.game_over.options') %>:
+  <ul>
+    <% @country.options.each do |option| %>
+      <li><%= option.title %></li>
+    <% end %>
+  </ul>
+</div>
+<div class="">
+  <%= t('country.game_over.lives_lost', count: @country.init_civ - @country.civ_num) %>
+</div>
+
+
+<%= link_to I18n.t("country.game_over.new_game"), root_path %>

@@ -7,9 +7,6 @@ class ApplicationController < ActionController::Base
   def home_page
   end
 
-  def game_over
-  end
-
   def did_lose
     if params[:country_id]
       country = Country.find(params[:country_id])
@@ -17,7 +14,7 @@ class ApplicationController < ActionController::Base
         country.lose = true
       end
       if country.lose?
-        redirect_to game_over_path
+        redirect_to game_over_country_path
       end
     end
   end

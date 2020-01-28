@@ -4,8 +4,11 @@ Rails.application.routes.draw do
   resources :ministers
   resources :options
   resources :events
-  resources :countries
-  get '/game_over', to: 'application#game_over'
+  resources :countries do
+    member do
+      get 'game_over'
+    end
+  end
   root 'application#home_page'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

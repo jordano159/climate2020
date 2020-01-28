@@ -4,20 +4,24 @@ $(document).ready(function(){
 	minister_num = 0
  // $("#minister-0").toggleClass('d-none');
  $("#next-title").html('<%= Minister.model_name.human(count: 2) %>');
+ $(".open_card").html('<%= I18n.t("minister.index.open_card") %>');
  $("#between").toggleClass('d-none');
  $(".next").click(function(event) {
 	 $(this).parents(".card").toggleClass('d-none')
 	 if ( $(this).parents("#between").exists()) {
 		 $("#minister-" + minister_num).toggleClass('d-none');
+		 $(".finished_reading").html('<%= I18n.t("minister.index.finished_reading") %>');
+		 console.log("finished_reading");
 	 }
 	 else {
-		 $("#next-title").html("<%= I18n.t("minister.index.next_player") %>");
+		 $("#next-title").html("<%= I18n.t("minister.index.move_next_player") %>");
 		 minister_num += 1
 	 	$("#between").toggleClass('d-none');
+		$(".open_card").html('<%= I18n.t("minister.index.open_card") %>');
 	 }
-	 if (!$("#minister-" + minister_num).exists()) {
+	 if (!$("#minister-" + minister_num).exists()) { // אם אין עוד שרים להציג
 		 $("#next-title").html("<%= I18n.t("minister.index.start_game") %>");
-		 $("#next").toggleClass('d-none');
+		 $(".open_card").toggleClass('d-none');
 		 $("#start-game").toggleClass('d-none');
 	 }
  });
@@ -31,16 +35,21 @@ $(document).ready(function(){
         <div class="card d-none h-100" id="minister-<%= index %>">
           <div class="card-body h-100 d-flex flex-column justify-content-between">
             <h5 class="card-title"><%= minister.role %></h5>
-            <p class="card-text"><%= minister.description %></p>
-							<button class="next btn btn-primary w-100 h-5" type="button" name="button"><%= I18n.t("minister.index.next") %></button>
+            <p class="card-text">
+							<%= minister.description %> <br> <br>
+							<%= Goal.all.sample.description if Goal.first.present? %>
+						</p>
+
+							<button class="finished_reading next btn btn-primary w-100 h-5" type="button" name="button"></button>
           </div>
         </div>
       <% end %>
 			<div class="card d-none h-100" id="between">
 				<div class="card-body h-100 d-flex flex-column justify-content-between">
-					<h5 class="card-title" id="next-title"><%= I18n.t("minister.index.next_player") %></h5>
+					<h5 class="card-title text-center" id="next-title"></h5> <!-- Content Served from JS -->
+					<%= image_tag "fenix.png", size: "250x250", alt: "Game Logo", class: "mx-auto d-block" %>
 					<%= link_to I18n.t("minister.index.start_game"), new_country_path, class: "btn btn-success d-none w-100 h-5", id:"start-game" %>
-					<button id="next" class="next btn btn-primary w-100 h-5" type="button" name="button"><%= I18n.t("minister.index.next") %></button>
+					<button class="open_card next btn btn-primary w-100 h-5" type="button" name="button"></button>
 				</div>
 			</div>
     </div>

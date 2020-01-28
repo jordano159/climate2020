@@ -8,8 +8,10 @@ class MinistersController < ApplicationController
     if params[:game]
       @ministers = Minister.rand_ministers(params[:game].to_i)
       redirect_to root_path, notice: 'יש לשמור על מספר השחקנים המותר' if @ministers == false
-    else
+    elsif admin_signed_in?
       @ministers = Minister.all
+    else
+      redirect_to root_path
     end
   end
 

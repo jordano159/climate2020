@@ -20,9 +20,9 @@
 <%= form_with(url: ministers_path, method: "get", local: true) do %>
   <%= label_tag(:game, I18n.t("application.home_page.players")) %>
   <%= text_field_tag(:game) %>
-  <%= submit_tag(I18n.t("application.home_page.new_game")) %>
+  <%= submit_tag I18n.t("application.home_page.new_game"), class: "btn btn-success" %>
 <% end %>
-<p><%= t('.minister_count', count: Minister.count) %></p>
+<p>(<%= t('.minister_count', count: Minister.count) %>)</p>
 <p id="notice"><%= notice %></p>
 <%# link_to "New Game", new_country_path %>
 <!-- <div> -->

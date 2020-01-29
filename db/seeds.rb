@@ -14,6 +14,7 @@ if File.file?(Rails.root.join('lib/event_seeds.csv'))
       min_deg: row[2]
     })
   end
+  puts "Inserted Events"
 end
 
 if File.file?(Rails.root.join('lib/option_seeds.csv'))
@@ -38,6 +39,7 @@ if File.file?(Rails.root.join('lib/option_seeds.csv'))
       min_energy: row[16]
     })
   end
+  puts "Inserted Options"
 end
 
 if File.file?(Rails.root.join('lib/minister_seeds.csv'))
@@ -47,14 +49,16 @@ if File.file?(Rails.root.join('lib/minister_seeds.csv'))
       description: row[1]
     })
   end
+  puts "Inserted Ministers"
 end
 
 if File.file?(Rails.root.join('lib/goal_seeds.csv'))
   CSV.foreach(Rails.root.join('lib/goal_seeds.csv'), headers: true) do |row|
     Goal.create({
-      description: row[1]
+      description: row[0]
     })
   end
+  puts "Inserted Goals"
 end
 
 if File.file?(Rails.root.join('lib/facts_seeds.csv'))

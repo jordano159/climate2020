@@ -1,5 +1,5 @@
 class Event < ApplicationRecord
-  has_many :options
+  has_many :options, dependent: :destroy
   has_and_belongs_to_many :countries, join_table: "countries_events"
   validates :title,          presence: true
   validates :description,    presence: true

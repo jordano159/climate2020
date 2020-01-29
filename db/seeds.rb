@@ -23,7 +23,7 @@ if File.file?(Rails.root.join('lib/option_seeds.csv'))
       operator: row[1],
       amount: row[2],
       on_what: row[3],
-      event_id: row[4],
+      event_id: Event.find_by(title: row[4]).id,
       min_resilience: row[5],
       min_budget: row[6],
       min_civ_num: row[7],

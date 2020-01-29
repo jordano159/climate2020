@@ -67,11 +67,11 @@ class Country < ApplicationRecord
     if self.new_record?
       self.resilience ||= :neutral
       self.reg_rel ||= :neutral
-      self.init_civ ||= rand(10.0..80.0).round(2)
+      self.init_civ ||= rand(40.0..70.0).round(2)
       self.civ_num ||= self.init_civ
       self.deg ||= 1.0
       self.life_level ||= 10
-      self.budget ||= (self.civ_num * rand(2..4)).to_i
+      self.budget ||= (self.civ_num * 3).to_i
       self.score ||= 0
       self.year ||= 2020
       self.is_conquered ||= false

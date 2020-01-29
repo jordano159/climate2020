@@ -22,7 +22,7 @@
   <%= submit_tag I18n.t("application.home_page.new_game"), class: "btn btn-success" %>
 <% end %>
 <p>(<%= t('.minister_count', count: Minister.count) %>)</p>
-<p id="notice"><%= notice %></p>
+<p id="notice"><%= notice if params[:error]%></p>
 <%# link_to "New Game", new_country_path %>
 <!-- <div> -->
   <%# link_to_unless_current "English", locale: "en" %>

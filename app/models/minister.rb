@@ -5,7 +5,7 @@ class Minister < ApplicationRecord
   def self.rand_ministers(num)
     ministers = []
     all = Minister.all
-    return false if num > all.count
+    return false if num > all.count || num <= 0
     counter = 1
     minister = all.sample
     ministers << minister

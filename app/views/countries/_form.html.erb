@@ -1,13 +1,8 @@
-<%= simple_form_for(@country, defaults: { wrapper_html: { class: 'w-100 pr-2 pl-2' } },html: { class: 'form-inline' }) do |f| %>
+<%= simple_form_for(@country, defaults: { wrapper_html: { class: 'w-100 pr-2 pl-2' } },html: { class: 'form-inline mb-5' }) do |f| %>
   <%= f.error_notification %>
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
   <div class="form-inputs w-100 mr-10 ml-10">
-		<%= Country.human_attribute_name(:budget) %>: <span id="budget">ddas<%= @country.budget%></span>
 
-
-
-    <span class="budget-minus"></span>
-		<!-- civ_num: <%= @country.civ_num %> -->
     <%= f.input :name %>
     <%= f.input :agriculture,   collection: agrihash, label_method: :second, value_method: :first, include_blank: false %>
     <%= f.input :education,     collection: eduhash, label_method: :second, value_method: :first, include_blank: false %>
@@ -26,6 +21,13 @@
 		</div>
   </div>
 <% end %>
+
+<footer class="footer fixed-bottom bg-info">
+  <div class="container text-white">
+    <%= Country.human_attribute_name(:budget) %>: <span id="budget"><%= @country.budget%></span>
+    <span class="budget-minus"></span>
+  </div>
+</footer>
 
 <script type="text/javascript">
 	costs = [<%= @agriculture_costs.values %>,

@@ -48,7 +48,7 @@ $(document).ready(function(){
 				<div class="card-body h-100 d-flex flex-column justify-content-between">
 					<h2 class="card-title text-center" id="next-title"></h2> <!-- Content Served from JS -->
 					<%= image_tag "fenix.png", size: "250x250", alt: "Game Logo", class: "mx-auto d-block" %>
-					<%= link_to I18n.t("minister.index.start_game"), new_country_path, class: "btn btn-success d-none w-100 h-5", id:"start-game" %>
+					<%= link_to I18n.t("minister.index.start_game"), new_country_path, class: "btn btn-success d-none w-100 h-5", id:"start-game", style: "font-size: large;" %>
 					<button class="open_card next btn btn-primary w-100 h-5" type="button" name="button"></button>
 				</div>
 			</div>

@@ -6,9 +6,9 @@
 <div class="">
   <%= t('country.game_over.turns_survived', count: @country.options.count) %>
 </div>
-<div class="">
-  <%= t('country.game_over.turns_survived', count: (@country.year - 2020) / 5) %>
-</div>
+<!-- <div class=""> -->
+  <%# t('country.game_over.turns_survived', count: (@country.year - 2020) / 5) %>
+<!-- </div> -->
 <div class="">
   <%= t('country.game_over.lives_lost', count: @country.init_civ - @country.civ_num) %>
 </div>
@@ -21,7 +21,7 @@
 <div class="">
   <%= t('country.game_over.options') %>:
   <ul>
-    <% @country.options.each do |option| %>
+    <% @country.options.uniq.each do |option| %>
       <li><%= option.title %></li>
     <% end %>
   </ul>

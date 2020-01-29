@@ -53,6 +53,14 @@ class Country < ApplicationRecord
     end
   end
 
+  def degrees
+    year = 2025
+    20.times do
+      puts (0.003 * (2 ** ((year - 2020) / 5)))
+      year += 5
+    end
+  end
+
   private
 
   def set_defaults

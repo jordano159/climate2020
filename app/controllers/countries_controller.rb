@@ -21,7 +21,8 @@ class CountriesController < ApplicationController
       if params[:turn] == "true"
         puts "********************* Params Turn *******************"
         @country.year += 5
-        @country.deg += 0.05
+        @country.deg += 5
+        # @country.deg += 0.003 * (2 ** ((@country.year - 2020) / 5))
         if @country.reg_rel == "war"
           puts "War"
           if @country.civ_num > 1.1

@@ -12,6 +12,9 @@
       </div>
       <div class="bd-highlight w-100">
         <div class="d-flex flex-row bd-highlight">
+          <% if country.resilience == "civil_war" || country.reg_rel == "war" %>
+          <div class="pr-2 bd-highlight flex-fill" id="warning"><strong><i class="material-icons text-danger">warning</i></strong></div>
+          <% end %>
           <div class="pr-2 bd-highlight flex-fill"><strong>התחממות:</strong>  <%= country.deg %>°C</div>
           <!-- <div class="pr-2 bd-highlight flex-fill"><strong>איכות חיים:</strong>      <%= country.life_level %></div> -->
           <div class="pr-2 bd-highlight flex-fill">

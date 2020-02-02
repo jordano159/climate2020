@@ -6,7 +6,11 @@
       <div class="card">
         <div class="card-body">
           <h5 class="card-title"><%= option.title %></h5>
-          <p class="card-text"><%= "#{option.amount} #{Country.human_attribute_name(option.on_what)}" %></p>
+          <% if option.amount > 0 %>
+            <p class="card-text"><%= option.amount.abs.to_s + "+ " + Country.human_attribute_name(option.on_what) %></p>
+          <% else %>
+            <p class="card-text"><%= option.amount.abs.to_s + "- " + Country.human_attribute_name(option.on_what) %></p>
+          <% end %>
           <% if params[:country_id] && Country.find(params[:country_id]).is_option_available(option) %>
             <%= link_to I18n.t("event.show.choose_option"), { controller: "countries", action: "show", id: params[:country_id], option_id: option.id, turn: true }, class: "btn btn-primary" %>
           <% else %>

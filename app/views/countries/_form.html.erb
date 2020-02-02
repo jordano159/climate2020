@@ -24,7 +24,7 @@
 
 <footer class="footer fixed-bottom bg-info">
   <div class="container text-white">
-    <%= Country.human_attribute_name(:budget) %>: <span id="budget"><%= @country.budget%></span> מיליון
+    <%= Country.human_attribute_name(:budget) %>: <span id="budget"><%= @country.budget%></span> <%=  I18n.t("event.show.million") %>
     <span class="budget-minus"></span>
   </div>
 </footer>
@@ -41,10 +41,10 @@
 	all_costs = 0
 	$.each($("select"),function(index, el) {
 		// console.log(index);
-		$(el).children("option[value='low']").append(" - " + costs[index][2])
-		$(el).children("option[value='medium']").append(" - " + costs[index][1])
-		$(el).children("option[value='high']").append(" - " + costs[index][0])
-    cost = parseInt($(el).children("option:selected").html().split(" ")[$(el).children("option:selected").html().split(" ").length-1]);
+		$(el).children("option[value='low']").append(": " + costs[index][2] + " " + '<%=  I18n.t("event.show.million") %>')
+		$(el).children("option[value='medium']").append(": " + costs[index][1] + " " + '<%=  I18n.t("event.show.million") %>')
+		$(el).children("option[value='high']").append(": " + costs[index][0] + " " + '<%=  I18n.t("event.show.million") %>')
+    cost = parseInt($(el).children("option:selected").html().split(" ")[$(el).children("option:selected").html().split(" ").length-2]);
 		all_costs = all_costs + cost
     console.log($(el).children("option:selected").html().split(" "));
 	});
@@ -55,7 +55,7 @@
 	$("select").change(function(event) {
     costs = 0
     $.each($("select"),function(index, el) {
-  		cost = parseInt($(el).children("option:selected").html().split(" ")[$(el).children("option:selected").html().split(" ").length-1]);
+  		cost = parseInt($(el).children("option:selected").html().split(" ")[$(el).children("option:selected").html().split(" ").length-2]);
       console.log("length: " + $(el).children("option:selected").html().length)
       costs = costs + cost
   	});

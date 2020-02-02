@@ -36,6 +36,8 @@ he:
       choose_option: "בחירת אפשרות"
       consequense: "השלכה"
       lose: "זהו, ויתרנו. נפסיד וחלאס"
+      requirements: "דרישות מינימום"
+      million: "מיליון"
   country:
     new:
       title: "בנו את המדינה"
@@ -50,6 +52,7 @@ he:
       options: "אלה האפשרויות שבחרתם בהן"
   navbar:
     wars: "אזרחים מתים ותקציב מבוזבז"
+
 
   # simple_form:
   #   errors:
@@ -87,21 +90,6 @@ he:
       create: יצירת %{model}
       submit: שמור %{model}
       update: עדכון %{model}
-  #   labels:
-  #     defaults:
-  #       username: 'User name'
-  #       password: 'Password'
-  #       new:
-  #         username: 'Choose a user name'
-  #   hints:
-  #     defaults:
-  #       username: 'User name to sign in.'
-  #       password: 'No special characters, please.'
-  #   placeholders:
-  #     defaults:
-  #       username: 'Your username'
-  #       password: '****'
-  #
   activerecord:
     models:
       country: מדינה

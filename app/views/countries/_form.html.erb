@@ -41,9 +41,9 @@
 	all_costs = 0
 	$.each($("select"),function(index, el) {
 		// console.log(index);
-		$(el).children("option[value='low']").append(" - " + costs[index][2] + " " + '<%=  I18n.t("event.show.million") %>')
-		$(el).children("option[value='medium']").append(" - " + costs[index][1] + " " + '<%=  I18n.t("event.show.million") %>')
-		$(el).children("option[value='high']").append(" - " + costs[index][0] + " " + '<%=  I18n.t("event.show.million") %>')
+		$(el).children("option[value='low']").append(": " + costs[index][2] + " " + '<%=  I18n.t("event.show.million") %>')
+		$(el).children("option[value='medium']").append(": " + costs[index][1] + " " + '<%=  I18n.t("event.show.million") %>')
+		$(el).children("option[value='high']").append(": " + costs[index][0] + " " + '<%=  I18n.t("event.show.million") %>')
     cost = parseInt($(el).children("option:selected").html().split(" ")[$(el).children("option:selected").html().split(" ").length-2]);
 		all_costs = all_costs + cost
     console.log($(el).children("option:selected").html().split(" "));

@@ -11,6 +11,18 @@
             <%= link_to I18n.t("event.show.choose_option"), { controller: "countries", action: "show", id: params[:country_id], option_id: option.id, turn: true }, class: "btn btn-primary" %>
           <% else %>
             <a href="#" class="btn btn-primary disabled"><%= I18n.t("event.show.choose_option") %></a>
+            <%# option.human_attribute_name(:min_resilience) %> <%# option.min_resilience   if option.read_attribute_before_type_cast(:min_resilience) > 0 %>
+            <%# option.min_budget       if option.read_attribute_before_type_cast(:min_budget) > 0 %>
+            <%# option.min_civ_num      if option.read_attribute_before_type_cast(:min_civ_num) > 0 %>
+            <%# option.min_reg_rel      if option.read_attribute_before_type_cast(:min_reg_rel) > 0 %>
+            <%# option.min_agriculture  if option.read_attribute_before_type_cast(:min_agriculture) > 0 %>
+            <%# option.min_education    if option.read_attribute_before_type_cast(:min_education) > 0 %>
+            <%# option.min_security     if option.read_attribute_before_type_cast(:min_security) > 0 %>
+            <%# option.min_comms        if option.read_attribute_before_type_cast(:min_comms) > 0 %>
+            <%# option.min_social_sec   if option.read_attribute_before_type_cast(:min_social_sec) > 0 %>
+            <%# option.min_health       if option.read_attribute_before_type_cast(:min_health) > 0 %>
+            <%# option.min_water        if option.read_attribute_before_type_cast(:min_water) > 0 %>
+            <%# option.min_energy       if option.read_attribute_before_type_cast(:min_energy) > 0 %>
           <% end %>
         </div>
       </div>

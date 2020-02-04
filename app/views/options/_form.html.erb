@@ -5,10 +5,11 @@
 
   <div class="form-inputs">
     <%= f.input :title %>
-    <%# f.input :operator,  collection: Option.operators.keys %>
     <%= f.input :amount %>
     <%  columns = %i[budget resilience civ_num deg life_level reg_rel agriculture education security comms social_sec health water energy] %>
     <%= f.input :on_what,   collection: columns %>
+    <%= f.input :amount2 %>
+    <%= f.input :on_what2,   collection: columns %>
     <%= f.association :event %>
     <%= f.input :min_resilience,  collection: Option.min_resiliences.keys %>
     <%= f.input :min_budget %>

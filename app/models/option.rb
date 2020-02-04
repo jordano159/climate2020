@@ -4,7 +4,6 @@ class Option < ApplicationRecord
 
   belongs_to :event
 
-  enum operator:                %i[plus minus], _prefix: true
   enum min_resilience:          Country.resiliences.keys, _prefix: true
   enum min_reg_rel:             Country.reg_rels.keys, _prefix: true
   enum min_agriculture:         Country.agricultures.keys, _prefix: true
@@ -18,9 +17,10 @@ class Option < ApplicationRecord
 
 
   validates :title,             presence: true
-  # validates :operator,          inclusion: { in: Option.operators.keys }
   validates :amount,            numericality: true
   validates :on_what,           inclusion: { in: %w(budget resilience civ_num deg life_level reg_rel agriculture education security comms social_sec health water energy) }
+  validates :amount2,           numericality: true, allow_blank: true
+  validates :on_what2,          inclusion: { in: %w(budget resilience civ_num deg life_level reg_rel agriculture education security comms social_sec health water energy) }, allow_blank: true
   validates :min_civ_num,       numericality: { greater_than_or_equal_to: 0 }, allow_nil: true
   validates :min_budget,        numericality: { only_integer: true, greater_than_or_equal_to: 0 }, allow_nil: true
   validates :min_resilience,    inclusion: { in: Option.min_resiliences.keys }, allow_nil: true

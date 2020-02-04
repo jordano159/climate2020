@@ -70,6 +70,6 @@ class OptionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def option_params
-      params.require(:option).permit(:title, :operator, :amount, :on_what, :event_id, :min_resilience, :min_budget, :min_civ_num, :min_reg_rel, :min_agriculture, :min_education, :min_security, :min_comms, :min_social_sec, :min_health, :min_water, :min_energy)
+      params.require(:option).permit(:title, :amount, :on_what, :amount2, :on_what2, :event_id, :min_resilience, :min_budget, :min_civ_num, :min_reg_rel, :min_agriculture, :min_education, :min_security, :min_comms, :min_social_sec, :min_health, :min_water, :min_energy)
     end
 end

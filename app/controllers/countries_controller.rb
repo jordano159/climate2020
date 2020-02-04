@@ -177,7 +177,6 @@ class CountriesController < ApplicationController
   end
 
     def consequence_too(option, country)
-      # operator.plus? ? operator = :+ : operator = :-
       puts "****************************************"
       puts "#{option.on_what}: #{country.send(option.on_what)} + #{option.amount}"
       case option.on_what
@@ -189,6 +188,15 @@ class CountriesController < ApplicationController
         country.send "#{option.on_what}=".to_sym, country.read_attribute_before_type_cast(option.on_what.to_sym) + option.amount
       end
       puts "#{option.on_what}: #{country.send(option.on_what)}"
+      case option.on_what2
+      when "budget", "life_level"
+        country.send "#{option.on_what2}=".to_sym, country.send(option.on_what2) + option.amount2.to_i
+      when "civ_num", "deg"
+        country.send "#{option.on_what2}=".to_sym, country.send(option.on_what2) + option.amount2
+      when "resilience", "reg_rel", "agriculture", "education", "security", "comms", "social_sec", "health", "water", "energy"
+        country.send "#{option.on_what2}=".to_sym, country.read_attribute_before_type_cast(option.on_what2.to_sym) + option.amount2
+      end
+      puts "#{option.on_what2}: #{country.send(option.on_what2)}"
       country.save!
     end
 

@@ -35,6 +35,7 @@ class Country < ApplicationRecord
   validates :energy,        inclusion: { in: Country.energies.keys }
 
   def is_option_available(option)
+    flag = false
     if   option.read_attribute_before_type_cast(:min_resilience)      <= read_attribute_before_type_cast(:resilience)   &&
             option.read_attribute_before_type_cast(:min_reg_rel)      <= read_attribute_before_type_cast(:reg_rel)      &&
             option.min_budget                                         <= budget                                         &&
@@ -49,16 +50,28 @@ class Country < ApplicationRecord
             option.read_attribute_before_type_cast(:min_energy)       <= read_attribute_before_type_cast(:energy)
       case option.on_what
       when "resilience", "reg_rel"
-        return true if self.read_attribute_before_type_cast(option.on_what.to_sym) + option.amount < 6
+        flag = true if self.read_attribute_before_type_cast(option.on_what.to_sym) + option.amount < 6
       when "agriculture", "education", "security", "comms", "social_sec", "health", "water", "energy"
-        return true if self.read_attribute_before_type_cast(option.on_what.to_sym) + option.amount < 3
+        flag = true if self.read_attribute_before_type_cast(option.on_what.to_sym) + option.amount < 3
       else
-        return true
+        flag = true
       end
       puts "ceiling check: #{self.read_attribute_before_type_cast(option.on_what.to_sym)} + #{option.amount}"
+      if option.on_what2.present?
+        case option.on_what2
+        when "resilience", "reg_rel"
+          flag = true if self.read_attribute_before_type_cast(option.on_what2.to_sym) + option.amount < 6
+        when "agriculture", "education", "security", "comms", "social_sec", "health", "water", "energy"
+          flag = true if self.read_attribute_before_type_cast(option.on_what2.to_sym) + option.amount < 3
+        else
+          flag = true
+        end
+        puts "ceiling check: #{self.read_attribute_before_type_cast(option.on_what2.to_sym)} + #{option.amount}"
+      end
     else
-      return false
+      flag = false
     end
+    return flag
   end
 
   def degrees

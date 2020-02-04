@@ -21,22 +21,23 @@ if File.file?(Rails.root.join('lib/option_seeds.csv'))
   CSV.foreach(Rails.root.join('lib/option_seeds.csv'), headers: true) do |row|
     Option.create({
       title: row[0],
-      operator: row[1],
-      amount: row[2],
-      on_what: row[3],
-      event_id: Event.find_by(title: row[4]).id,
-      min_resilience: row[5],
-      min_budget: row[6],
-      min_civ_num: row[7],
-      min_reg_rel: row[8],
-      min_agriculture: row[9],
-      min_education: row[10],
-      min_security: row[11],
-      min_comms: row[12],
-      min_social_sec: row[13],
-      min_health: row[14],
-      min_water: row[15],
-      min_energy: row[16]
+      amount: row[1],
+      on_what: row[2],
+      amount2: row[3],
+      on_what2: row[4],
+      event_id: Event.find_by(title: row[5]).id,
+      min_resilience: row[6],
+      min_budget: row[7],
+      min_civ_num: row[8],
+      min_reg_rel: row[9],
+      min_agriculture: row[10],
+      min_education: row[11],
+      min_security: row[12],
+      min_comms: row[13],
+      min_social_sec: row[14],
+      min_health: row[15],
+      min_water: row[16],
+      min_energy: row[17]
     })
   end
   puts "Inserted Options"

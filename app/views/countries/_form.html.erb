@@ -65,9 +65,13 @@
     // $("#country_budget").val($("#budget").html())
     if (parseInt($("#budget").html()) < 0) {
       // $(".budget-minus").removeClass('d-none')
+      $("#submit").removeClass('btn-success')
+      $("#submit").addClass('btn-secondary disabled')
       $(".budget-minus").append("<%= j (render partial: 'budget_minus') %>")
     }
     else {
+      $("#submit").addClass('btn-success')
+      $("#submit").removeClass('btn-secondary disabled')
       $(".budget-minus-partial").remove()
     }
 	});

@@ -61,6 +61,23 @@ class Country < ApplicationRecord
     end
   end
 
+  def set_score
+    enum_attributes = %w(resilience reg_rel agriculture education security comms social_sec health water energy)
+    score = ((self.year - 2020) * 2) - ((self.init_civ.to_i - self.civ_num.to_i) * 2)
+    puts "***********************************************"
+    puts "year: " + (self.year - 2020).to_s
+    puts "civ: " + "-" + ((self.init_civ.to_i - self.civ_num.to_i) * 2).to_s
+    puts "score = " + ((self.year - 2020) * 2).to_s + " - " + (self.init_civ.to_i - self.civ_num.to_i).to_s
+    puts score
+    enum_attributes.each do |attribute|
+      score = score + read_attribute_before_type_cast(attribute.to_sym) * 5
+      puts attribute + " " + (read_attribute_before_type_cast(attribute.to_sym) * 5).to_s
+      puts score
+    end
+    self.score = score
+    self.save
+  end
+
   private
 
   def set_defaults

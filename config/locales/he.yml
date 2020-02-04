@@ -45,12 +45,18 @@ he:
     game_over:
       new_game: "משחק חדש"
       title: "המשחק נגמר!"
-      year_survived: "שרדתם %{count} שנים"
-      turns_survived: "שרדתם %{count} תורות"
-      lives_lost: "נהרגו לכם %{count} מיליון אזרחים"
+      survived: "שרדתם"
+      years_count: "%{count}"
+      years: "שנים"
+      lost: "נהרגו"
+      lives_lost_count: "%{count}"
+      million_civs: "מיליון אזרחים"
       civil_war: "הפסדתם בעקבות מלחמת אזרחים"
       war: "מדינה אחרת כבשה אתכם"
-      options: "אלה האפשרויות שבחרתם בהן"
+      options: "האפשרויות שבחרתן"
+      score: "תוצאה:"
+      score_num: "%{count}"
+      points: "נקודות"
   navbar:
     wars: "אזרחים מתים ותקציב מבוזבז"
 

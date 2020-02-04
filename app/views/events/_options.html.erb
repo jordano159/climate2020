@@ -3,9 +3,9 @@
     <div class="card-body">
       <h5 class="card-title"><%= option.title %></h5>
       <% if option.amount > 0 %>
-        <p class="card-text"><%= option.amount.abs.to_s + "+ " + Country.human_attribute_name(option.on_what) %></p>
+        <p class="card-text text-success"><%= option.amount.abs.to_s + "+ " + Country.human_attribute_name(option.on_what) %></p>
       <% else %>
-        <p class="card-text"><%= option.amount.abs.to_s + "- " + Country.human_attribute_name(option.on_what) %></p>
+        <p class="card-text text-danger"><%= option.amount.abs.to_s + "- " + Country.human_attribute_name(option.on_what) %></p>
       <% end %>
       <% if params[:country_id] %>
         <% country = Country.find(params[:country_id]) %>

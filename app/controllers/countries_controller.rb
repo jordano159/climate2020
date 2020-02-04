@@ -71,6 +71,7 @@ class CountriesController < ApplicationController
     end
     if params[:lose]
       @country.lose = true
+      @country.set_score
       @country.save
       redirect_to game_over_country_path(country_id: @country.id)
     end

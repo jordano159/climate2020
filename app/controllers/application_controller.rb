@@ -14,6 +14,7 @@ class ApplicationController < ActionController::Base
         country.lose = true
       end
       if country.lose? && action_name != "game_over"
+        country.set_score
         redirect_to game_over_country_path(country_id: country.id)
       end
     end

@@ -80,47 +80,7 @@ class CountriesController < ApplicationController
   # GET /countries/new
   def new
     @country = Country.new
-    @agriculture_costs = {
-      high: (@country.init_civ * 0.5 + 3).to_i,
-      medium: (@country.init_civ * 0.3 + 2).to_i,
-      low: (@country.init_civ * 0.1 + 1).to_i,
-    }
-    @education_costs = {
-      high: (@country.init_civ * 0.5 + 3).to_i,
-      medium: (@country.init_civ * 0.3 + 2).to_i,
-      low: (@country.init_civ * 0.1 + 1).to_i,
-    }
-    @security_costs = {
-      high: (@country.init_civ * 0.5 + 3).to_i,
-      medium: (@country.init_civ * 0.3 + 2).to_i,
-      low: (@country.init_civ * 0.1 + 1).to_i,
-    }
-    @comms_costs = {
-      high: (@country.init_civ * 0.5 + 3).to_i,
-      medium: (@country.init_civ * 0.3 + 2).to_i,
-      low: (@country.init_civ * 0.1 + 1).to_i,
-    }
-    @social_sec_costs = {
-      high: (@country.init_civ * 0.5 + 3).to_i,
-      medium: (@country.init_civ * 0.3 + 2).to_i,
-      low: (@country.init_civ * 0.1 + 1).to_i,
-    }
-    @health_costs = {
-      high: (@country.init_civ * 0.5 + 3).to_i,
-      medium: (@country.init_civ * 0.3 + 2).to_i,
-      low: (@country.init_civ * 0.1 + 1).to_i,
-    }
-    @water_costs = {
-      high: (@country.init_civ * 0.5 + 3).to_i,
-      medium: (@country.init_civ * 0.3 + 2).to_i,
-      low: (@country.init_civ * 0.1 + 1).to_i,
-    }
-    @energy_costs = {
-      high: (@country.init_civ * 0.5 + 3).to_i,
-      medium: (@country.init_civ * 0.3 + 2).to_i,
-      low: (@country.init_civ * 0.1 + 1).to_i
-    }
-
+    set_costs(@country)
   end
 
   # GET /countries/1/edit
@@ -131,46 +91,7 @@ class CountriesController < ApplicationController
   # POST /countries.json
   def create
     @country = Country.new(country_params)
-		@agriculture_costs = {
-			high: (@country.init_civ * 0.5 + 3).to_i,
-			medium: (@country.init_civ * 0.3 + 2).to_i,
-			low: (@country.init_civ * 0.1 + 1).to_i,
-		}
-		@education_costs = {
-			high: (@country.init_civ * 0.5 + 3).to_i,
-			medium: (@country.init_civ * 0.3 + 2).to_i,
-			low: (@country.init_civ * 0.1 + 1).to_i,
-		}
-		@security_costs = {
-			high: (@country.init_civ * 0.5 + 3).to_i,
-			medium: (@country.init_civ * 0.3 + 2).to_i,
-			low: (@country.init_civ * 0.1 + 1).to_i,
-		}
-		@comms_costs = {
-			high: (@country.init_civ * 0.5 + 3).to_i,
-			medium: (@country.init_civ * 0.3 + 2).to_i,
-			low: (@country.init_civ * 0.1 + 1).to_i,
-		}
-		@social_sec_costs = {
-			high: (@country.init_civ * 0.5 + 3).to_i,
-			medium: (@country.init_civ * 0.3 + 2).to_i,
-			low: (@country.init_civ * 0.1 + 1).to_i,
-		}
-		@health_costs = {
-			high: (@country.init_civ * 0.5 + 3).to_i,
-			medium: (@country.init_civ * 0.3 + 2).to_i,
-			low: (@country.init_civ * 0.1 + 1).to_i,
-		}
-		@water_costs = {
-			high: (@country.init_civ * 0.5 + 3).to_i,
-			medium: (@country.init_civ * 0.3 + 2).to_i,
-			low: (@country.init_civ * 0.1 + 1).to_i,
-		}
-		@energy_costs = {
-			high: (@country.init_civ * 0.5 + 3).to_i,
-			medium: (@country.init_civ * 0.3 + 2).to_i,
-			low: (@country.init_civ * 0.1 + 1).to_i
-		}
+    set_costs(@country)
     respond_to do |format|
       if @country.save
         format.html { redirect_to event_path(id: 1, country_id: @country.id) }
@@ -211,6 +132,49 @@ class CountriesController < ApplicationController
   end
 
   private
+
+  def set_costs(country)
+    @agriculture_costs = {
+      high: (country.init_civ * 0.5 + 3).to_i,
+      medium: (country.init_civ * 0.3 + 2).to_i,
+      low: (country.init_civ * 0.1 + 1).to_i,
+    }
+    @education_costs = {
+      high: (country.init_civ * 0.5 + 3).to_i,
+      medium: (country.init_civ * 0.3 + 2).to_i,
+      low: (country.init_civ * 0.1 + 1).to_i,
+    }
+    @security_costs = {
+      high: (country.init_civ * 0.5 + 3).to_i,
+      medium: (country.init_civ * 0.3 + 2).to_i,
+      low: (country.init_civ * 0.1 + 1).to_i,
+    }
+    @comms_costs = {
+      high: (country.init_civ * 0.5 + 3).to_i,
+      medium: (country.init_civ * 0.3 + 2).to_i,
+      low: (country.init_civ * 0.1 + 1).to_i,
+    }
+    @social_sec_costs = {
+      high: (country.init_civ * 0.5 + 3).to_i,
+      medium: (country.init_civ * 0.3 + 2).to_i,
+      low: (country.init_civ * 0.1 + 1).to_i,
+    }
+    @health_costs = {
+      high: (country.init_civ * 0.5 + 3).to_i,
+      medium: (country.init_civ * 0.3 + 2).to_i,
+      low: (country.init_civ * 0.1 + 1).to_i,
+    }
+    @water_costs = {
+      high: (country.init_civ * 0.5 + 3).to_i,
+      medium: (country.init_civ * 0.3 + 2).to_i,
+      low: (country.init_civ * 0.1 + 1).to_i,
+    }
+    @energy_costs = {
+      high: (country.init_civ * 0.5 + 3).to_i,
+      medium: (country.init_civ * 0.3 + 2).to_i,
+      low: (country.init_civ * 0.1 + 1).to_i
+    }
+  end
 
     def consequence_too(option, country)
       # operator.plus? ? operator = :+ : operator = :-

@@ -38,6 +38,7 @@ he:
       lose: "זהו, ויתרנו. נפסיד וחלאס"
       requirements: "דרישות מינימום"
       million: "מיליון"
+      ceiling: "כבר על המקסימום"
   country:
     new:
       title: "בנו את המדינה"

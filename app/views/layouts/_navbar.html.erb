@@ -14,9 +14,9 @@
           <div class="pr-2 bd-highlight flex-fill" id="warning"><strong><i class="material-icons text-danger">warning</i></strong></div>
           <% end %>
           <div class="bd-highlight flex-fill w-25 text-center py-1"><%= country.deg %>°C</div>
-          <div class="bd-highlight flex-fill w-25 text-center py-1"><i class="material-icons font-icon">access_time</i><%= country.year %></div>
-          <div class="bd-highlight flex-fill w-25 text-center py-1"><strong><i class="material-icons font-icon">person_outline</i></strong><%= country.civ_num %></div>
-          <div class="bd-highlight flex-fill w-25 text-center py-1"><strong><i class="material-icons font-icon">attach_money</i></strong><%= country.budget %>M</div>
+          <div class="bd-highlight flex-fill w-25 text-center py-1">⏲<%= country.year %></div>
+          <div class="bd-highlight flex-fill w-25 text-center py-1">&#128697;<%= country.civ_num %>M</div>
+          <div class="bd-highlight flex-fill w-25 text-center py-1 ltr"><%= country.budget %>M$</div>
           <div class="bd-highlight flex-fill text-center py-1" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <i class="material-icons">menu</i>
           </div>
@@ -26,48 +26,82 @@
 
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav p-0">
-      <li class="nav-item active">
-        <% if country.resilience == "civil_war" %>
-        <strong><%= Country.human_attribute_name(:resilience) %>:</strong>           <%= reshash[country.resilience.to_sym] %> <span style="color: red">(<%= I18n.t("navbar.wars") %>)</span>
-        <% else %>
-        <strong><%= Country.human_attribute_name(:resilience) %>:</strong>           <%= reshash[country.resilience.to_sym].split[0] %>
-        <% end %>
-      </li>
-      <li class="nav-item">
-        <% if country.reg_rel == "war" %>
-        <strong><%= Country.human_attribute_name(:reg_rel) %>:</strong>           <span style="color: red"><%= reghash[country.reg_rel.to_sym] %> (<%= I18n.t("navbar.wars") %>)</span>
-        <% else %>
-        <strong><%= Country.human_attribute_name(:reg_rel) %>:</strong>           <%= reghash[country.reg_rel.to_sym].split[0] %>
-        <% end %>
-      </li>
-      <li class="nav-item">
-        <strong><%= Country.human_attribute_name(:agriculture) %>:</strong>       <%= agrihash[country.agriculture.to_sym].split[0] %>
-      </li>
-      <li class="nav-item">
-        <strong><%= Country.human_attribute_name(:education) %>:</strong>         <%= eduhash[country.education.to_sym].split[0] %>
-      </li>
-      <li class="nav-item">
-        <strong><%= Country.human_attribute_name(:security) %>:</strong>          <%= securityhash[country.security.to_sym].split[0] %>
-      </li>
-      <li class="nav-item">
-        <strong><%= Country.human_attribute_name(:comms) %>:</strong>             <%= commshash[country.comms.to_sym].split[0] %>
-      </li>
-      <li class="nav-item">
-        <strong><%= Country.human_attribute_name(:social_sec) %>:</strong>        <%= social_sechash[country.social_sec.to_sym].split[0] %>
-      </li>
-      <li class="nav-item">
-        <strong><%= Country.human_attribute_name(:health) %>:</strong>            <%= healthhash[country.health.to_sym].split[0] %>
-      </li>
-      <li class="nav-item">
-        <strong><%= Country.human_attribute_name(:water) %>:</strong>             <%= waterhash[country.water.to_sym].split[0] %>
-      </li>
-      <li class="nav-item">
-        <strong><%= Country.human_attribute_name(:energy) %>:</strong>            <%= energyhash[country.energy.to_sym].split[0] %>
-      </li>
-      </div>
-    </ul>
 
-  </div>
+      <div class="d-flex flex-row">
+        <div class="p-2 d-flex flex-column w-50">
+          <div class="nav-item active">
+            <% if country.resilience == "civil_war" %>
+              <strong><%= Country.human_attribute_name(:resilience) %>:</strong>           <span class="reg-res"><%= reshash[country.resilience.to_sym] %> (<%= I18n.t("navbar.wars") %>)</span>
+            <% else %>
+              <strong><%= Country.human_attribute_name(:resilience) %>:</strong>           <span class="reg-res"><%= reshash[country.resilience.to_sym].split[0] %></span>
+            <% end %>
+          </div>
+          <div class="nav-item">
+            <strong><%= Country.human_attribute_name(:agriculture) %>:</strong>       <span class="hash"><%= agrihash[country.agriculture.to_sym].split[0] %></span>
+          </div>
+          <div class="nav-item">
+            <strong><%= Country.human_attribute_name(:security) %>:</strong>          <span class="hash"><%= securityhash[country.security.to_sym].split[0] %></span>
+          </div>
+          <div class="nav-item">
+            <strong><%= Country.human_attribute_name(:social_sec) %>:</strong>        <span class="hash"><%= social_sechash[country.social_sec.to_sym].split[0] %></span>
+          </div>
+          <div class="nav-item">
+            <strong><%= Country.human_attribute_name(:water) %>:</strong>             <span class="hash"><%= waterhash[country.water.to_sym].split[0] %></span>
+          </div>
+        </div>
+        <div class="p-2 d-flex flex-column w-50">
+          <div class="nav-item">
+            <% if country.reg_rel == "war" %>
+              <strong><%= Country.human_attribute_name(:reg_rel) %>:</strong>           <span class="reg-res"><%= reghash[country.reg_rel.to_sym] %> (<%= I18n.t("navbar.wars") %>)</span>
+            <% else %>
+              <strong><%= Country.human_attribute_name(:reg_rel) %>:</strong>         <span class="reg-res"><%= reghash[country.reg_rel.to_sym].split[0] %></span>
+            <% end %>
+          </div>
+          <div class="nav-item">
+            <strong><%= Country.human_attribute_name(:education) %>:</strong>         <span class="hash"><%= eduhash[country.education.to_sym].split[0] %></span>
+          </div>
+
+          <div class="nav-item">
+            <strong><%= Country.human_attribute_name(:comms) %>:</strong>             <span class="hash"><%= commshash[country.comms.to_sym].split[0] %></span>
+          </div>
+
+          <div class="nav-item">
+            <strong><%= Country.human_attribute_name(:health) %>:</strong>            <span class="hash"><%= healthhash[country.health.to_sym].split[0] %></span>
+          </div>
+
+          <div class="nav-item">
+            <strong><%= Country.human_attribute_name(:energy) %>:</strong>            <span class="hash"><%= energyhash[country.energy.to_sym].split[0] %></span>
+          </div>
+        </div>
+      </div>
+    </div>
 </nav>
+
+<script type="text/javascript">
+  $(".hash").each(function(){
+    html = $(this).html()
+    switch(html) {
+    case "גבוה":
+      $(this).addClass('text-success')
+      break;
+    case "נמוך":
+      $(this).addClass('text-danger')
+      break;
+    default:
+    }
+  })
+  $(".reg-res").each(function(){
+    html = $(this).html()
+    if (html == "מצויין" || html == "טוב") {
+      $(this).addClass('text-success')
+    }
+    else if (html == "נייטרלי"){
+      $(this).addClass('text-black')
+    }
+    else {
+      $(this).addClass('text-danger')
+    }
+    
+  })
+</script>
 <% end %>

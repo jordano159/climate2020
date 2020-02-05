@@ -64,6 +64,9 @@ class CountriesController < ApplicationController
             @country.is_torn_apart = true
             puts "Torn Apart and Lost by Budget"
           end
+					if Event.where("min_deg <= ?", @country.deg).where.not(id: @country.events).sample == nil
+					  @country.lose = true
+					end
         end
         @country.save!
       end
@@ -184,9 +187,15 @@ class CountriesController < ApplicationController
         country.send "#{option.on_what}=".to_sym, country.send(option.on_what) + option.amount.to_i
       when "civ_num", "deg"
         country.send "#{option.on_what}=".to_sym, country.send(option.on_what) + option.amount
-      when "resilience", "reg_rel", "agriculture", "education", "security", "comms", "social_sec", "health", "water", "energy"
-        country.send "#{option.on_what}=".to_sym, country.read_attribute_before_type_cast(option.on_what.to_sym) + option.amount
-      end
+      when "resilience", "reg_rel"
+				if country.read_attribute_before_type_cast(option.on_what.to_sym) + option.amount <= 6 && country.read_attribute_before_type_cast(option.on_what.to_sym) + option.amount >= 0
+        	country.send "#{option.on_what}=".to_sym, country.read_attribute_before_type_cast(option.on_what.to_sym) + option.amount
+				end
+			when "agriculture", "education", "security", "comms", "social_sec", "health", "water", "energy"
+				if country.read_attribute_before_type_cast(option.on_what.to_sym) + option.amount <= 2 && country.read_attribute_before_type_cast(option.on_what.to_sym) + option.amount >= 0
+					country.send "#{option.on_what}=".to_sym, country.read_attribute_before_type_cast(option.on_what.to_sym) + option.amount
+				end
+			end
       puts "#{option.on_what}: #{country.send(option.on_what)}"
       case option.on_what2
       when "budget", "life_level"
@@ -196,7 +205,7 @@ class CountriesController < ApplicationController
       when "resilience", "reg_rel", "agriculture", "education", "security", "comms", "social_sec", "health", "water", "energy"
         country.send "#{option.on_what2}=".to_sym, country.read_attribute_before_type_cast(option.on_what2.to_sym) + option.amount2
       end
-      puts "#{option.on_what2}: #{country.send(option.on_what2)}"
+      # puts "#{option.on_what2}: #{country.send(option.on_what2)}"
       country.save!
     end
 

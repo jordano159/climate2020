@@ -57,6 +57,7 @@ he:
       score: "תוצאה:"
       score_num: "%{count}"
       points: "נקודות"
+      no_more_events: "צלחתם את כל האסונות!"
   navbar:
     wars: "אזרחים מתים ותקציב מבוזבז"
 

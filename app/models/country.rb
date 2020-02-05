@@ -48,26 +48,29 @@ class Country < ApplicationRecord
             option.read_attribute_before_type_cast(:min_health)       <= read_attribute_before_type_cast(:health)       &&
             option.read_attribute_before_type_cast(:min_water)        <= read_attribute_before_type_cast(:water)        &&
             option.read_attribute_before_type_cast(:min_energy)       <= read_attribute_before_type_cast(:energy)
-      case option.on_what
-      when "resilience", "reg_rel"
-        flag = true if self.read_attribute_before_type_cast(option.on_what.to_sym) + option.amount < 6
-      when "agriculture", "education", "security", "comms", "social_sec", "health", "water", "energy"
-        flag = true if self.read_attribute_before_type_cast(option.on_what.to_sym) + option.amount < 3
-      else
-        flag = true
-      end
-      puts "ceiling check: #{self.read_attribute_before_type_cast(option.on_what.to_sym)} + #{option.amount}"
-      if option.on_what2.present?
-        case option.on_what2
-        when "resilience", "reg_rel"
-          flag = true if self.read_attribute_before_type_cast(option.on_what2.to_sym) + option.amount < 6
-        when "agriculture", "education", "security", "comms", "social_sec", "health", "water", "energy"
-          flag = true if self.read_attribute_before_type_cast(option.on_what2.to_sym) + option.amount < 3
-        else
-          flag = true
-        end
-        puts "ceiling check: #{self.read_attribute_before_type_cast(option.on_what2.to_sym)} + #{option.amount}"
-      end
+
+			flag = true
+			# ceilig checks:
+      # case option.on_what
+      # when "resilience", "reg_rel"
+      #   flag = true if self.read_attribute_before_type_cast(option.on_what.to_sym) + option.amount < 6
+      # when "agriculture", "education", "security", "comms", "social_sec", "health", "water", "energy"
+      #   flag = true if self.read_attribute_before_type_cast(option.on_what.to_sym) + option.amount < 3
+      # else
+      #   flag = true
+      # end
+      # puts "ceiling check: #{self.read_attribute_before_type_cast(option.on_what.to_sym)} + #{option.amount}"
+      # if option.on_what2.present?
+      #   case option.on_what2
+      #   when "resilience", "reg_rel"
+      #     flag = true if self.read_attribute_before_type_cast(option.on_what2.to_sym) + option.amount < 6
+      #   when "agriculture", "education", "security", "comms", "social_sec", "health", "water", "energy"
+      #     flag = true if self.read_attribute_before_type_cast(option.on_what2.to_sym) + option.amount < 3
+      #   else
+      #     flag = true
+      #   end
+      #   puts "ceiling check: #{self.read_attribute_before_type_cast(option.on_what2.to_sym)} + #{option.amount}"
+      # end
     else
       flag = false
     end

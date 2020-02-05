@@ -13,7 +13,9 @@ class EventsController < ApplicationController
   def show
     if params[:country_id]
       c = Country.find(params[:country_id])
-      @event = Event.where("min_deg <= ?", c.deg).sample
+      @event = Event.where("min_deg <= ?", c.deg).where.not(id: c.events).sample
+      # @event = Event.where("min_deg <= ?", c.deg).sample
+			# @event = Event.find(2)
       # if c.lose?
       #   redirect_to game_over_country_path(country_id: @country.id)
       # end

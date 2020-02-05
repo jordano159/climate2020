@@ -36,6 +36,9 @@
   <div class="">
     <%= t('country.game_over.war') if @country.is_conquered %>
   </div>
+	<div class="">
+		<%= t('country.game_over.no_more_events') if Event.where("min_deg <= ?", @country.deg).where.not(id: @country.events).sample == nil %>
+	</div>
   <div class="">
     <h3><%= t('country.game_over.options') %></h3>
     <% @country.options.uniq.each do |option| %>

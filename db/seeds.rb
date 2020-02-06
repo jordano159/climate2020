@@ -43,29 +43,29 @@ if File.file?(Rails.root.join('lib/option_seeds.csv'))
   puts "Inserted Options"
 end
 
-if File.file?(Rails.root.join('lib/minister_seeds.csv'))
-  CSV.foreach(Rails.root.join('lib/minister_seeds.csv'), headers: true) do |row|
-    Minister.create({
-      role: row[0],
-      description: row[1]
-    })
-  end
-  puts "Inserted Ministers"
-end
-
-if File.file?(Rails.root.join('lib/goal_seeds.csv'))
-  CSV.foreach(Rails.root.join('lib/goal_seeds.csv'), headers: true) do |row|
-    Goal.create({
-      description: row[0]
-    })
-  end
-  puts "Inserted Goals"
-end
-
-if File.file?(Rails.root.join('lib/facts_seeds.csv'))
-  CSV.foreach(Rails.root.join('lib/facts_seeds.csv'), headers: true) do |row|
-    Fact.create({
-      content: row[1]
-    })
-  end
-end
+# if File.file?(Rails.root.join('lib/minister_seeds.csv'))
+#   CSV.foreach(Rails.root.join('lib/minister_seeds.csv'), headers: true) do |row|
+#     Minister.create({
+#       role: row[0],
+#       description: row[1]
+#     })
+#   end
+#   puts "Inserted Ministers"
+# end
+#
+# if File.file?(Rails.root.join('lib/goal_seeds.csv'))
+#   CSV.foreach(Rails.root.join('lib/goal_seeds.csv'), headers: true) do |row|
+#     Goal.create({
+#       description: row[0]
+#     })
+#   end
+#   puts "Inserted Goals"
+# end
+#
+# if File.file?(Rails.root.join('lib/facts_seeds.csv'))
+#   CSV.foreach(Rails.root.join('lib/facts_seeds.csv'), headers: true) do |row|
+#     Fact.create({
+#       content: row[1]
+#     })
+#   end
+# end

@@ -37,7 +37,7 @@ $(document).ready(function(){
             <h2 class="card-title"><%= minister.role %></h2>
             <p class="card-text">
 							<span class="font-weight-bold"><%= I18n.t("minister.index.description") %>:</span> <%= minister.description %> <br> <br>
-							<span class="font-weight-bold"><%= I18n.t("minister.index.goal") %>:</span> <%= Goal.all.sample.description if Goal.first.present? %>
+							<!-- <span class="font-weight-bold"><%# I18n.t("minister.index.goal") %>:</span> <%# Goal.all.sample.description if Goal.first.present? %> -->
 						</p>
 
 							<button class="finished_reading next btn btn-primary w-100 h-5" type="button" name="button"></button>

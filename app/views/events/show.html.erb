@@ -5,9 +5,17 @@
     <p class="card-text">
       <% if @event.amount.present? && @event.on_what.present? %>
         <% if @event.amount > 0 %>
-          <p class="card-text text-success"><%= @event.amount.abs.to_s + "+ " + Country.human_attribute_name(@event.on_what) %></p>
+          <% if (@event.amount % 1).zero? %>
+            <p class="card-text text-success"><%= @event.amount.abs.to_i.to_s + "+ " + Country.human_attribute_name(@event.on_what) %></p>
+          <% else %>
+            <p class="card-text text-success"><%= @event.amount.abs.to_s + "+ " + Country.human_attribute_name(@event.on_what) %></p>
+          <% end %>
         <% else %>
-          <p class="card-text text-danger"><%= @event.amount.abs.to_s + "- " + Country.human_attribute_name(@event.on_what) %></p>
+          <% if (@event.amount % 1).zero? %>
+            <p class="card-text text-danger"><%= @event.amount.abs.to_i.to_s + "- " + Country.human_attribute_name(@event.on_what) %></p>
+          <% else %>
+            <p class="card-text text-danger"><%= @event.amount.abs.to_s + "- " + Country.human_attribute_name(@event.on_what) %></p>
+          <% end %>
         <% end %>
       <% end %>
     </p>

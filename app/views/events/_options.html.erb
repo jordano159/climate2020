@@ -3,15 +3,31 @@
     <div class="card-body">
       <h5 class="card-title"><%= option.title %></h5>
       <% if option.amount > 0 %>
-        <p class="card-text text-success"><%= option.amount.abs.to_s + "+ " + Country.human_attribute_name(option.on_what) %></p>
-      <% else %>
-        <p class="card-text text-danger"><%= option.amount.abs.to_s + "- " + Country.human_attribute_name(option.on_what) %></p>
-      <% end %>
-      <% if option.amount2.present? %>
-        <% if option.amount2 > 0 %>
-          <p class="card-text text-success"><%= option.amount2.abs.to_s + "+ " + Country.human_attribute_name(option.on_what2) %></p>
+        <% if (option.amount % 1).zero? %>
+          <p class="card-text text-success"><%= option.amount.abs.to_i.to_s + "+ " + Country.human_attribute_name(option.on_what) %></p>
         <% else %>
-          <p class="card-text text-danger"><%= option.amount2.abs.to_s + "- " + Country.human_attribute_name(option.on_what2) %></p>
+          <p class="card-text text-success"><%= option.amount.abs.to_s + "+ " + Country.human_attribute_name(option.on_what) %></p>
+        <% end %>
+      <% else %>
+        <% if (option.amount % 1).zero? %>
+          <p class="card-text text-danger"><%= option.amount.abs.to_i.to_s + "- " + Country.human_attribute_name(option.on_what) %></p>
+        <% else %>
+          <p class="card-text text-danger"><%= option.amount.abs.to_s + "- " + Country.human_attribute_name(option.on_what) %></p>
+        <% end %>
+      <% end %>
+      <% if option.amount2.present? && option.on_what2.present? %>
+        <% if option.amount2 > 0 %>
+          <% if (option.amount2 % 1).zero? %>
+            <p class="card-text text-success"><%= option.amount2.abs.to_i.to_s + "+ " + Country.human_attribute_name(option.on_what2) %></p>
+          <% else %>
+            <p class="card-text text-success"><%= option.amount2.abs.to_s + "+ " + Country.human_attribute_name(option.on_what2) %></p>
+          <% end %>
+        <% else %>
+          <% if (option.amount2 % 1).zero? %>
+            <p class="card-text text-danger"><%= option.amount2.abs.to_i.to_s + "- " + Country.human_attribute_name(option.on_what2) %></p>
+          <% else %>
+            <p class="card-text text-danger"><%= option.amount2.abs.to_s + "- " + Country.human_attribute_name(option.on_what2) %></p>
+          <% end %>
         <% end %>
       <% end %>
       <% if params[:country_id] %>
@@ -19,32 +35,53 @@
         <% if country.is_option_available(option) %>
           <%= link_to I18n.t("event.show.choose_option"), { controller: "countries", action: "show", id: params[:country_id], option_id: option.id, turn: true }, class: "btn btn-primary" %>
         <% else %>
-          <a href="#" class="btn btn-secondary disabled"><%= I18n.t("event.show.choose_option") %></a> <br>
-          <%= I18n.t("event.show.requirements") %>:
-          <%= tag(:br) + Country.human_attribute_name(:resilience) + " - " +  reshash[option.min_resilience.to_sym]                       if option.read_attribute_before_type_cast(:min_resilience) > 0 %>
-          <%= tag(:br) + Country.human_attribute_name(:budget) + " - " +      option.min_budget.to_s + " " + I18n.t("event.show.million") if option.read_attribute_before_type_cast(:min_budget) > 0 %>
-          <%= tag(:br) + Country.human_attribute_name(:civ_num) + " - " +     option.min_civ_num.to_s                                     if option.read_attribute_before_type_cast(:min_civ_num) > 0 %>
-          <%= tag(:br) + Country.human_attribute_name(:reg_rel) + " - " +     reghash[option.min_reg_rel.to_sym]                          if option.read_attribute_before_type_cast(:min_reg_rel) > 0 %>
-          <%= tag(:br) + Country.human_attribute_name(:agriculture) + " - " + agrihash[option.min_agriculture.to_sym].split[0]            if option.read_attribute_before_type_cast(:min_agriculture) > 0 %>
-          <%= tag(:br) + Country.human_attribute_name(:education) + " - " +   eduhash[option.min_education.to_sym].split[0]               if option.read_attribute_before_type_cast(:min_education) > 0 %>
-          <%= tag(:br) + Country.human_attribute_name(:security) + " - " +    securityhash[option.min_security.to_sym].split[0]           if option.read_attribute_before_type_cast(:min_security) > 0 %>
-          <%= tag(:br) + Country.human_attribute_name(:comms) + " - " +       commshash[option.min_comms.to_sym].split[0]                 if option.read_attribute_before_type_cast(:min_comms) > 0 %>
-          <%= tag(:br) + Country.human_attribute_name(:social_sec) + " - " +  social_sechash[option.min_social_sec.to_sym].split[0]       if option.read_attribute_before_type_cast(:min_social_sec) > 0 %>
-          <%= tag(:br) + Country.human_attribute_name(:health) + " - " +      healthhash[option.min_health.to_sym].split[0]               if option.read_attribute_before_type_cast(:min_health) > 0 %>
-          <%= tag(:br) + Country.human_attribute_name(:water) + " - " +       waterhash[option.min_water.to_sym].split[0]                 if option.read_attribute_before_type_cast(:min_water) > 0 %>
-          <%= tag(:br) + Country.human_attribute_name(:energy) + " - " +      energyhash[option.min_energy.to_sym].split[0]               if option.read_attribute_before_type_cast(:min_energy) > 0 %>
-          <%= tag(:br) + Country.human_attribute_name(:resilience) + " " +    I18n.t("event.show.ceiling") if (option.on_what == "resilience" && country.read_attribute_before_type_cast(:resilience) + option.amount > 5)    || (option.on_what2 == "resilience" && country.read_attribute_before_type_cast(:resilience) + option.amount2 > 5) %>
-          <%= tag(:br) + Country.human_attribute_name(:reg_rel) + " " +       I18n.t("event.show.ceiling") if (option.on_what == "reg_rel" && country.read_attribute_before_type_cast(:reg_rel) + option.amount > 5)          || (option.on_what2 == "reg_rel" && country.read_attribute_before_type_cast(:reg_rel) + option.amount2 > 5) %>
-          <%= tag(:br) + Country.human_attribute_name(:agriculture) + " " +   I18n.t("event.show.ceiling") if (option.on_what == "agriculture" && country.read_attribute_before_type_cast(:agriculture) + option.amount > 2)  || (option.on_what2 == "agriculture" && country.read_attribute_before_type_cast(:agriculture) + option.amount2 > 2) %>
-          <%= tag(:br) + Country.human_attribute_name(:education) + " " +     I18n.t("event.show.ceiling") if (option.on_what == "education" && country.read_attribute_before_type_cast(:education) + option.amount > 2)      || (option.on_what2 == "education" && country.read_attribute_before_type_cast(:education) + option.amount2 > 2) %>
-          <%= tag(:br) + Country.human_attribute_name(:security) + " " +      I18n.t("event.show.ceiling") if (option.on_what == "security" && country.read_attribute_before_type_cast(:security) + option.amount > 2)        || (option.on_what2 == "security" && country.read_attribute_before_type_cast(:security) + option.amount2 > 2) %>
-          <%= tag(:br) + Country.human_attribute_name(:comms) + " " +         I18n.t("event.show.ceiling") if (option.on_what == "comms" && country.read_attribute_before_type_cast(:comms) + option.amount > 2)              || (option.on_what2 == "comms" && country.read_attribute_before_type_cast(:comms) + option.amount2 > 2) %>
-          <%= tag(:br) + Country.human_attribute_name(:social_sec) + " " +    I18n.t("event.show.ceiling") if (option.on_what == "social_sec" && country.read_attribute_before_type_cast(:social_sec) + option.amount > 2)    || (option.on_what2 == "social_sec" && country.read_attribute_before_type_cast(:social_sec) + option.amount2 > 2) %>
-          <%= tag(:br) + Country.human_attribute_name(:health) + " " +        I18n.t("event.show.ceiling") if (option.on_what == "health" && country.read_attribute_before_type_cast(:health) + option.amount > 2)            || (option.on_what2 == "health" && country.read_attribute_before_type_cast(:health) + option.amount2 > 2) %>
-          <%= tag(:br) + Country.human_attribute_name(:water) + " " +         I18n.t("event.show.ceiling") if (option.on_what == "water" && country.read_attribute_before_type_cast(:water) + option.amount > 2)              || (option.on_what2 == "water" && country.read_attribute_before_type_cast(:water) + option.amount2 > 2) %>
-          <%= tag(:br) + Country.human_attribute_name(:energy) + " " +        I18n.t("event.show.ceiling") if (option.on_what == "energy" && country.read_attribute_before_type_cast(:energy) + option.amount > 2)            || (option.on_what2 == "energy" && country.read_attribute_before_type_cast(:energy) + option.amount2 > 2) %>
+          <a href="#" class="btn btn-secondary disabled"><%= I18n.t("event.show.choose_option") %></a>
         <% end %>
+        <div class="req">
+          <%= I18n.t("event.show.requirements") %>:
+          <span class="reqq">
+            <%= tag(:br) + Country.human_attribute_name(:resilience) + " - " +  reshash[option.min_resilience.to_sym]                       if option.read_attribute_before_type_cast(:min_resilience) > 0 %>
+            <%= tag(:br) + Country.human_attribute_name(:budget) + " - " +      option.min_budget.to_s + " " + I18n.t("event.show.million") if option.read_attribute_before_type_cast(:min_budget) > 0 %>
+            <% if (option.min_civ_num % 1).zero? %>
+              <%= tag(:br) + option.min_civ_num.to_i.to_s + "  " + Country.human_attribute_name(:civ_num)                                   if option.read_attribute_before_type_cast(:min_civ_num) > 0 %>
+            <% else %>
+              <%= tag(:br) + option.min_civ_num.to_s + "  " + Country.human_attribute_name(:civ_num)                                        if option.read_attribute_before_type_cast(:min_civ_num) > 0 %>
+            <% end %>
+            <%= tag(:br) + Country.human_attribute_name(:reg_rel) + " - " +     reghash[option.min_reg_rel.to_sym]                          if option.read_attribute_before_type_cast(:min_reg_rel) > 0 %>
+            <%= tag(:br) + Country.human_attribute_name(:agriculture) + " - " + agrihash[option.min_agriculture.to_sym].split[0]            if option.read_attribute_before_type_cast(:min_agriculture) > 0 %>
+            <%= tag(:br) + Country.human_attribute_name(:education) + " - " +   eduhash[option.min_education.to_sym].split[0]               if option.read_attribute_before_type_cast(:min_education) > 0 %>
+            <%= tag(:br) + Country.human_attribute_name(:security) + " - " +    securityhash[option.min_security.to_sym].split[0]           if option.read_attribute_before_type_cast(:min_security) > 0 %>
+            <%= tag(:br) + Country.human_attribute_name(:comms) + " - " +       commshash[option.min_comms.to_sym].split[0]                 if option.read_attribute_before_type_cast(:min_comms) > 0 %>
+            <%= tag(:br) + Country.human_attribute_name(:social_sec) + " - " +  social_sechash[option.min_social_sec.to_sym].split[0]       if option.read_attribute_before_type_cast(:min_social_sec) > 0 %>
+            <%= tag(:br) + Country.human_attribute_name(:health) + " - " +      healthhash[option.min_health.to_sym].split[0]               if option.read_attribute_before_type_cast(:min_health) > 0 %>
+            <%= tag(:br) + Country.human_attribute_name(:water) + " - " +       waterhash[option.min_water.to_sym].split[0]                 if option.read_attribute_before_type_cast(:min_water) > 0 %>
+            <%= tag(:br) + Country.human_attribute_name(:energy) + " - " +      energyhash[option.min_energy.to_sym].split[0]               if option.read_attribute_before_type_cast(:min_energy) > 0 %>
+            <%= tag(:br) + Country.human_attribute_name(:resilience) + " " +    I18n.t("event.show.ceiling") if (option.on_what == "resilience" && country.read_attribute_before_type_cast(:resilience) + option.amount > 5)    || (option.on_what2 == "resilience" && country.read_attribute_before_type_cast(:resilience) + option.amount2 > 5) %>
+            <%= tag(:br) + Country.human_attribute_name(:reg_rel) + " " +       I18n.t("event.show.ceiling") if (option.on_what == "reg_rel" && country.read_attribute_before_type_cast(:reg_rel) + option.amount > 5)          || (option.on_what2 == "reg_rel" && country.read_attribute_before_type_cast(:reg_rel) + option.amount2 > 5) %>
+            <%= tag(:br) + Country.human_attribute_name(:agriculture) + " " +   I18n.t("event.show.ceiling") if (option.on_what == "agriculture" && country.read_attribute_before_type_cast(:agriculture) + option.amount > 2)  || (option.on_what2 == "agriculture" && country.read_attribute_before_type_cast(:agriculture) + option.amount2 > 2) %>
+            <%= tag(:br) + Country.human_attribute_name(:education) + " " +     I18n.t("event.show.ceiling") if (option.on_what == "education" && country.read_attribute_before_type_cast(:education) + option.amount > 2)      || (option.on_what2 == "education" && country.read_attribute_before_type_cast(:education) + option.amount2 > 2) %>
+            <%= tag(:br) + Country.human_attribute_name(:security) + " " +      I18n.t("event.show.ceiling") if (option.on_what == "security" && country.read_attribute_before_type_cast(:security) + option.amount > 2)        || (option.on_what2 == "security" && country.read_attribute_before_type_cast(:security) + option.amount2 > 2) %>
+            <%= tag(:br) + Country.human_attribute_name(:comms) + " " +         I18n.t("event.show.ceiling") if (option.on_what == "comms" && country.read_attribute_before_type_cast(:comms) + option.amount > 2)              || (option.on_what2 == "comms" && country.read_attribute_before_type_cast(:comms) + option.amount2 > 2) %>
+            <%= tag(:br) + Country.human_attribute_name(:social_sec) + " " +    I18n.t("event.show.ceiling") if (option.on_what == "social_sec" && country.read_attribute_before_type_cast(:social_sec) + option.amount > 2)    || (option.on_what2 == "social_sec" && country.read_attribute_before_type_cast(:social_sec) + option.amount2 > 2) %>
+            <%= tag(:br) + Country.human_attribute_name(:health) + " " +        I18n.t("event.show.ceiling") if (option.on_what == "health" && country.read_attribute_before_type_cast(:health) + option.amount > 2)            || (option.on_what2 == "health" && country.read_attribute_before_type_cast(:health) + option.amount2 > 2) %>
+            <%= tag(:br) + Country.human_attribute_name(:water) + " " +         I18n.t("event.show.ceiling") if (option.on_what == "water" && country.read_attribute_before_type_cast(:water) + option.amount > 2)              || (option.on_what2 == "water" && country.read_attribute_before_type_cast(:water) + option.amount2 > 2) %>
+            <%= tag(:br) + Country.human_attribute_name(:energy) + " " +        I18n.t("event.show.ceiling") if (option.on_what == "energy" && country.read_attribute_before_type_cast(:energy) + option.amount > 2)            || (option.on_what2 == "energy" && country.read_attribute_before_type_cast(:energy) + option.amount2 > 2) %>
+          </span>
+        </div>
       <% end %>
     </div>
   </div>
 <% end %>
+
+<script type="text/javascript">
+  $( document ).ready(function() {
+    $( ".reqq" ).each(function( index ) {
+      if ($(this).html().trim() == "") {
+        $(this).parent().addClass("d-none")
+        $(this).addClass("d-none")
+      }
+      // console.log( index + ": " + $( this ).text() );
+    });
+  });
+
+</script>

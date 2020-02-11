@@ -14,7 +14,7 @@ class EventsController < ApplicationController
     if params[:country_id]
       country = Country.find(params[:country_id])
       @event = Event.where("min_deg <= ?", country.deg).where.not(id: country.events).sample
-      event_consequence(@event, country)
+      event_consequence(@event, country) if @event.amount.present? && @event.on_what.present?
       # @event = Event.where("min_deg <= ?", c.deg).sample
 			# @event = Event.find(2)
       # if c.lose?

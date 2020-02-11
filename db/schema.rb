@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_11_082322) do
+ActiveRecord::Schema.define(version: 2020_02_11_135533) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -69,7 +69,7 @@ ActiveRecord::Schema.define(version: 2020_02_11_082322) do
     t.float "min_deg"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "amount"
+    t.float "amount"
     t.string "on_what"
   end
 
@@ -111,7 +111,7 @@ ActiveRecord::Schema.define(version: 2020_02_11_082322) do
     t.integer "min_energy"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "amount2"
+    t.float "amount2"
     t.string "on_what2"
     t.index ["event_id"], name: "index_options_on_event_id"
   end

@@ -1,4 +1,4 @@
-<%= simple_form_for(@country, defaults: { wrapper_html: { class: 'w-100 pr-2 pl-2' } },html: { class: 'form-inline mb-5' }) do |f| %>
+<%= simple_form_for(@country, defaults: { wrapper_html: { class: 'w-100 pr-2 pl-2' } }, html: { class: 'form-inline mb-5' }) do |f| %>
   <%= f.error_notification %>
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
   <div class="form-inputs w-100 mr-10 ml-10">
@@ -23,10 +23,10 @@
 <% end %>
 
 <footer class="footer fixed-bottom bg-info">
-  <div class="container text-white">
-    <%= Country.human_attribute_name(:budget) %>: <span id="budget"><%= @country.budget%></span> <%=  I18n.t("event.show.million") %>
+  <h3 class="container text-white">
+    <%= Country.human_attribute_name(:budget) %>: <span id="budget" class="ltr" dir="ltr"><%= @country.budget%></span> <%=  I18n.t("event.show.million") %>
     <span class="budget-minus"></span>
-  </div>
+  </h3>
 </footer>
 
 <script type="text/javascript">
@@ -67,12 +67,15 @@
       // $(".budget-minus").removeClass('d-none')
       $("#submit").removeClass('btn-success')
       $("#submit").addClass('btn-secondary disabled')
-      $(".budget-minus").append("<%= j (render partial: 'budget_minus') %>")
+      $(".budget-minus").html("<%= j (render partial: 'budget_minus') %>")
+      $("#new_country").css('margin-bottom', '5rem')
+      $("#new_country").removeClass('mb-5')
     }
     else {
       $("#submit").addClass('btn-success')
       $("#submit").removeClass('btn-secondary disabled')
       $(".budget-minus-partial").remove()
+      $("#new_country").addClass('mb-5')
     }
 	});
 

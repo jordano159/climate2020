@@ -6,6 +6,9 @@
     <%= f.input :title %>
     <%= f.input :description %>
     <%= f.input :min_deg %>
+    <%= f.input :amount %>
+    <%  columns = %i[budget resilience civ_num deg life_level reg_rel agriculture education security comms social_sec health water energy] %>
+    <%= f.input :on_what,   collection: columns %>
   </div>
 
   <div class="form-actions">

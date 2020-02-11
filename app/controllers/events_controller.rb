@@ -12,8 +12,9 @@ class EventsController < ApplicationController
   # GET /events/1.json
   def show
     if params[:country_id]
-      c = Country.find(params[:country_id])
-      @event = Event.where("min_deg <= ?", c.deg).where.not(id: c.events).sample
+      country = Country.find(params[:country_id])
+      @event = Event.where("min_deg <= ?", country.deg).where.not(id: country.events).sample
+      event_consequence(@event, country)
       # @event = Event.where("min_deg <= ?", c.deg).sample
 			# @event = Event.find(2)
       # if c.lose?
@@ -74,6 +75,27 @@ class EventsController < ApplicationController
   end
 
   private
+
+  def event_consequence(event, country)
+    puts "****************************************"
+    puts "#{event.on_what}: #{country.send(event.on_what)} + #{event.amount}"
+    case event.on_what
+    when "budget", "life_level"
+      country.send "#{event.on_what}=".to_sym, country.send(event.on_what) + event.amount.to_i
+    when "civ_num", "deg"
+      country.send "#{event.on_what}=".to_sym, country.send(event.on_what) + event.amount
+    when "resilience", "reg_rel"
+      if country.read_attribute_before_type_cast(event.on_what.to_sym) + event.amount <= 6 && country.read_attribute_before_type_cast(event.on_what.to_sym) + event.amount >= 0
+        country.send "#{event.on_what}=".to_sym, country.read_attribute_before_type_cast(event.on_what.to_sym) + event.amount
+      end
+    when "agriculture", "education", "security", "comms", "social_sec", "health", "water", "energy"
+      if country.read_attribute_before_type_cast(event.on_what.to_sym) + event.amount <= 2 && country.read_attribute_before_type_cast(event.on_what.to_sym) + event.amount >= 0
+        country.send "#{event.on_what}=".to_sym, country.read_attribute_before_type_cast(event.on_what.to_sym) + event.amount
+      end
+    end
+    country.save!
+  end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_event
       @event = Event.find(params[:id])
@@ -81,6 +103,6 @@ class EventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-      params.require(:event).permit(:title, :description, :min_deg)
+      params.require(:event).permit(:title, :description, :min_deg, :amount, :on_what)
     end
 end

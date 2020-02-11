@@ -80,9 +80,35 @@ class EventsController < ApplicationController
     puts "****************************************"
     puts "#{event.on_what}: #{country.send(event.on_what)} + #{event.amount}"
     case event.on_what
-    when "budget", "life_level"
+    when "budget"
+      puts "#{country.budget} + #{event.amount} = #{country.budget + event.amount}"
+      if country.budget + event.amount < 0
+        country.lose = true
+        if country.reg_rel == "war"
+          country.is_conquered = true
+        end
+        if country.resilience == "civil_war"
+          country.is_torn_apart = true
+        end
+      else
+        country.send "#{event.on_what}=".to_sym, country.send(event.on_what) + event.amount.to_i
+      end
+    when "life_level"
       country.send "#{event.on_what}=".to_sym, country.send(event.on_what) + event.amount.to_i
-    when "civ_num", "deg"
+    when "civ_num"
+      puts "#{country.civ_num} + #{event.amount} = #{country.civ_num + event.amount}"
+      if country.civ_num + event.amount < 0
+        country.lose = true
+        if country.reg_rel == "war"
+          country.is_conquered = true
+        end
+        if country.resilience == "civil_war"
+          country.is_torn_apart = true
+        end
+      else
+        country.send "#{event.on_what}=".to_sym, country.send(event.on_what) + event.amount
+      end
+    when "deg"
       country.send "#{event.on_what}=".to_sym, country.send(event.on_what) + event.amount
     when "resilience", "reg_rel"
       if country.read_attribute_before_type_cast(event.on_what.to_sym) + event.amount <= 6 && country.read_attribute_before_type_cast(event.on_what.to_sym) + event.amount >= 0

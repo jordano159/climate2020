@@ -1,5 +1,5 @@
 <h1><%= t ".title" %></h1>
-<div class="container">
+<div class="quote-container">
     <blockquote class="quote-box bg-info">
       <p class="quotation-mark">
         “
@@ -14,7 +14,7 @@
         </p>
       </div>
     </blockquote>
-    <p><%= t ".description" %></p>
+    <p><%# t ".description" %></p>
 </div>
 <%= form_with(url: ministers_path, method: "get", local: true) do %>
   <%= label_tag(:game, I18n.t("application.home_page.players")) %>

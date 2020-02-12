@@ -30,12 +30,18 @@
 </div>
 <hr>
 <div class="mb-5rem">
-  <div class="">
-    <%= t('country.game_over.civil_war') if @country.is_torn_apart %>
-  </div>
-  <div class="">
-    <%= t('country.game_over.war') if @country.is_conquered %>
-  </div>
+  <% if @country.quit %>
+    <div class="">
+      <%= t('country.game_over.quit') %>
+    </div>
+  <% else %>
+    <div class="">
+      <%= t('country.game_over.civil_war') if @country.is_torn_apart %>
+    </div>
+    <div class="">
+      <%= t('country.game_over.war') if @country.is_conquered %>
+    </div>
+  <% end %>
 	<div class="">
 		<%= t('country.game_over.no_more_events') if Event.where("min_deg <= ?", @country.deg).where.not(id: @country.events).sample == nil %>
 	</div>

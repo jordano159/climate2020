@@ -20,7 +20,7 @@
       <% end %>
     </p>
     <%= render "options" %>
-    <%= link_to I18n.t("event.show.lose"), { controller: "countries", action: "show", id: params[:country_id], lose: true, turn: true }, class: "btn btn-warning mt-4" if params[:country_id]%>
+    <%= link_to I18n.t("event.show.quit"), { controller: "countries", action: "show", id: params[:country_id], quit: true, turn: true }, class: "btn btn-warning mt-4" if params[:country_id]%>
   </div>
 </div>
 

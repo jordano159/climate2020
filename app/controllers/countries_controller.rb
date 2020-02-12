@@ -22,6 +22,7 @@ class CountriesController < ApplicationController
         puts "********************* Params Turn *******************"
         @country.year += 5
         @country.deg += 0.05
+        @country.budget += 1 if (@country.year % 2).zero?
         # @country.deg += 0.003 * (2 ** ((@country.year - 2020) / 5))
         if @country.reg_rel == "war"
           puts "War"
@@ -72,8 +73,9 @@ class CountriesController < ApplicationController
       end
       redirect_to event_path(id: 1, country_id: @country.id)
     end
-    if params[:lose]
+    if params[:quit]
       @country.lose = true
+      @country.quit = true
       @country.set_score
       @country.save
       redirect_to game_over_country_path(country_id: @country.id)

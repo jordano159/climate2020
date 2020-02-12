@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_11_135533) do
+ActiveRecord::Schema.define(version: 2020_02_12_114125) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(version: 2020_02_11_135533) do
     t.integer "budget"
     t.boolean "lose", default: false, null: false
     t.boolean "is_torn_apart", default: false, null: false
+    t.boolean "quit", default: false, null: false
   end
 
   create_table "countries_events", id: false, force: :cascade do |t|

@@ -26,6 +26,7 @@
   <h3 class="container text-white">
     <%= Country.human_attribute_name(:budget) %>: <span id="budget" class="ltr" dir="ltr"><%= @country.budget%></span> <%=  I18n.t("event.show.million") %>
     <span class="budget-minus"></span>
+    <span class="text-white tiny"> (<%= I18n.t("event.show.rest_of_game") %>) </span>
   </h3>
 </footer>
 

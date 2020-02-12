@@ -35,10 +35,11 @@ he:
     show:
       choose_option: "בחירת אפשרות"
       consequense: "השלכה"
-      lose: "זהו, ויתרנו. נפסיד וחלאס"
+      quit: "זהו, ויתרנו. נפסיד וחלאס"
       requirements: "דרישות מינימום"
       million: "מיליון"
       ceiling: "כבר על המקסימום"
+      rest_of_game: "עד סוף המשחק"
   country:
     new:
       title: "בנו את המדינה"
@@ -58,6 +59,7 @@ he:
       score_num: "%{count}"
       points: "נקודות"
       no_more_events: "צלחתם את כל האסונות!"
+      quit: "בחרתם לסיים את המשחק באמצע. חבל, אתם מפספסים אחלה אסונות..."
   navbar:
     wars: "אזרחים מתים ותקציב מבוזבז"
 

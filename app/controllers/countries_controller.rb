@@ -190,11 +190,13 @@ class CountriesController < ApplicationController
       when "civ_num", "deg"
         country.send "#{option.on_what}=".to_sym, country.send(option.on_what) + option.amount
       when "resilience", "reg_rel"
-				if country.read_attribute_before_type_cast(option.on_what.to_sym) + option.amount <= 6 && country.read_attribute_before_type_cast(option.on_what.to_sym) + option.amount >= 0
+				if country.read_attribute_before_type_cast(option.on_what.to_sym) + option.amount <= 6 &&
+           country.read_attribute_before_type_cast(option.on_what.to_sym) + option.amount >= 0
         	country.send "#{option.on_what}=".to_sym, country.read_attribute_before_type_cast(option.on_what.to_sym) + option.amount
 				end
 			when "agriculture", "education", "security", "comms", "social_sec", "health", "water", "energy"
-				if country.read_attribute_before_type_cast(option.on_what.to_sym) + option.amount <= 2 && country.read_attribute_before_type_cast(option.on_what.to_sym) + option.amount >= 0
+				if country.read_attribute_before_type_cast(option.on_what.to_sym) + option.amount <= 2 &&
+           country.read_attribute_before_type_cast(option.on_what.to_sym) + option.amount >= 0
 					country.send "#{option.on_what}=".to_sym, country.read_attribute_before_type_cast(option.on_what.to_sym) + option.amount
 				end
 			end
@@ -204,9 +206,17 @@ class CountriesController < ApplicationController
         country.send "#{option.on_what2}=".to_sym, country.send(option.on_what2) + option.amount2.to_i
       when "civ_num", "deg"
         country.send "#{option.on_what2}=".to_sym, country.send(option.on_what2) + option.amount2
-      when "resilience", "reg_rel", "agriculture", "education", "security", "comms", "social_sec", "health", "water", "energy"
-        country.send "#{option.on_what2}=".to_sym, country.read_attribute_before_type_cast(option.on_what2.to_sym) + option.amount2
-      end
+      when "resilience", "reg_rel"
+				if country.read_attribute_before_type_cast(option.on_what.to_sym) + option.amount <= 6 &&
+           country.read_attribute_before_type_cast(option.on_what.to_sym) + option.amount >= 0
+        	country.send "#{option.on_what}=".to_sym, country.read_attribute_before_type_cast(option.on_what.to_sym) + option.amount
+				end
+			when "agriculture", "education", "security", "comms", "social_sec", "health", "water", "energy"
+				if country.read_attribute_before_type_cast(option.on_what.to_sym) + option.amount <= 2 &&
+           country.read_attribute_before_type_cast(option.on_what.to_sym) + option.amount >= 0
+					country.send "#{option.on_what}=".to_sym, country.read_attribute_before_type_cast(option.on_what.to_sym) + option.amount
+				end
+			end
       # puts "#{option.on_what2}: #{country.send(option.on_what2)}"
       country.save!
     end

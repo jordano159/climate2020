@@ -39,6 +39,7 @@ he:
       requirements: "דרישות מינימום"
       million: "מיליון"
       ceiling: "כבר על המקסימום"
+      rest_of_game: "עד סוף המשחק"
   country:
     new:
       title: "בנו את המדינה"

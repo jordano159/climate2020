@@ -86,19 +86,26 @@ class Country < ApplicationRecord
   end
 
   def set_score
-    enum_attributes = %w(resilience reg_rel agriculture education security comms social_sec health water energy)
-    score = ((self.year - 2020) * 2) - ((self.init_civ.to_i - self.civ_num.to_i) * 2)
     puts "***********************************************"
+    enum_attributes = %w(resilience reg_rel agriculture education security comms social_sec health water energy)
+    score = (self.year - 2020)/2
+    score = 40 if score > 40
+    puts score
+    score = score + ((self.civ_num / self.init_civ) * 40)
+    puts score
     puts "year: " + (self.year - 2020).to_s
-    puts "civ: " + "-" + ((self.init_civ.to_i - self.civ_num.to_i) * 2).to_s
-    puts "score = " + ((self.year - 2020) * 2).to_s + " - " + (self.init_civ.to_i - self.civ_num.to_i).to_s
+    puts "year score: " + ((self.year - 2020)/5).to_s
+    puts "init_civ: " + self.init_civ.to_s
+    puts "current_civ: " + self.civ_num.to_s
+    puts "civ: " + (self.civ_num / self.init_civ).to_s
+    puts "score = " + ((self.year - 2020)/5).to_s + " + " + ((self.civ_num / self.init_civ) * 40).to_s
     puts score
     enum_attributes.each do |attribute|
-      score = score + read_attribute_before_type_cast(attribute.to_sym) * 5
-      puts attribute + " " + (read_attribute_before_type_cast(attribute.to_sym) * 5).to_s
-      puts score
+      score = score + ((read_attribute_before_type_cast(attribute.to_sym) + 1).to_f)*5/9
+      puts attribute + " " + (((read_attribute_before_type_cast(attribute.to_sym) + 1).to_f)*5/9).to_s
+      puts score.to_i
     end
-    self.score = score
+    self.score = score.to_i
     self.save
   end
 

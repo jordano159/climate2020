@@ -3,7 +3,7 @@
   <div class="bg-primary rounded-pill w-75 text-white text-center">
     <%= t('country.game_over.score') %>
     <h1 class="text-center m-0">
-      <%= t('country.game_over.score_num', count: (@country.score)) %>
+      <%= t('country.game_over.score_num', count: (@country.score.to_i)) %>
     </h1>
     <%= t('country.game_over.points') %>
   </div>

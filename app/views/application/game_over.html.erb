@@ -36,14 +36,20 @@
 <hr>
 <div class="mb-5rem">
   <% if @country.quit %>
-    <div class="">
+    <div>
       <%= t('country.game_over.quit') %>
     </div>
   <% else %>
-    <div class="">
+    <div>
+      <%= t('country.game_over.everyone_dead') if @country.is_everyone_dead %>
+    </div>
+    <div>
+      <%= t('country.game_over.out_of_money') if @country.is_out_of_money %>
+    </div>
+    <div>
       <%= t('country.game_over.civil_war') if @country.is_torn_apart %>
     </div>
-    <div class="">
+    <div>
       <%= t('country.game_over.war') if @country.is_conquered %>
     </div>
   <% end %>

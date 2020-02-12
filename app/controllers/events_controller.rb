@@ -84,6 +84,7 @@ class EventsController < ApplicationController
       puts "#{country.budget} + #{event.amount} = #{country.budget + event.amount}"
       if country.budget + event.amount < 0
         country.lose = true
+        country.is_out_of_money = true
         if country.reg_rel == "war"
           country.is_conquered = true
         end
@@ -99,6 +100,7 @@ class EventsController < ApplicationController
       puts "#{country.civ_num} + #{event.amount} = #{country.civ_num + event.amount}"
       if country.civ_num + event.amount < 0
         country.lose = true
+        country.is_everyone_dead = true
         if country.reg_rel == "war"
           country.is_conquered = true
         end

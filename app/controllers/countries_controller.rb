@@ -33,6 +33,7 @@ class CountriesController < ApplicationController
           else
             @country.lose = true
             @country.is_conquered = true
+            @country.is_everyone_dead = true
             puts "Conquered and Lost by Civ_num"
           end
           if @country.budget > 1.01
@@ -42,6 +43,7 @@ class CountriesController < ApplicationController
           else
             @country.lose = true
             @country.is_conquered = true
+            @country.is_out_of_money = true
             puts "Conquered and Lost by Budget"
           end
         end
@@ -54,6 +56,7 @@ class CountriesController < ApplicationController
           else
             @country.lose = true
             @country.is_torn_apart = true
+            @country.is_everyone_dead = true
             puts "Torn Apart and Lost by Civ_num"
           end
           if @country.budget > 1.01
@@ -63,6 +66,7 @@ class CountriesController < ApplicationController
           else
             @country.lose = true
             @country.is_torn_apart = true
+            @country.is_out_of_money = true
             puts "Torn Apart and Lost by Budget"
           end
 					if Event.where("min_deg <= ?", @country.deg).where.not(id: @country.events).sample == nil

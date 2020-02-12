@@ -8,6 +8,11 @@
     <%= t('country.game_over.points') %>
   </div>
 </h5>
+<h5 class="d-flex justify-content-center mb-2">
+  <div class="">
+    <%= t('country.game_over.more_then', count: (@country.compare)) %>
+  </div>
+</h5>
 <div class="d-flex mb-2">
   <div class="d-flex justify-content-center w-50 mx-1">
     <div class="bg-success rounded-pill w-100 text-white text-center">

@@ -1,4 +1,4 @@
-<%= simple_form_for(@country, defaults: { wrapper_html: { class: 'w-100 pr-2 pl-2' } }, html: { class: 'form-inline mb-5' }) do |f| %>
+<%= simple_form_for(@country, defaults: { wrapper_html: { class: 'w-100 pr-2 pl-2 ' } }, html: { class: 'form-inline mb-5' }) do |f| %>
   <%= f.error_notification %>
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
   <div class="form-inputs w-100 mr-10 ml-10">
@@ -21,7 +21,6 @@
 		</div>
   </div>
 <% end %>
-
 <footer class="footer fixed-bottom bg-info">
   <h3 class="container text-white">
     <%= Country.human_attribute_name(:budget) %>: <span id="budget" class="ltr" dir="ltr"><%= @country.budget%></span> <%=  I18n.t("event.show.million") %>
@@ -57,7 +56,7 @@
     costs = 0
     $.each($("select"),function(index, el) {
   		cost = parseInt($(el).children("option:selected").html().split(" ")[$(el).children("option:selected").html().split(" ").length-2]);
-      console.log("length: " + $(el).children("option:selected").html().length)
+      // console.log("length: " + $(el).children("option:selected").html().length)
       costs = costs + cost
   	});
     console.log("costs: " + costs);
@@ -83,7 +82,7 @@
   $('#new_country').validate({ // initialize the plugin
     submitHandler: function(form) {
       if (parseInt($("#budget").html()) < 0) {
-        console.log("<0");
+        // console.log("<0");
         $(".budget-minus").removeClass('d-none')
       }
       else {

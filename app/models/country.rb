@@ -109,6 +109,22 @@ class Country < ApplicationRecord
     self.save
   end
 
+  def compare
+    puts "***************compare*************************"
+    score = self.score
+    scores = Country.where.not(id: self.id).where("score != ?", 0).pluck(:score)
+    counter = 0
+    scores.each do |s|
+      if score > s
+        counter += 1
+      end
+    end
+    percent = (counter * 100) / scores.size
+    puts "*****************end compare***********************"
+    return percent
+  end
+
+
   private
 
   def set_defaults

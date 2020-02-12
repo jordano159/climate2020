@@ -13,11 +13,18 @@
  */
 
 @import "bootstrap";
-
 *{
 	direction: rtl;
 	text-align: right;
 	font-family: "Rubik";
+}
+
+
+#ex1Slider .slider-selection {
+	background: #BABABA;
+}
+#ex1 .slider-selection {
+	background: #BABABA;
 }
 .w-screen{
 	width: 100vw;

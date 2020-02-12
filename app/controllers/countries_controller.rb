@@ -22,6 +22,7 @@ class CountriesController < ApplicationController
         puts "********************* Params Turn *******************"
         @country.year += 5
         @country.deg += 0.05
+        @country.budget += 1 if (@country.year % 2).zero?
         # @country.deg += 0.003 * (2 ** ((@country.year - 2020) / 5))
         if @country.reg_rel == "war"
           puts "War"

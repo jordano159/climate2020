@@ -53,33 +53,73 @@
       <%= t('country.game_over.war') if @country.is_conquered %>
     </div>
   <% end %>
+  <!-- Button trigger modal -->
+<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal">
+    <%= t('country.game_over.options') %>
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title" id="exampleModalLabel"></h3>
+        <button class="float-left close" type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="">
+          <h3><%= t('country.game_over.options') %></h3>
+          <% @country.options.uniq.each do |option| %>
+          <div class="rounded-pill bg-white shadow mb-3 d-flex px-4 py-1 align-items-center justify-content-between">
+            <div class="">
+              <div class="text-secondary event-title">
+                <%= option.event.title %>
+              </div>
+              <div class="option-title"><%= option.title %></div>
+            </div>
+            <% if option.amount > 0 %>
+              <p class="card-text event-title text-success"><%= option.amount.abs.to_s + "+ " + Country.human_attribute_name(option.on_what) %></p>
+            <% else %>
+              <p class="card-text event-title text-danger"><%= option.amount.abs.to_s + "- " + Country.human_attribute_name(option.on_what) %></p>
+            <% end %>
+            <% if option.amount2.present? %>
+              <% if option.amount2 > 0 %>
+                <p class="card-text text-success"><%= option.amount2.abs.to_s + "+ " + Country.human_attribute_name(option.on_what2) %></p>
+              <% else %>
+                <p class="card-text text-danger"><%= option.amount2.abs.to_s + "- " + Country.human_attribute_name(option.on_what2) %></p>
+              <% end %>
+            <% end %>
+          </div>
+          <% end %>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal"><%= t('country.game_over.close') %></button>
+      </div>
+    </div>
+  </div>
+</div>
+<hr>
+<h1><%= t('country.game_over.hope') %></h1>
+<h3><%= t('country.game_over.alternative') %></h3>
+<p><%= t('country.game_over.economy') %></p>
+<hr>
+<h3><%= t('country.game_over.what_to_do') %></h3>
+<ul>
+  <li><%= link_to t('country.game_over.xr'), "https://xrebellionisrael.earth/" %> - <%= t('country.game_over.xr_exp') %></li>
+  <li><%= link_to t('country.game_over.tree'), "http://citytree.net/" %> - <%= t('country.game_over.tree_exp') %></li>
+  <li><%= link_to t('country.game_over.change'), "https://www.youtube.com/watch?v=58foRGYOoU8" %></li>
+  <li><%= link_to t('country.game_over.this_changes'), "https://ecowiki.org.il/wiki/%D7%96%D7%94_%D7%9E%D7%A9%D7%A0%D7%94_%D7%94%D7%9B%D7%9C" %> - <%= t('country.game_over.eco_wiki') %></li>
+  <li><%= link_to t('country.game_over.air'), "https://www.globes.co.il/news/article.aspx?did=1001245957" %></li>
+  <li><%= link_to t('country.game_over.new_deal'), "https://www.youtube.com/watch?v=d9uTH0iprVQ&feature=youtu.be" %> <%= t('country.game_over.new_deal_exp') %></li>
+  <li><%= link_to t('country.game_over.greta'), "https://www.youtube.com/watch?v=TMrtLsQbaok" %></li>
+  <li><%= link_to t('country.game_over.story'), "https://www.youtube.com/watch?v=cpkRvc-sOKk" %> - <%= t('country.game_over.story_exp') %></li>
+</ul>
 	<div class="">
 		<%= t('country.game_over.no_more_events') if Event.where("min_deg <= ?", @country.deg).where.not(id: @country.events).sample == nil %>
 	</div>
-  <div class="">
-    <h3><%= t('country.game_over.options') %></h3>
-    <% @country.options.uniq.each do |option| %>
-    <div class="rounded-pill bg-white shadow mb-3 d-flex px-4 py-1 align-items-center justify-content-between">
-      <div class="">
-        <div class="text-secondary event-title">
-          <%= option.event.title %>
-        </div>
-        <div class="option-title"><%= option.title %></div>
-      </div>
-      <% if option.amount > 0 %>
-        <p class="card-text event-title text-success"><%= option.amount.abs.to_s + "+ " + Country.human_attribute_name(option.on_what) %></p>
-      <% else %>
-        <p class="card-text event-title text-danger"><%= option.amount.abs.to_s + "- " + Country.human_attribute_name(option.on_what) %></p>
-      <% end %>
-      <% if option.amount2.present? %>
-        <% if option.amount2 > 0 %>
-          <p class="card-text text-success"><%= option.amount2.abs.to_s + "+ " + Country.human_attribute_name(option.on_what2) %></p>
-        <% else %>
-          <p class="card-text text-danger"><%= option.amount2.abs.to_s + "- " + Country.human_attribute_name(option.on_what2) %></p>
-        <% end %>
-      <% end %>
-    </div>
-    <% end %>
-  </div>
+<hr>
   <%= link_to I18n.t("country.game_over.new_game"), root_path %>
 </div>

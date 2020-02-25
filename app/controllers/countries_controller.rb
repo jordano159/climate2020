@@ -73,7 +73,7 @@ class CountriesController < ApplicationController
 					  @country.lose = true
 					end
         end
-        @country.save!
+        @country.save
       end
       redirect_to event_path(id: 1, country_id: @country.id)
     end
@@ -187,7 +187,7 @@ class CountriesController < ApplicationController
   end
 
     def consequence_too(option, country)
-      puts "****************************************"
+      puts "******************consequence_too**********************"
       puts "#{option.on_what}: #{country.send(option.on_what)} + #{option.amount}"
       case option.on_what
       when "budget", "life_level"
@@ -206,6 +206,7 @@ class CountriesController < ApplicationController
 				end
 			end
       puts "#{option.on_what}: #{country.send(option.on_what)}"
+
       case option.on_what2
       when "budget", "life_level"
         country.send "#{option.on_what2}=".to_sym, country.send(option.on_what2) + option.amount2.to_i
@@ -223,7 +224,7 @@ class CountriesController < ApplicationController
 				end
 			end
       # puts "#{option.on_what2}: #{country.send(option.on_what2)}"
-      country.save!
+      country.save
     end
 
     # Use callbacks to share common setup or constraints between actions.

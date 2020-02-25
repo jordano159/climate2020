@@ -29,7 +29,7 @@
     <%= render 'application/favicon' %>
     </head>
 
-  <body class="bg-light mx-1 my-1">
+  <body class="bg-light">
     <% if admin_signed_in? %>
       <div>
         <%= link_to 'Home',         root_path %>
@@ -43,7 +43,7 @@
       </div>
     <% end %>
 
-    <div class="" dir="rtl">
+    <div class="w-100 h-100" dir="rtl">
       <%= yield %>
     </div>
     <%= render 'layouts/navbar' %>

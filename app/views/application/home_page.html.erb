@@ -1,31 +1,108 @@
-<h1><%= t ".title" %></h1>
-<div class="quote-container">
-    <blockquote class="quote-box bg-info">
-      <p class="quotation-mark">
-        “
-      </p>
-      <p class="quote-text">
-        <%= t ".quote" %>
-      </p>
-      <hr>
-      <div class="blog-post-actions">
-        <p class="blog-post-bottom pull-left writer">
-          <%= t ".writer" %>
+
+<% if mobile_device? %>
+<div class=" mx-1 my-1">
+
+  <h1><%= t ".title" %></h1>
+  <div class="quote-container">
+      <blockquote class="quote-box bg-info">
+        <p class="quotation-mark">
+          “
         </p>
-      </div>
-    </blockquote>
-    <p><%# t ".description" %></p>
+        <p class="quote-text">
+          <%= t ".quote" %>
+        </p>
+        <hr>
+        <div class="blog-post-actions">
+          <p class="blog-post-bottom pull-left writer">
+            <%= t ".writer" %>
+          </p>
+        </div>
+      </blockquote>
+      <p><%# t ".description" %></p>
+  </div>
+  <%= form_with(url: ministers_path, method: "get", local: true) do %>
+    <%= label_tag(:game, I18n.t("application.home_page.players")) %>
+    <%= text_field_tag(:game) %>
+    <%= submit_tag I18n.t("application.home_page.new_game"), class: "btn btn-success" %>
+  <% end %>
+  <p>(<%= t('.minister_count', count: Minister.count) %>)</p>
+  <p id="notice"><%= notice if params[:error]%></p>
+  <p class="pr-1"><%= t ".instructions_html" %></p>
+
+
+
 </div>
-<%= form_with(url: ministers_path, method: "get", local: true) do %>
-  <%= label_tag(:game, I18n.t("application.home_page.players")) %>
-  <%= text_field_tag(:game) %>
-  <%= submit_tag I18n.t("application.home_page.new_game"), class: "btn btn-success" %>
+<% else %>
+<div class="parent w-100 h-screen">
+<div class="div1 d-flex align-items-center justify-content-center mt-3">
+  <div class="quote-container-desktop w-50">
+  <blockquote class="quote-box  line-height-16">
+    <p class="quotation-mark line-height-16">
+      “
+    </p>
+    <h4 class="quote-text  line-height-16">
+      <%= t ".quote" %>
+    </h4>
+    <hr>
+    <div class="blog-post-actions">
+      <p class="blog-post-bottom pull-left writer">
+        <%= t ".writer" %>
+      </p>
+    </div>
+  </blockquote>
+</div>
+</div>
+<div class="div2 d-flex align-items-center justify-content-center">
+  <div class="shadow p-3 rounded-lg bg-light">
+    <%= form_with(url: ministers_path, method: "get", local: true) do %>
+    <h2><%= label_tag(:game, I18n.t("application.home_page.players"), class:"mb-0") %></h2>
+    <p class="mb-2"><%= t('.minister_count', count: Minister.count) %></p>
+    <%= text_field_tag(:game, nil, class: "w-100 form-control") %> <br>
+    <%= submit_tag I18n.t("application.home_page.new_game"), class: "btn btn-success btn-sm mt-1 float-left" %>
+    <% end %>
+    <p id="notice"><%= notice if params[:error]%></p>
+
+  </div>
+  </div>
+  <div class="div3 d-flex flex-column align-items-center">
+    <div class="d-flex flex-column align-items-center h-50">
+      <%= image_tag "fenix.svg", class: "w-50 mt-5" %>
+      <h1 class="w-100 text-center"><%= t ".title" %></h1>
+    </div>
+    <div class="d-flex flex-column align-items-center align-self-end h-50">
+      <h4><%= t ".background_html" %></h4>
+      <button class="btn btn-secondary" type="button" name="button"  data-toggle="modal" data-target="#instructionsModal"><%= t ".instructions" %></button>
+    </div>
+  </div>
+
+</div>
+<!-- Modal -->
+<div class="modal fade w-100" id="instructionsModal" tabindex="-1" role="dialog" aria-labelledby="instructionsModalLabel" aria-hidden="true">
+  <div class="modal-dialog w-75" role="document">
+    <div class="modal-content w-100">
+      <div class="modal-header">
+        <h5 class="modal-title" id="instructionsModalLabel"><%= t ".instructions" %></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h1><%= t ".goal_title" %></h1>
+        <%= t ".goal" %>
+
+
+      <h1><%= t ".course_title" %></h1>
+      <%= t ".course_html" %>
+      <h1><%= t ".end_title" %></h1>
+      <%= t ".end_html" %>
+      <h1><%= t ".win_title" %></h1>
+      <%= t ".win" %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal"><%= t ".close" %></button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <% end %>
-<p>(<%= t('.minister_count', count: Minister.count) %>)</p>
-<p id="notice"><%= notice if params[:error]%></p>
-<%# link_to "New Game", new_country_path %>
-<!-- <div> -->
-  <%# link_to_unless_current "English", locale: "en" %>
-  <%# link_to_unless_current "Hebrew", locale: "he" %>
-<!-- </div> -->
-<p class="pr-1"><%= t ".instructions_html" %></p>

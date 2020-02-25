@@ -1,4 +1,8 @@
-<h1><%= t "country.new.title" %></h1>
+<% if mobile_device? %>
+  <h1><%= t "country.new.title" %></h1>
+<% else %>
+
+<% end %>
 
 <%= render 'form', country: @country %>
 

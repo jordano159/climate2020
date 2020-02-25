@@ -111,6 +111,13 @@ blockquote{
   margin-right: auto;
   margin-left: auto;
 }
+.quote-container-desktop{
+	width: 40%;
+  padding-right: 5px;
+  padding-left: 5px;
+  margin-right: auto;
+  margin-left: auto;
+}
 .quotation-mark{
 
     margin-top: -10px;
@@ -148,3 +155,52 @@ blockquote{
 #warning{
     animation: yourAnimation 2s infinite 0s linear;
 }
+.parent {
+	display: grid;
+	grid-template-columns: repeat(5, 1fr);
+	grid-template-rows: repeat(6, 1fr);
+	grid-column-gap: 0px;
+	grid-row-gap: 0px;
+	background: #efefef
+}
+
+.div1 { grid-area: 1 / 2 / 3 / 6; }
+.div2 { grid-area: 3 / 3 / 5 / 5; }
+.div3 {
+	 grid-area: 1 / 1 / 7 / 2;
+	 background: #eafff1;
+	 -webkit-box-shadow: -7px 0px 5px -1px rgba(0,0,0,0.19);
+-moz-box-shadow: -7px 0px 5px -1px rgba(0,0,0,0.19);
+box-shadow: -7px 0px 5px -1px rgba(0,0,0,0.19);
+ }
+
+
+.div3 h4{
+	line-height: 1.6 !important;
+}
+
+.line-height-16{
+	line-height: 1.6 !important;
+	background: white !important;
+	color: black;
+	// box-shadow: none
+
+}
+
+.parent-new-country {
+display: grid;
+grid-template-columns: repeat(5, 1fr);
+grid-template-rows: repeat(6, 1fr);
+grid-column-gap: 0px;
+grid-row-gap: 0px;
+}
+
+.div1-new-country { grid-area: 1 / 1 / 7 / 2;
+	background: #eafff1;
+  -webkit-box-shadow: -7px 0px 5px -1px rgba(0,0,0,0.19);
+ 	-moz-box-shadow: -7px 0px 5px -1px rgba(0,0,0,0.19);
+ 	box-shadow: -7px 0px 5px -1px rgba(0,0,0,0.19);
+	color: black; }
+.div2-new-country { grid-area: 1 / 2 / 7 / 6;
+
+ }

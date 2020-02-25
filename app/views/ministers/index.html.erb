@@ -1,35 +1,35 @@
-<script>
-$(document).ready(function(){
-	jQuery.fn.exists = function(){ return this.length > 0; }
-	minister_num = 0
- // $("#minister-0").toggleClass('d-none');
- $("#next-title").html('<%= Minister.model_name.human(count: 2) %>');
- $(".open_card").html('<%= I18n.t("minister.index.open_card") %>');
- $("#between").toggleClass('d-none');
- $(".next").click(function(event) {
-	 $(this).parents(".card").toggleClass('d-none')
-	 if ( $(this).parents("#between").exists()) {
-		 $("#minister-" + minister_num).toggleClass('d-none');
-		 $(".finished_reading").html('<%= I18n.t("minister.index.finished_reading") %>');
-		 console.log("finished_reading");
-	 }
-	 else {
-		 $("#next-title").html("<%= I18n.t("minister.index.move_next_player") %>");
-		 minister_num += 1
-	 	$("#between").toggleClass('d-none');
-		$(".open_card").html('<%= I18n.t("minister.index.open_card") %>');
-	 }
-	 if (!$("#minister-" + minister_num).exists()) { // אם אין עוד שרים להציג
-		 $("#next-title").html("<%= I18n.t("minister.index.start_game") %>");
-		 $(".open_card").toggleClass('d-none');
-		 $("#start-game").toggleClass('d-none');
-	 }
- });
-});
-</script>
 
 <% if params[:game] %>
-
+	<% if mobile_device? %>
+	<script>
+		$(document).ready(function(){
+			jQuery.fn.exists = function(){ return this.length > 0; }
+			minister_num = 0
+			// $("#minister-0").toggleClass('d-none');
+			$("#next-title").html('<%= Minister.model_name.human(count: 2) %>');
+			$(".open_card").html('<%= I18n.t("minister.index.open_card") %>');
+			$("#between").toggleClass('d-none');
+			$(".next").click(function(event) {
+				$(this).parents(".card").toggleClass('d-none')
+				if ( $(this).parents("#between").exists()) {
+					$("#minister-" + minister_num).toggleClass('d-none');
+					$(".finished_reading").html('<%= I18n.t("minister.index.finished_reading") %>');
+					console.log("finished_reading");
+				}
+				else {
+					$("#next-title").html("<%= I18n.t("minister.index.move_next_player") %>");
+					minister_num += 1
+					$("#between").toggleClass('d-none');
+					$(".open_card").html('<%= I18n.t("minister.index.open_card") %>');
+				}
+				if (!$("#minister-" + minister_num).exists()) { // אם אין עוד שרים להציג
+					$("#next-title").html("<%= I18n.t("minister.index.start_game") %>");
+					$(".open_card").toggleClass('d-none');
+					$("#start-game").toggleClass('d-none');
+				}
+			});
+		});
+	</script>
     <div class="card-body h-screen">
       <% @ministers.each_with_index do |minister, index| %>
         <div class="card d-none h-100" id="minister-<%= index %>">
@@ -53,7 +53,32 @@ $(document).ready(function(){
 				</div>
 			</div>
     </div>
+<% else %>
+<%= image_tag "fenix.png", size: "250x250", alt: "Game Logo", class: "mx-auto d-block" %>
+<div class="w-100 d-flex flex-column align-items-center">
+	<h1><%= I18n.t("minister.index.list") %></h1>
+	<h2><%= I18n.t("minister.index.choose") %></h2>
+</div>
 
+<div class="row mx-2">
+		<% @ministers.each_with_index do |minister, index| %>
+		<div class="card-body col-4 h-50">
+			<div class="card h-100" id="minister-<%= index %>">
+				<div class="card-body h-100 d-flex flex-column justify-content-between">
+					<h1 class="card-title"><%= minister.role %></h1>
+					<h2 class="card-text">
+						<h3 class="font-weight-bold"><%= I18n.t("minister.index.description") %>:</h3> <h4> <%= minister.description %></h4>
+					</h2>
+				</div>
+			</div>
+		</div>
+		<% end %>
+		</div>
+	<div class="w-full d-flex justify-content-center">
+			<%= link_to I18n.t("minister.index.start_game"), new_country_path, class: "btn btn-success w-25 h-5 mb-5", id:"start-game", style: "font-size: large;" %>
+	</div>
+
+<% end %>
 <!-- Admin view -->
 <% else %>
 

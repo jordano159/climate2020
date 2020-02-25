@@ -1,3 +1,5 @@
+<% if mobile_device? %>
+
 <%= simple_form_for(@country, defaults: { wrapper_html: { class: 'w-100 pr-2 pl-2 ' } }, html: { class: 'form-inline mb-5' }) do |f| %>
   <%= f.error_notification %>
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
@@ -12,13 +14,13 @@
     <%= f.input :health,        collection: healthhash, label_method: :second, value_method: :first, include_blank: false %>
     <%= f.input :water,         collection: waterhash, label_method: :second, value_method: :first, include_blank: false %>
     <%= f.input :energy,        collection: energyhash, label_method: :second, value_method: :first, include_blank: false %>
-		<%= f.input :budget,        as: :hidden %>
+    <%= f.input :budget,        as: :hidden %>
     <%= f.input :civ_num,       as: :hidden %>
     <%= f.input :init_civ,      as: :hidden %>
-		<div class="form-actions">
-			<%= f.button :submit, class: "btn btn-success", id:"submit" %>
+    <div class="form-actions">
+      <%= f.button :submit, class: "btn btn-success", id:"submit" %>
       <!-- <div class="budget-minus"></div> -->
-		</div>
+    </div>
   </div>
 <% end %>
 <footer class="footer fixed-bottom bg-info">
@@ -30,38 +32,38 @@
 </footer>
 
 <script type="text/javascript">
-	costs = [<%= @agriculture_costs.values %>,
-		 			 <%= @education_costs.values %>,
-					 <%= @security_costs.values %>,
-					 <%= @comms_costs.values %>,
-					 <%= @social_sec_costs.values %>,
-					 <%= @health_costs.values %>,
-					 <%= @water_costs.values %>,
-					 <%= @energy_costs.values %>]
-	all_costs = 0
-	$.each($("select"),function(index, el) {
-		// console.log(index);
-		$(el).children("option[value='low']").append(": " + costs[index][2] + " " + '<%=  I18n.t("event.show.million") %>')
-		$(el).children("option[value='medium']").append(": " + costs[index][1] + " " + '<%=  I18n.t("event.show.million") %>')
-		$(el).children("option[value='high']").append(": " + costs[index][0] + " " + '<%=  I18n.t("event.show.million") %>')
+  costs = [<%= @agriculture_costs.values %>,
+           <%= @education_costs.values %>,
+           <%= @security_costs.values %>,
+           <%= @comms_costs.values %>,
+           <%= @social_sec_costs.values %>,
+           <%= @health_costs.values %>,
+           <%= @water_costs.values %>,
+           <%= @energy_costs.values %>]
+  all_costs = 0
+  $.each($("select"),function(index, el) {
+    // console.log(index);
+    $(el).children("option[value='low']").append(": " + costs[index][2] + " " + '<%=  I18n.t("event.show.million") %>')
+    $(el).children("option[value='medium']").append(": " + costs[index][1] + " " + '<%=  I18n.t("event.show.million") %>')
+    $(el).children("option[value='high']").append(": " + costs[index][0] + " " + '<%=  I18n.t("event.show.million") %>')
     cost = parseInt($(el).children("option:selected").html().split(" ")[$(el).children("option:selected").html().split(" ").length-2]);
-		all_costs = all_costs + cost
+    all_costs = all_costs + cost
     console.log($(el).children("option:selected").html().split(" "));
-	});
-	start_budget = <%= @country.budget %> - all_costs
+  });
+  start_budget = <%= @country.budget %> - all_costs
   // console.log(costs);
-	$("#budget").html(start_budget)
+  $("#budget").html(start_budget)
 
-	$("select").change(function(event) {
+  $("select").change(function(event) {
     costs = 0
     $.each($("select"),function(index, el) {
-  		cost = parseInt($(el).children("option:selected").html().split(" ")[$(el).children("option:selected").html().split(" ").length-2]);
+      cost = parseInt($(el).children("option:selected").html().split(" ")[$(el).children("option:selected").html().split(" ").length-2]);
       // console.log("length: " + $(el).children("option:selected").html().length)
       costs = costs + cost
-  	});
+    });
     console.log("costs: " + costs);
-		new_budget = <%= @country.budget %> - costs
-		$("#budget").html(new_budget)
+    new_budget = <%= @country.budget %> - costs
+    $("#budget").html(new_budget)
     // $("#country_budget").val($("#budget").html())
     if (parseInt($("#budget").html()) < 0) {
       // $(".budget-minus").removeClass('d-none')
@@ -77,7 +79,7 @@
       $(".budget-minus-partial").remove()
       $("#new_country").addClass('mb-5')
     }
-	});
+  });
 
   $('#new_country').validate({ // initialize the plugin
     submitHandler: function(form) {
@@ -115,3 +117,143 @@
       }
     });
 </script>
+
+<% else %>
+<div class="parent-new-country">
+<div class="div1-new-country ">
+  <sidebar class="footer ">
+    <div class="div3 d-flex flex-column align-items-center">
+      <div class="d-flex flex-column align-items-center h-50">
+        <%= image_tag "fenix.svg", class: "w-50 mt-5" %>
+        <h1 class="w-100 text-center"><%= t "application.home_page.title" %></h1>
+      </div>
+      <div class="d-flex flex-column align-items-center align-self-end h-50">
+        <h3 class="container">
+          <%= Country.human_attribute_name(:budget) %>: <br> <span id="budget" class="ltr" dir="ltr"><%= @country.budget%></span> <%=  I18n.t("event.show.million") %>
+          <span class="budget-minus"></span>
+          <span class="text-white tiny"> (<%= I18n.t("event.show.rest_of_game") %>) </span>
+        </h3>
+      </div>
+    </div>
+
+  </sidebar>
+
+ </div>
+<div class="div2-new-country">
+  <div class="w-100 d-flex justify-content-center">
+    <h1><%= t "country.new.title" %></h1>
+  </div>
+  <%= simple_form_for(@country, defaults: { wrapper_html: { class: 'w-100 pr-2 pl-2 ' } }, html: { class: ' mb-5' }) do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+  <div class="form-inputs w-100 mr-10 ml-10">
+
+    <%= f.input :name%>
+    <%= f.input :agriculture,   collection: agrihash, label_method: :second, value_method: :first, include_blank: false %>
+    <%= f.input :education,     collection: eduhash, label_method: :second, value_method: :first, include_blank: false %>
+    <%= f.input :security,      collection: securityhash, label_method: :second, value_method: :first, include_blank: false %>
+    <%= f.input :comms,         collection: commshash, label_method: :second, value_method: :first, include_blank: false %>
+    <%= f.input :social_sec,    collection: social_sechash, label_method: :second, value_method: :first, include_blank: false %>
+    <%= f.input :health,        collection: healthhash, label_method: :second, value_method: :first, include_blank: false %>
+    <%= f.input :water,         collection: waterhash, label_method: :second, value_method: :first, include_blank: false %>
+    <%= f.input :energy,        collection: energyhash, label_method: :second, value_method: :first, include_blank: false %>
+    <%= f.input :budget,        as: :hidden %>
+    <%= f.input :civ_num,       as: :hidden %>
+    <%= f.input :init_civ,      as: :hidden %>
+    <div class="form-actions">
+      <%= f.button :submit, class: "btn btn-success", id:"submit" %>
+      <!-- <div class="budget-minus"></div> -->
+    </div>
+  </div>
+  <% end %>
+</div>
+</div>
+
+<script type="text/javascript">
+  costs = [<%= @agriculture_costs.values %>,
+           <%= @education_costs.values %>,
+           <%= @security_costs.values %>,
+           <%= @comms_costs.values %>,
+           <%= @social_sec_costs.values %>,
+           <%= @health_costs.values %>,
+           <%= @water_costs.values %>,
+           <%= @energy_costs.values %>]
+  all_costs = 0
+  $.each($("select"),function(index, el) {
+    // console.log(index);
+    $(el).children("option[value='low']").append(": " + costs[index][2] + " " + '<%=  I18n.t("event.show.million") %>')
+    $(el).children("option[value='medium']").append(": " + costs[index][1] + " " + '<%=  I18n.t("event.show.million") %>')
+    $(el).children("option[value='high']").append(": " + costs[index][0] + " " + '<%=  I18n.t("event.show.million") %>')
+    cost = parseInt($(el).children("option:selected").html().split(" ")[$(el).children("option:selected").html().split(" ").length-2]);
+    all_costs = all_costs + cost
+    console.log($(el).children("option:selected").html().split(" "));
+  });
+  start_budget = <%= @country.budget %> - all_costs
+  // console.log(costs);
+  $("#budget").html(start_budget)
+
+  $("select").change(function(event) {
+    costs = 0
+    $.each($("select"),function(index, el) {
+      cost = parseInt($(el).children("option:selected").html().split(" ")[$(el).children("option:selected").html().split(" ").length-2]);
+      // console.log("length: " + $(el).children("option:selected").html().length)
+      costs = costs + cost
+    });
+    console.log("costs: " + costs);
+    new_budget = <%= @country.budget %> - costs
+    $("#budget").html(new_budget)
+    // $("#country_budget").val($("#budget").html())
+    if (parseInt($("#budget").html()) < 0) {
+      // $(".budget-minus").removeClass('d-none')
+      $("#submit").removeClass('btn-success')
+      $("#submit").addClass('btn-secondary disabled')
+      $(".budget-minus").html("<%= j (render partial: 'budget_minus') %>")
+      $("#new_country").css('margin-bottom', '5rem')
+      $("#new_country").removeClass('mb-5')
+    }
+    else {
+      $("#submit").addClass('btn-success')
+      $("#submit").removeClass('btn-secondary disabled')
+      $(".budget-minus-partial").remove()
+      $("#new_country").addClass('mb-5')
+    }
+  });
+
+  $('#new_country').validate({ // initialize the plugin
+    submitHandler: function(form) {
+      if (parseInt($("#budget").html()) < 0) {
+        // console.log("<0");
+        $(".budget-minus").removeClass('d-none')
+      }
+      else {
+        $("#country_budget").val($("#budget").html())
+        form.submit();
+      }
+    },
+    errorPlacement: function(label, element) {
+     label.addClass('er');
+     label.insertAfter(element);
+    },
+    wrapper: 'span',
+      rules: {
+        "country[name]": {
+            required: true
+        },
+        // "country[budget]": {
+        //     required: true,
+        //     digits: true
+        // }
+      },
+      messages: {
+        "country[name]": {
+        required: "חייב להיות שם"
+      },
+       // "country[budget]": {
+       //   required: "התקציב חייב להיות חיובי",
+       //   digits: "התקציב חייב להיות חיובי"
+       // },
+      }
+    });
+</script>
+
+<% end %>

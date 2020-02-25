@@ -119,7 +119,11 @@ class Country < ApplicationRecord
         counter += 1
       end
     end
-    percent = (counter * 100) / scores.size
+    if scores.size == 0
+      percent = 100
+    else
+      percent = (counter * 100) / scores.size
+    end
     puts "*****************end compare***********************"
     return percent
   end

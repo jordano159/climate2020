@@ -3,8 +3,8 @@ class Country < ApplicationRecord
   has_and_belongs_to_many :events, join_table: "countries_events"
   after_initialize :set_defaults
 
-  enum resilience:          %i[civil_war terrible bad neutral good excellent], _prefix: true
-  enum reg_rel:             %i[war terrible bad neutral good excellent], _prefix: true
+  enum resilience:          %i[civil_war terrible neutral excellent], _prefix: true
+  enum reg_rel:             %i[war terrible neutral excellent], _prefix: true
   enum agriculture:         %i[low medium high], _prefix: true
   enum education:           %i[low medium high], _prefix: true
   enum security:            %i[low medium high], _prefix: true

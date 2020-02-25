@@ -67,9 +67,7 @@ module CountriesHelper
     reg_rel = {
       war: "מלחמה",
       terrible: "נורא",
-      bad: "גרוע",
       neutral: "נייטרלי",
-      good: "טוב",
       excellent: "מצויין"
     }
   end
@@ -78,9 +76,7 @@ module CountriesHelper
     resilience = {
       civil_war: "מלחמת אזרחים",
       terrible: "נורא",
-      bad: "גרוע",
       neutral: "נייטרלי",
-      good: "טוב",
       excellent: "מצויין"
     }
   end

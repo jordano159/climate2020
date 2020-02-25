@@ -113,11 +113,13 @@ class EventsController < ApplicationController
     when "deg"
       country.send "#{event.on_what}=".to_sym, country.send(event.on_what) + event.amount
     when "resilience", "reg_rel"
-      if country.read_attribute_before_type_cast(event.on_what.to_sym) + event.amount <= 6 && country.read_attribute_before_type_cast(event.on_what.to_sym) + event.amount >= 0
+      if country.read_attribute_before_type_cast(event.on_what.to_sym) + event.amount <= 3 &&
+         country.read_attribute_before_type_cast(event.on_what.to_sym) + event.amount >= 0
         country.send "#{event.on_what}=".to_sym, country.read_attribute_before_type_cast(event.on_what.to_sym) + event.amount
       end
     when "agriculture", "education", "security", "comms", "social_sec", "health", "water", "energy"
-      if country.read_attribute_before_type_cast(event.on_what.to_sym) + event.amount <= 2 && country.read_attribute_before_type_cast(event.on_what.to_sym) + event.amount >= 0
+      if country.read_attribute_before_type_cast(event.on_what.to_sym) + event.amount <= 2 &&
+         country.read_attribute_before_type_cast(event.on_what.to_sym) + event.amount >= 0
         country.send "#{event.on_what}=".to_sym, country.read_attribute_before_type_cast(event.on_what.to_sym) + event.amount
       end
     end

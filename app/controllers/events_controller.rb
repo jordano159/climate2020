@@ -123,7 +123,7 @@ class EventsController < ApplicationController
         country.send "#{event.on_what}=".to_sym, country.read_attribute_before_type_cast(event.on_what.to_sym) + event.amount
       end
     end
-    country.save!
+    country.save
   end
 
     # Use callbacks to share common setup or constraints between actions.

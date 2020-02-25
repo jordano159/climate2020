@@ -140,6 +140,7 @@ class CountriesController < ApplicationController
     @country = Country.find(params[:country_id])
   end
 
+
   private
 
   def set_costs(country)

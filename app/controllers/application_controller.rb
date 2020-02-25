@@ -20,6 +20,14 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def new_direction
+    send_file("#{Rails.root}/public/new_direction.docx")
+  end
+
+  def hashomer_hatzair
+    send_file("#{Rails.root}/public/hashomer_hatzair.docx")
+  end
+
   private
 
   def switch_locale(&action)

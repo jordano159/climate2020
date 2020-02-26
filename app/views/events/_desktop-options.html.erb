@@ -1,51 +1,49 @@
-<% @event.options.each do |option| %>
-  <div class="card">
-    <div class="card-body">
-      <h5 class="card-title"><%= option.title %></h5>
+<div class="row h-75">
+  <% @event.options.each do |option| %>
+  <div class="card col-5 m-2 bg-opaque-white h-50 mt-5">
+    <div class="card-body h-100">
+      <h3 class="card-title"><%= option.title %></h3>
+      <div>
       <% if option.amount > 0 %>
         <% if (option.amount % 1).zero? %>
-          <p class="card-text text-success"><%= option.amount.abs.to_i.to_s + "+ " + Country.human_attribute_name(option.on_what) %></p>
+          <span class="card-text bg-success rounded w-25 text-white px-1"><%= option.amount.abs.to_i.to_s + "+ " + Country.human_attribute_name(option.on_what) %></span>
         <% else %>
-          <p class="card-text text-success"><%= option.amount.abs.to_s + "+ " + Country.human_attribute_name(option.on_what) %></p>
+          <span class="card-text bg-success rounded w-25 text-white px-1"><%= option.amount.abs.to_s + "+ " + Country.human_attribute_name(option.on_what) %></span>
         <% end %>
       <% else %>
         <% if (option.amount % 1).zero? %>
-          <p class="card-text text-danger"><%= option.amount.abs.to_i.to_s + "- " + Country.human_attribute_name(option.on_what) %></p>
+          <span class="card-text bg-danger rounded w-25 text-white px-1"><%= option.amount.abs.to_i.to_s + "- " + Country.human_attribute_name(option.on_what) %></span>
         <% else %>
-          <p class="card-text text-danger"><%= option.amount.abs.to_s + "- " + Country.human_attribute_name(option.on_what) %></p>
+          <span class="card-text bg-danger rounded w-25 text-white px-1"><%= option.amount.abs.to_s + "- " + Country.human_attribute_name(option.on_what) %></span>
         <% end %>
       <% end %>
       <% if option.amount2.present? && option.on_what2.present? %>
         <% if option.amount2 > 0 %>
           <% if (option.amount2 % 1).zero? %>
-            <p class="card-text text-success"><%= option.amount2.abs.to_i.to_s + "+ " + Country.human_attribute_name(option.on_what2) %></p>
+            <span class="card-text bg-success rounded w-25 text-white px-1"><%= option.amount2.abs.to_i.to_s + "+ " + Country.human_attribute_name(option.on_what2) %></span>
           <% else %>
-            <p class="card-text text-success"><%= option.amount2.abs.to_s + "+ " + Country.human_attribute_name(option.on_what2) %></p>
+            <span class="card-text bg-success rounded w-25 text-white px-1"><%= option.amount2.abs.to_s + "+ " + Country.human_attribute_name(option.on_what2) %></span>
           <% end %>
         <% else %>
           <% if (option.amount2 % 1).zero? %>
-            <p class="card-text text-danger"><%= option.amount2.abs.to_i.to_s + "- " + Country.human_attribute_name(option.on_what2) %></p>
+            <span class="card-text bg-danger rounded text-white px-1 w-25"><%= option.amount2.abs.to_i.to_s + "- " + Country.human_attribute_name(option.on_what2) %></span>
           <% else %>
-            <p class="card-text text-danger"><%= option.amount2.abs.to_s + "- " + Country.human_attribute_name(option.on_what2) %></p>
+            <span class="card-text bg-danger rounded text-white px-1 w-25"><%= option.amount2.abs.to_s + "- " + Country.human_attribute_name(option.on_what2) %></span>
           <% end %>
         <% end %>
       <% end %>
+      </div>
       <% if params[:country_id] %>
         <% country = Country.find(params[:country_id]) %>
-        <% if country.is_option_available(option) %>
-          <%= link_to I18n.t("event.show.choose_option"), { controller: "countries", action: "show", id: params[:country_id], option_id: option.id, turn: true }, class: "btn btn-primary" %>
-        <% else %>
-          <a href="#" class="btn btn-secondary disabled"><%= I18n.t("event.show.choose_option") %></a>
-        <% end %>
         <div class="req">
           <%= I18n.t("event.show.requirements") %>:
           <span class="reqq">
             <%= tag(:br) + Country.human_attribute_name(:resilience) + " - " +  reshash[option.min_resilience.to_sym]                       if option.read_attribute_before_type_cast(:min_resilience) > 0 %>
             <%= tag(:br) + Country.human_attribute_name(:budget) + " - " +      option.min_budget.to_s + " " + I18n.t("event.show.million") if option.read_attribute_before_type_cast(:min_budget) > 0 %>
             <% if (option.min_civ_num % 1).zero? %>
-              <%= tag(:br) + option.min_civ_num.to_i.to_s + "  " + Country.human_attribute_name(:civ_num)                                   if option.read_attribute_before_type_cast(:min_civ_num) > 0 %>
+            <%= tag(:br) + option.min_civ_num.to_i.to_s + "  " + Country.human_attribute_name(:civ_num)                                   if option.read_attribute_before_type_cast(:min_civ_num) > 0 %>
             <% else %>
-              <%= tag(:br) + option.min_civ_num.to_s + "  " + Country.human_attribute_name(:civ_num)                                        if option.read_attribute_before_type_cast(:min_civ_num) > 0 %>
+            <%= tag(:br) + option.min_civ_num.to_s + "  " + Country.human_attribute_name(:civ_num)                                        if option.read_attribute_before_type_cast(:min_civ_num) > 0 %>
             <% end %>
             <%= tag(:br) + Country.human_attribute_name(:reg_rel) + " - " +     reghash[option.min_reg_rel.to_sym]                          if option.read_attribute_before_type_cast(:min_reg_rel) > 0 %>
             <%= tag(:br) + Country.human_attribute_name(:agriculture) + " - " + agrihash[option.min_agriculture.to_sym].split[0]            if option.read_attribute_before_type_cast(:min_agriculture) > 0 %>
@@ -58,20 +56,28 @@
             <%= tag(:br) + Country.human_attribute_name(:energy) + " - " +      energyhash[option.min_energy.to_sym].split[0]               if option.read_attribute_before_type_cast(:min_energy) > 0 %>
           </span>
         </div>
+
+        <% if country.is_option_available(option) %>
+          <%= link_to I18n.t("event.show.choose_option"), { controller: "countries", action: "show", id: params[:country_id], option_id: option.id, turn: true }, class: "  btn btn-primary w-75 relative-bottom" %>
+        <% else %>
+          <a href="#" class="btn btn-secondary disabled w-75 relative-bottom" data-toggle="tooltip" data-placement="top" title="Tooltip on top"><%= I18n.t("event.show.choose_option") %></a>
+        <% end %>
       <% end %>
     </div>
   </div>
-<% end %>
+  <% end %>
 
-<script type="text/javascript">
-  $( document ).ready(function() {
-    $( ".reqq" ).each(function( index ) {
-      if ($(this).html().trim() == "") {
-        $(this).parent().addClass("d-none")
-        $(this).addClass("d-none")
-      }
-      // console.log( index + ": " + $( this ).text() );
+  <script type="text/javascript">
+    $( document ).ready(function() {
+      $( ".reqq" ).each(function( index ) {
+        if ($(this).html().trim() == "") {
+          $(this).parent().addClass("d-none")
+          $(this).addClass("d-none")
+        }
+        // console.log( index + ": " + $( this ).text() );
+      });
     });
-  });
 
-</script>
+  </script>
+
+</div>

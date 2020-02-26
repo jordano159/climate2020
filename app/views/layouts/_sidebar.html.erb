@@ -1,0 +1,81 @@
+<% if params[:country_id] %>
+  <% country = Country.find(params[:country_id]) %>
+    <div class="d-flex flex-column bd-highlight w-100  line-height-1">
+      <div class="bd-highlight w-100">
+        <div class="d-flex flex-row bd-highlight w-100">
+          <h1 class="flex-fill text-center text-white"><%= country.name %></h1>
+        </div>
+      </div>
+      <div class="bd-highlight w-100 p-2">
+        <div class="d-flex flex-column bd-highlight text-white">
+          <h4 class="flex-fill w-100">&#127777; <%= I18n.t("sidebar.deg") %>: <%= country.deg %>°C</h4>
+          <h4 class="flex-fill w-100">⏲ <%= I18n.t("sidebar.year") %>: <%= country.year %></h4>
+          <h4 class="flex-fill w-100">&#128697; <%= I18n.t("sidebar.civ") %>: <%= country.civ_num %> <%= I18n.t("sidebar.million") %></h4>
+          <h4 class="flex-fill w-100">$ <%= I18n.t("sidebar.budget") %>: <%= country.budget %> <%= I18n.t("sidebar.dollar") %></h4>
+        </div>
+      </div>
+
+        <div class="p-2 d-flex flex-column w-100 text-white">
+          <div class="nav-item">
+            <h4 class="w-100">
+            <% if country.resilience == "civil_war" %>
+              <%= Country.human_attribute_name(:resilience) %>:           <span class="reg-res"><%= reshash[country.resilience.to_sym] %> (<%= I18n.t("navbar.wars") %>)</span>
+            <% else %>
+              <%= Country.human_attribute_name(:resilience) %>:           <span class="reg-res"><%= reshash[country.resilience.to_sym].split[0] %></span>
+            <% end %>
+            <% if country.resilience == "civil_war" || country.reg_rel == "war" %>
+            <% end %>
+            </h4>
+          </div>
+          <div class="nav-item">
+            <h4 class="w-100"><%= Country.human_attribute_name(:agriculture) %>:       <span class="hash"><%= agrihash[country.agriculture.to_sym].split[0] %></span></h4>
+          </div>
+          <div class="nav-item">
+            <h4 class="w-100"><%= Country.human_attribute_name(:security) %>:          <span class="hash"><%= securityhash[country.security.to_sym].split[0] %></span></h4>
+          </div>
+          <div class="nav-item">
+            <h4 class="w-100"><%= Country.human_attribute_name(:social_sec) %>:        <span class="hash"><%= social_sechash[country.social_sec.to_sym].split[0] %></span></h4>
+          </div>
+          <div class="nav-item">
+            <h4 class="w-100"><%= Country.human_attribute_name(:water) %>:             <span class="hash"><%= waterhash[country.water.to_sym].split[0] %></span></h4>
+          </div>
+          <div class="nav-item">
+            <% if country.reg_rel == "war" %>
+              <h4 class="w-100"><%= Country.human_attribute_name(:reg_rel) %>:           <span class="reg-res"><%= reghash[country.reg_rel.to_sym] %> (<%= I18n.t("navbar.wars") %>)</span></h4>
+            <% else %>
+              <h4 class="w-100"><%= Country.human_attribute_name(:reg_rel) %>:         <span class="reg-res"><%= reghash[country.reg_rel.to_sym].split[0] %></span></h4>
+            <% end %>
+          </div>
+          <div class="nav-item">
+            <h4 class="w-100"><%= Country.human_attribute_name(:education) %>:         <span class="hash"><%= eduhash[country.education.to_sym].split[0] %></span></h4>
+          </div>
+
+          <div class="nav-item">
+            <h4 class="w-100"><%= Country.human_attribute_name(:comms) %>:             <span class="hash"><%= commshash[country.comms.to_sym].split[0] %></span></h4>
+          </div>
+
+          <div class="nav-item">
+            <h4 class="w-100"><%= Country.human_attribute_name(:health) %>:            <span class="hash"><%= healthhash[country.health.to_sym].split[0] %></span></h4>
+          </div>
+
+          <div class="nav-item">
+            <h4 class="w-100"><%= Country.human_attribute_name(:energy) %>:            <span class="hash"><%= energyhash[country.energy.to_sym].split[0] %></span></h4>
+          </div>
+        </div>
+      </div>
+
+<script type="text/javascript">
+  $(".reg-res").each(function(){
+    html = $(this).html()
+    if (html == "מצויין" || html == "טוב") {
+      $(this).addClass('text-success')
+    }
+    else if (html == "נייטרלי"){
+    }
+    else {
+      $(this).addClass('bg-danger rounded')
+    }
+
+  })
+</script>
+<% end %>

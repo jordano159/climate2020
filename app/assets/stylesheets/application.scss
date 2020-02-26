@@ -97,7 +97,7 @@ blockquote{
     margin-top: -50px;
     padding-top: -100px;
     border-radius: 17px;
-    background-color: #4ADFCC;
+    background-color: white;
     margin-top: 25px;
     color:white;
     width: 100%;
@@ -181,29 +181,51 @@ blockquote{
 
 .line-height-16{
 	line-height: 1.6 !important;
-	background: white !important;
-	color: black;
+
 	// box-shadow: none
 
 }
 
-.parent-new-country {
-display: grid;
-grid-template-columns: repeat(5, 1fr);
-grid-template-rows: repeat(6, 1fr);
-grid-column-gap: 0px;
-grid-row-gap: 0px;
+.bg-opaque{
+		background: rgba(0,0,0,0.4) !important;
+		color: white;
+		box-shadow: none;
 }
 
-.div1-new-country { grid-area: 1 / 1 / 7 / 2;
-	background: #eafff1;
-  -webkit-box-shadow: -7px 0px 5px -1px rgba(0,0,0,0.19);
- 	-moz-box-shadow: -7px 0px 5px -1px rgba(0,0,0,0.19);
- 	box-shadow: -7px 0px 5px -1px rgba(0,0,0,0.19);
-	color: black; }
-.div2-new-country { grid-area: 1 / 2 / 7 / 6;
+.bg-opaque-white{
+		background: rgba(255,255,255,0.6) !important;
+		color: black;
+		box-shadow: none;
+}
 
- }
+.parent-new-country {
+ display: grid;
+ grid-template-columns: repeat(5, 1fr);
+ grid-template-rows: repeat(6, 1fr);
+ grid-column-gap: 0px;
+ grid-row-gap: 0px;
+}
+
+.div1-new-country { grid-area: 1 / 1 / 7 / 6; }
+.div2-new-country { grid-area: 1 / 1 / 7 / 6; }
+.div3-new-country {
+	grid-area: 1 / 1 / 7 / 2;
+	color: white; }
+.div4-new-country { grid-area: 1 / 2 / 7 / 6; }
+
+.parent-playing {
+ display: grid;
+ grid-template-columns: repeat(5, 1fr);
+ grid-template-rows: repeat(6, 1fr);
+ grid-column-gap: 0px;
+ grid-row-gap: 0px;
+}
+
+.div1-playing { grid-area: 1 / 1 / 7 / 6; }
+.div2-playing { grid-area: 1 / 1 / 7 / 6; }
+.div3-playing {	grid-area: 1 / 1 / 7 / 2; }
+.div4-playing { grid-area: 1 / 2 / 7 / 6; }
+
 
  .parent {
 	 display: grid;
@@ -215,14 +237,14 @@ grid-row-gap: 0px;
 
  .div1 {
 	 		grid-area: 1 / 1 / 11 / 11;
-			background-image: url(pollution.jpg);
+			background-image: url(pollution.webp);
 		  background-repeat: no-repeat, no-repeat;
 			background-position: center;
 			background-size: cover;
   	}
  .div2 {
 	 		grid-area: 1 / 1 / 11 / 11;
-			background: rgba(0,0,0,0.1);
+			background: rgba(0,0,0,0.3);
   			}
  .div3 { grid-area: 8 / 4 / 10 / 6; }
  .div4 { grid-area: 8 / 6 / 10 / 8; }
@@ -239,4 +261,39 @@ grid-row-gap: 0px;
 
 .modal-dialog{
 	max-width: none
+}
+
+.border-medium{
+	border-width: medium !important;
+}
+
+.bg-image{
+	background-image: url(pollution.webp);
+	background-repeat: no-repeat, no-repeat;
+	background-position: center;
+	background-size: cover;
+	 background-attachment: fixed;
+}
+.bg-overlay{
+	background: rgba(0,0,0,0.3);
+}
+
+.padding-right-none{
+	padding-right: 0 !important;
+}
+
+.vertical-center{
+	vertical-align: middle;
+}
+.min-h-screen{
+	min-height: 100vh;
+}
+.h-33{
+	height: 33%;
+}
+.relative-bottom{
+	position: absolute;
+	bottom: 0;
+	left: 50%;
+	transform: translate(-50%, -50%) !important;
 }

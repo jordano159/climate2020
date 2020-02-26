@@ -54,29 +54,36 @@
 			</div>
     </div>
 <% else %>
-<%= image_tag "fenix.png", size: "250x250", alt: "Game Logo", class: "mx-auto d-block" %>
-<div class="w-100 d-flex flex-column align-items-center">
-	<h1><%= I18n.t("minister.index.list") %></h1>
-	<h2><%= I18n.t("minister.index.choose") %></h2>
-</div>
+<div class="bg-image w-full h-full min-h-screen">
+	<div class="bg-overlay w-full h-full min-h-screen">
+		<%= image_tag "fenix.png", size: "250x250", alt: "Game Logo", class: "mx-auto d-block" %>
+		<div class="w-100 d-flex flex-column align-items-center text-white">
+			<h1><%= I18n.t("minister.index.list") %></h1>
+			<h2><%= I18n.t("minister.index.choose") %></h2>
+		</div>
 
-<div class="row mx-2">
-		<% @ministers.each_with_index do |minister, index| %>
-		<div class="card-body col-4 h-50">
-			<div class="card h-100" id="minister-<%= index %>">
-				<div class="card-body h-100 d-flex flex-column justify-content-between">
-					<h1 class="card-title"><%= minister.role %></h1>
-					<h2 class="card-text">
-						<h3 class="font-weight-bold"><%= I18n.t("minister.index.description") %>:</h3> <h4> <%= minister.description %></h4>
-					</h2>
+		<div class="row h-100 w-100">
+			<% @ministers.each_with_index do |minister, index| %>
+			<div class="card-body col-4 h-25">
+				<div class="card h-100  bg-opaque" id="minister-<%= index %>">
+					<div class="card-body h-100 d-flex flex-column justify-content-between">
+						<h1 class="card-title"><%= minister.role %></h1>
+						<h2 class="card-text">
+							<h3 class="font-weight-bold"><%= I18n.t("minister.index.description") %>:</h3> <h4> <%= minister.description %></h4>
+						</h2>
+					</div>
 				</div>
 			</div>
+			<% end %>
 		</div>
-		<% end %>
+		<div class="w-full d-flex justify-content-center align-items-center">
+			<%= link_to new_country_path, class: "btn btn-success w-25 h-5 mb-5 text-center", id: "start-game"  do %>
+				<h1 class="text-center" ><%= I18n.t("minister.index.start_game") %></h1>
+			<% end %>
+			<%# link_to I18n.t("minister.index.start_game"), new_country_path, class: "btn btn-success w-25 h-5 mb-5", id:"start-game" %>
 		</div>
-	<div class="w-full d-flex justify-content-center">
-			<%= link_to I18n.t("minister.index.start_game"), new_country_path, class: "btn btn-success w-25 h-5 mb-5", id:"start-game", style: "font-size: large;" %>
 	</div>
+</div>
 
 <% end %>
 <!-- Admin view -->

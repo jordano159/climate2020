@@ -1,3 +1,4 @@
+<% if mobile_device? %>
 <div class="card js-bottom-margin bg-light">
   <div class="card-body">
     <h5 class="card-title"><%= @event.title %></h5>
@@ -24,14 +25,6 @@
   </div>
 </div>
 
-<% if admin_signed_in? %>
-  <p>
-    <strong>Min deg:</strong>
-    <%= @event.min_deg %>
-  </p>
-  <%= link_to 'Edit', edit_event_path(@event) %>
-  <%= link_to 'Back', events_path %>
-<% end %>
 
 <script type="text/javascript">
 $(document).ready(function() {
@@ -39,3 +32,64 @@ $(document).ready(function() {
   $(".js-bottom-margin").css("margin-bottom", nav_height)
 });
 </script>
+
+<% else %>
+
+<div class="parent-playing min-h-screen">
+  <div class="div1-playing bg-image"></div>
+  <div class="div2-playing bg-overlay"></div>
+  <div class="div3-playing bg-overlay h-100">
+    <div class="d-flex flex-column align-items-center">
+      <div class="d-flex flex-column align-items-center h-50">
+        <%= image_tag "fenix.svg", class: "w-50 mt-1" %>
+        <h1 class="w-100 text-center text-white"><%= t "application.home_page.title" %></h1>
+      </div>
+    </div>
+      <%= render "layouts/sidebar" %>
+    <%= link_to I18n.t("event.show.quit"), { controller: "countries", action: "show", id: params[:country_id], quit: true, turn: true }, class: " btn btn-warning mt-4" if params[:country_id]%>
+  </div>
+  <div class="div4-playing">
+    <div class="card bg-transparent h-100">
+    <div class="card-body h-100">
+      <h5 class="card-title"><%= @event.title %></h5>
+      <p class="card-text"><%= @event.description %></p>
+      <p class="card-text">
+        <% if @event.amount.present? && @event.on_what.present? %>
+          <% if @event.amount > 0 %>
+            <% if (@event.amount % 1).zero? %>
+              <p class="card-text text-success"><%= @event.amount.abs.to_i.to_s + "+ " + Country.human_attribute_name(@event.on_what) %></p>
+            <% else %>
+              <p class="card-text text-success"><%= @event.amount.abs.to_s + "+ " + Country.human_attribute_name(@event.on_what) %></p>
+            <% end %>
+          <% else %>
+            <% if (@event.amount % 1).zero? %>
+              <p class="card-text text-danger"><%= @event.amount.abs.to_i.to_s + "- " + Country.human_attribute_name(@event.on_what) %></p>
+            <% else %>
+              <p class="card-text text-danger"><%= @event.amount.abs.to_s + "- " + Country.human_attribute_name(@event.on_what) %></p>
+            <% end %>
+          <% end %>
+        <% end %>
+      <%= render "desktop-options" %>
+    </div>
+  </div>
+</div>
+</div>
+
+
+
+<script type="text/javascript">
+$(document).ready(function() {
+  nav_height = $("nav").outerHeight()
+  $(".js-bottom-margin").css("margin-bottom", nav_height)
+});
+</script>
+
+<% end %>
+<% if admin_signed_in? %>
+<p>
+  <strong>Min deg:</strong>
+  <%= @event.min_deg %>
+</p>
+<%= link_to 'Edit', edit_event_path(@event) %>
+<%= link_to 'Back', events_path %>
+<% end %>

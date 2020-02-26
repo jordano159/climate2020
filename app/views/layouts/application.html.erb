@@ -23,11 +23,13 @@
     <link href="https://fonts.googleapis.com/css?family=Suez+One" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Secular+One" rel="stylesheet">
 		<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js'></script>
-		<script src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.6.2/bootstrap-slider.min.js'></script>
+		<!-- <script src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.6.2/bootstrap-slider.min.js'></script> -->
+    <script src='https://unpkg.com/@popperjs/core@2'></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <%= render 'application/favicon' %>
     </head>
+
 
   <body class="bg-light">
     <% if admin_signed_in? %>
@@ -46,10 +48,10 @@
     <div class="w-100 h-100" dir="rtl">
       <%= yield %>
     </div>
-    <%= render 'layouts/navbar' %>
-    <div class="menu w-screen h-screen fixed-top bg-transparent p-5 ">
-      <%= render 'layouts/data' %>
-    </div>
+    <%= render 'layouts/navbar' if mobile_device? %>
+    <!-- <div class="menu w-screen h-screen fixed-top bg-transparent p-5 "> -->
+      <%# render 'layouts/data' %>
+    <!-- </div> -->
 
 
   <script type="text/javascript">

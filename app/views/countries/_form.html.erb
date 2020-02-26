@@ -120,54 +120,59 @@
 
 
 <% else %>
-<div class="parent-new-country">
-<div class="div1-new-country ">
-  <sidebar class="footer ">
-    <div class="div3 d-flex flex-column align-items-center">
-      <div class="d-flex flex-column align-items-center h-50">
-        <%= image_tag "fenix.svg", class: "w-50 mt-5" %>
-        <h1 class="w-100 text-center"><%= t "application.home_page.title" %></h1>
-      </div>
-      <div class="d-flex flex-column align-items-center align-self-end h-50">
-        <h3 class="container">
-          <%= Country.human_attribute_name(:budget) %>: <br> <span id="budget" class="ltr" dir="ltr"><%= @country.budget%></span> <%=  I18n.t("event.show.million") %>
-          <span class="budget-minus"></span>
-          <span class="text-white tiny"> (<%= I18n.t("event.show.rest_of_game") %>) </span>
-        </h3>
+<div class="parent-new-country h-screen">
+  <div class="div1-new-country bg-image"></div>
+  <div class="div2-new-country bg-overlay"></div>
+    <div class="div3-new-country">
+      <sidebar class="footer ">
+        <div class="div3a d-flex flex-column align-items-center">
+          <div class="d-flex flex-column align-items-center h-50">
+            <%= image_tag "fenix.svg", class: "w-50 mt-5" %>
+            <h1 class="w-100 text-center"><%= t "application.home_page.title" %></h1>
+          </div>
+          <div class="d-flex flex-column align-items-center align-self-end h-50 w-100">
+            <h3 class="container">
+              <%= Country.human_attribute_name(:budget) %>: <br> <span id="budget" class="ltr" dir="ltr"><%= @country.budget%></span> <%=  I18n.t("event.show.million") %>
+              <span class="budget-minus"></span>
+              <span class="tiny"> (<%= I18n.t("event.show.rest_of_game") %>) </span>
+            </h3>
+          </div>
+        </div>
+      </sidebar>
+     </div>
+    <div class="div4-new-country">
+      <div class="d-flex flex-column w-100 h-100 justify-content-center">
+        <div class="w-100 d-flex justify-content-center mt-2">
+          <h1 class="text-white"><%= t "country.new.title" %></h1>
+        </div>
+        <div class="w-100 h-100 d-flex justify-content-center">
+          <%= simple_form_for(@country, defaults: { input_html: {class: "bg-opaque text-white"}, wrapper_html: { class: 'w-100 pr-2 pl-2 text-white' } }, html: { class: 'w-50 mb-5 bg-overlay rounded-lg' }) do |f| %>
+          <%= f.error_notification %>
+          <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+          <div class="form-inputs mt-2">
+            <%= f.input :name%>
+            <%= f.input :agriculture,   collection: agrihash, label_method: :second, value_method: :first, include_blank: false %>
+            <%= f.input :education,     collection: eduhash, label_method: :second, value_method: :first, include_blank: false %>
+            <%= f.input :security,      collection: securityhash, label_method: :second, value_method: :first, include_blank: false %>
+            <%= f.input :comms,         collection: commshash, label_method: :second, value_method: :first, include_blank: false %>
+            <%= f.input :social_sec,    collection: social_sechash, label_method: :second, value_method: :first, include_blank: false %>
+            <%= f.input :health,        collection: healthhash, label_method: :second, value_method: :first, include_blank: false %>
+            <%= f.input :water,         collection: waterhash, label_method: :second, value_method: :first, include_blank: false %>
+            <%= f.input :energy,        collection: energyhash, label_method: :second, value_method: :first, include_blank: false %>
+            <%= f.input :budget,        as: :hidden %>
+            <%= f.input :civ_num,       as: :hidden %>
+            <%= f.input :init_civ,      as: :hidden %>
+            <div class="form-actions d-flex justify-content-center">
+              <%= f.button :submit, class: "btn btn-info w-75", id:"submit" %>
+              <!-- <div class="budget-minus"></div> -->
+            </div>
+          </div>
+          <% end %>
+
+        </div>
+
       </div>
     </div>
-
-  </sidebar>
-
- </div>
-<div class="div2-new-country">
-  <div class="w-100 d-flex justify-content-center">
-    <h1><%= t "country.new.title" %></h1>
-  </div>
-  <%= simple_form_for(@country, defaults: { wrapper_html: { class: 'w-100 pr-2 pl-2 ' } }, html: { class: ' mb-5' }) do |f| %>
-  <%= f.error_notification %>
-  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
-  <div class="form-inputs w-100 mr-10 ml-10">
-
-    <%= f.input :name%>
-    <%= f.input :agriculture,   collection: agrihash, label_method: :second, value_method: :first, include_blank: false %>
-    <%= f.input :education,     collection: eduhash, label_method: :second, value_method: :first, include_blank: false %>
-    <%= f.input :security,      collection: securityhash, label_method: :second, value_method: :first, include_blank: false %>
-    <%= f.input :comms,         collection: commshash, label_method: :second, value_method: :first, include_blank: false %>
-    <%= f.input :social_sec,    collection: social_sechash, label_method: :second, value_method: :first, include_blank: false %>
-    <%= f.input :health,        collection: healthhash, label_method: :second, value_method: :first, include_blank: false %>
-    <%= f.input :water,         collection: waterhash, label_method: :second, value_method: :first, include_blank: false %>
-    <%= f.input :energy,        collection: energyhash, label_method: :second, value_method: :first, include_blank: false %>
-    <%= f.input :budget,        as: :hidden %>
-    <%= f.input :civ_num,       as: :hidden %>
-    <%= f.input :init_civ,      as: :hidden %>
-    <div class="form-actions">
-      <%= f.button :submit, class: "btn btn-success", id:"submit" %>
-      <!-- <div class="budget-minus"></div> -->
-    </div>
-  </div>
-  <% end %>
-</div>
 </div>
 
 <script type="text/javascript">

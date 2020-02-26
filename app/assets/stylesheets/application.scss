@@ -206,15 +206,24 @@ grid-row-gap: 0px;
  }
 
  .parent {
- display: grid;
- grid-template-columns: repeat(10, 1fr);
- grid-template-rows: repeat(10, 1fr);
- grid-column-gap: 0px;
- grid-row-gap: 0px;
+	 display: grid;
+	 grid-template-columns: repeat(10, 1fr);
+	 grid-template-rows: repeat(10, 1fr);
+	 grid-column-gap: 0px;
+	 grid-row-gap: 0px;
  }
 
- .div1 { grid-area: 1 / 1 / 11 / 11; }
- .div2 { grid-area: 1 / 1 / 11 / 11; }
+ .div1 {
+	 		grid-area: 1 / 1 / 11 / 11;
+			background-image: url(pollution.jpg);
+		  background-repeat: no-repeat, no-repeat;
+			background-position: center;
+			background-size: cover;
+  	}
+ .div2 {
+	 		grid-area: 1 / 1 / 11 / 11;
+			background: rgba(0,0,0,0.1);
+  			}
  .div3 { grid-area: 8 / 4 / 10 / 6; }
  .div4 { grid-area: 8 / 6 / 10 / 8; }
  .div5 { grid-area: 5 / 4 / 8 / 8; }

@@ -237,7 +237,7 @@ blockquote{
 
  .div1 {
 	 		grid-area: 1 / 1 / 11 / 11;
-			background-image: url(pollution.webp);
+			background-image: asset_url('pollution.webp');
 		  background-repeat: no-repeat, no-repeat;
 			background-position: center;
 			background-size: cover;

@@ -1,126 +1,276 @@
-<h1><%= t "country.game_over.title" %></h1>
-<h5 class="d-flex justify-content-center mb-2">
-  <div class="bg-primary rounded-pill w-75 text-white text-center">
-    <%= t('country.game_over.score') %>
-    <h1 class="text-center m-0">
-      100 / <%= t('country.game_over.score_num', count: (@country.score.to_i)) %>
-    </h1>
-    <%= t('country.game_over.points') %>
-  </div>
-</h5>
-<h5 class="d-flex justify-content-center mb-2">
-  <div class="">
-    <%= t('country.game_over.more_then', count: (@country.compare)) %>
-  </div>
-</h5>
-<div class="d-flex mb-2">
-  <div class="d-flex justify-content-center w-50 mx-1">
-    <div class="bg-success rounded-pill w-100 text-white text-center">
-      <%= t('country.game_over.survived') %>
-      <h3 class="text-center m-0">
-        <%= t('country.game_over.years_count', count: (@country.year - 2020)) %>
-      </h3>
-      <%= t('country.game_over.years') %>
-    </div>
-  </div>
-  <div class="d-flex justify-content-center w-50 mx-1">
-    <div class="bg-danger rounded-pill w-100 text-white text-center">
-      <%= t('country.game_over.lost') %>
-      <h3 class="text-center m-0">
-        <%= t('country.game_over.lives_lost_count', count: ((@country.init_civ - @country.civ_num).round)) %>
-      </h3>
-      <%= t('country.game_over.million_civs') %>
-    </div>
-  </div>
-</div>
-<hr>
-<div class="mb-5rem">
-  <% if @country.quit %>
-    <div>
-      <%= t('country.game_over.quit') %>
-    </div>
-  <% else %>
-    <div>
-      <%= t('country.game_over.everyone_dead') if @country.is_everyone_dead %>
-    </div>
-    <div>
-      <%= t('country.game_over.out_of_money') if @country.is_out_of_money %>
-    </div>
-    <div>
-      <%= t('country.game_over.civil_war') if @country.is_torn_apart %>
-    </div>
-    <div>
-      <%= t('country.game_over.war') if @country.is_conquered %>
-    </div>
-  <% end %>
-  <!-- Button trigger modal -->
-<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal">
-    <%= t('country.game_over.options') %>
-</button>
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h3 class="modal-title" id="exampleModalLabel"></h3>
-        <button class="float-left close" type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="">
-          <h3><%= t('country.game_over.options') %></h3>
-          <% @country.options.uniq.each do |option| %>
-          <div class="rounded-pill bg-white shadow mb-3 d-flex px-4 py-1 align-items-center justify-content-between">
-            <div class="">
-              <div class="text-secondary event-title">
-                <%= option.event.title %>
-              </div>
-              <div class="option-title"><%= option.title %></div>
-            </div>
-            <% if option.amount > 0 %>
-              <p class="card-text event-title text-success"><%= option.amount.abs.to_s + "+ " + Country.human_attribute_name(option.on_what) %></p>
-            <% else %>
-              <p class="card-text event-title text-danger"><%= option.amount.abs.to_s + "- " + Country.human_attribute_name(option.on_what) %></p>
-            <% end %>
-            <% if option.amount2.present? %>
-              <% if option.amount2 > 0 %>
-                <p class="card-text text-success"><%= option.amount2.abs.to_s + "+ " + Country.human_attribute_name(option.on_what2) %></p>
-              <% else %>
-                <p class="card-text text-danger"><%= option.amount2.abs.to_s + "- " + Country.human_attribute_name(option.on_what2) %></p>
-              <% end %>
-            <% end %>
-          </div>
-          <% end %>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal"><%= t('country.game_over.close') %></button>
-      </div>
-    </div>
-  </div>
-</div>
-<hr>
-<h1><%= t('country.game_over.hope') %></h1>
-<h3><%= t('country.game_over.alternative') %></h3>
-<p><%= t('country.game_over.economy') %></p>
-<hr>
-<h3><%= t('country.game_over.what_to_do') %></h3>
-<ul>
-  <li><%= link_to t('country.game_over.hashomer'), hashomer_hatzair_path %> - <%= t('country.game_over.hashomer_exp') %></li>
-  <li><%= link_to t('country.game_over.xr'), "https://xrebellionisrael.earth/" %> - <%= t('country.game_over.xr_exp') %></li>
-  <li><%= link_to t('country.game_over.tree'), "http://citytree.net/" %> - <%= t('country.game_over.tree_exp') %></li>
-  <li><%= link_to t('country.game_over.change'), new_direction_path %> - <%= t('country.game_over.change_exp') %></li>
-  <li><%= link_to t('country.game_over.this_changes'), "https://ecowiki.org.il/wiki/%D7%96%D7%94_%D7%9E%D7%A9%D7%A0%D7%94_%D7%94%D7%9B%D7%9C" %> - <%= t('country.game_over.eco_wiki') %></li>
-  <li><%= link_to t('country.game_over.air'), "https://www.globes.co.il/news/article.aspx?did=1001245957" %></li>
-  <li><%= link_to t('country.game_over.new_deal'), "https://youtu.be/VWtQrn-aRrM" %> <%= t('country.game_over.new_deal_exp') %></li>
-  <li><%= link_to t('country.game_over.greta'), "https://www.youtube.com/watch?v=kR5X1n7AY3A" %></li>
-  <li><%= link_to t('country.game_over.story'), "https://www.youtube.com/watch?v=cpkRvc-sOKk" %> - <%= t('country.game_over.story_exp') %></li>
-</ul>
-	<div class="">
-		<%= t('country.game_over.no_more_events') if Event.where("min_deg <= ?", @country.deg).where.not(id: @country.events).sample == nil %>
+<% if mobile_device? %>
+	<h1><%= t "country.game_over.title" %></h1>
+	<h5 class="d-flex justify-content-center mb-2">
+	  <div class="bg-primary rounded-pill w-75 text-white text-center">
+	    <%= t('country.game_over.score') %>
+	    <h1 class="text-center m-0">
+	      100 / <%= t('country.game_over.score_num', count: (@country.score.to_i)) %>
+	    </h1>
+	    <%= t('country.game_over.points') %>
+	  </div>
+	</h5>
+	<h5 class="d-flex justify-content-center mb-2">
+	  <div class="">
+	    <%= t('country.game_over.more_then', count: (@country.compare)) %>
+	  </div>
+	</h5>
+	<div class="d-flex mb-2">
+	  <div class="d-flex justify-content-center w-50 mx-1">
+	    <div class="bg-success rounded-pill w-100 text-white text-center">
+	      <%= t('country.game_over.survived') %>
+	      <h3 class="text-center m-0">
+	        <%= t('country.game_over.years_count', count: (@country.year - 2020)) %>
+	      </h3>
+	      <%= t('country.game_over.years') %>
+	    </div>
+	  </div>
+	  <div class="d-flex justify-content-center w-50 mx-1">
+	    <div class="bg-danger rounded-pill w-100 text-white text-center">
+	      <%= t('country.game_over.lost') %>
+	      <h3 class="text-center m-0">
+	        <%= t('country.game_over.lives_lost_count', count: ((@country.init_civ - @country.civ_num).round)) %>
+	      </h3>
+	      <%= t('country.game_over.million_civs') %>
+	    </div>
+	  </div>
 	</div>
-<hr>
-  <%= link_to I18n.t("country.game_over.new_game"), root_path %>
+	<hr>
+	<div class="mb-5rem">
+	  <% if @country.quit %>
+	    <div>
+	      <%= t('country.game_over.quit') %>
+	    </div>
+	  <% else %>
+	    <div>
+	      <%= t('country.game_over.everyone_dead') if @country.is_everyone_dead %>
+	    </div>
+	    <div>
+	      <%= t('country.game_over.out_of_money') if @country.is_out_of_money %>
+	    </div>
+	    <div>
+	      <%= t('country.game_over.civil_war') if @country.is_torn_apart %>
+	    </div>
+	    <div>
+	      <%= t('country.game_over.war') if @country.is_conquered %>
+	    </div>
+	  <% end %>
+	  <!-- Button trigger modal -->
+	<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal">
+	    <%= t('country.game_over.options') %>
+	</button>
+
+	<!-- Modal -->
+	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h3 class="modal-title" id="exampleModalLabel"></h3>
+	        <button class="float-left close" type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	        <div class="">
+	          <h3><%= t('country.game_over.options') %></h3>
+	          <% @country.options.uniq.each do |option| %>
+	          <div class="rounded-pill bg-white shadow mb-3 d-flex px-4 py-1 align-items-center justify-content-between">
+	            <div class="">
+	              <div class="text-secondary event-title">
+	                <%= option.event.title %>
+	              </div>
+	              <div class="option-title"><%= option.title %></div>
+	            </div>
+	            <% if option.amount > 0 %>
+	              <p class="card-text event-title text-success"><%= option.amount.abs.to_s + "+ " + Country.human_attribute_name(option.on_what) %></p>
+	            <% else %>
+	              <p class="card-text event-title text-danger"><%= option.amount.abs.to_s + "- " + Country.human_attribute_name(option.on_what) %></p>
+	            <% end %>
+	            <% if option.amount2.present? %>
+	              <% if option.amount2 > 0 %>
+	                <p class="card-text text-success"><%= option.amount2.abs.to_s + "+ " + Country.human_attribute_name(option.on_what2) %></p>
+	              <% else %>
+	                <p class="card-text text-danger"><%= option.amount2.abs.to_s + "- " + Country.human_attribute_name(option.on_what2) %></p>
+	              <% end %>
+	            <% end %>
+	          </div>
+	          <% end %>
+	        </div>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal"><%= t('country.game_over.close') %></button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	<hr>
+	<h1><%= t('country.game_over.hope') %></h1>
+	<h3><%= t('country.game_over.alternative') %></h3>
+	<p><%= t('country.game_over.economy') %></p>
+	<hr>
+	<h3><%= t('country.game_over.what_to_do') %></h3>
+	<ul>
+	  <li><%= link_to t('country.game_over.hashomer'), hashomer_hatzair_path %> - <%= t('country.game_over.hashomer_exp') %></li>
+	  <li><%= link_to t('country.game_over.xr'), "https://xrebellionisrael.earth/" %> - <%= t('country.game_over.xr_exp') %></li>
+	  <li><%= link_to t('country.game_over.tree'), "http://citytree.net/" %> - <%= t('country.game_over.tree_exp') %></li>
+	  <li><%= link_to t('country.game_over.change'), new_direction_path %> - <%= t('country.game_over.change_exp') %></li>
+	  <li><%= link_to t('country.game_over.this_changes'), "https://ecowiki.org.il/wiki/%D7%96%D7%94_%D7%9E%D7%A9%D7%A0%D7%94_%D7%94%D7%9B%D7%9C" %> - <%= t('country.game_over.eco_wiki') %></li>
+	  <li><%= link_to t('country.game_over.air'), "https://www.globes.co.il/news/article.aspx?did=1001245957" %></li>
+	  <li><%= link_to t('country.game_over.new_deal'), "https://youtu.be/VWtQrn-aRrM" %> <%= t('country.game_over.new_deal_exp') %></li>
+	  <li><%= link_to t('country.game_over.greta'), "https://www.youtube.com/watch?v=kR5X1n7AY3A" %></li>
+	  <li><%= link_to t('country.game_over.story'), "https://www.youtube.com/watch?v=cpkRvc-sOKk" %> - <%= t('country.game_over.story_exp') %></li>
+	</ul>
+		<div class="">
+			<%= t('country.game_over.no_more_events') if Event.where("min_deg <= ?", @country.deg).where.not(id: @country.events).sample == nil %>
+		</div>
+	<hr>
+	  <%= link_to I18n.t("country.game_over.new_game"), root_path %>
+	</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<% else %>
+<div class="parent-game-over h-full">
+<div class="div1-game-over"> </div>
+<div class="div2-game-over bg-overlay"> </div>
+<div class="div3-game-over bg-opaque rounded-lg">
+	<h1><%= t "country.game_over.title" %></h1>
+	<h5 class="d-flex justify-content-center mb-2">
+	  <div class="bg-primary rounded-pill w-75 text-white text-center">
+	    <%= t('country.game_over.score') %>
+	    <h1 class="text-center m-0">
+	      100 / <%= t('country.game_over.score_num', count: (@country.score.to_i)) %>
+	    </h1>
+	    <%= t('country.game_over.points') %>
+	  </div>
+	</h5>
+	<h5 class="d-flex justify-content-center mb-2">
+	  <div class="">
+	    <%= t('country.game_over.more_then', count: (@country.compare)) %>
+	  </div>
+	</h5>
+	<div class="d-flex mb-2">
+	  <div class="d-flex justify-content-center w-50 mx-1">
+	    <div class="bg-success rounded-pill w-100 text-white text-center">
+	      <%= t('country.game_over.survived') %>
+	      <h3 class="text-center m-0">
+	        <%= t('country.game_over.years_count', count: (@country.year - 2020)) %>
+	      </h3>
+	      <%= t('country.game_over.years') %>
+	    </div>
+	  </div>
+	  <div class="d-flex justify-content-center w-50 mx-1">
+	    <div class="bg-danger rounded-pill w-100 text-white text-center">
+	      <%= t('country.game_over.lost') %>
+	      <h3 class="text-center m-0">
+	        <%= t('country.game_over.lives_lost_count', count: ((@country.init_civ - @country.civ_num).round)) %>
+	      </h3>
+	      <%= t('country.game_over.million_civs') %>
+	    </div>
+	  </div>
+	</div>
+	<hr>
+	<div class="mb-5rem">
+	  <% if @country.quit %>
+	    <div>
+	      <%= t('country.game_over.quit') %>
+	    </div>
+	  <% else %>
+	    <div>
+	      <%= t('country.game_over.everyone_dead') if @country.is_everyone_dead %>
+	    </div>
+	    <div>
+	      <%= t('country.game_over.out_of_money') if @country.is_out_of_money %>
+	    </div>
+	    <div>
+	      <%= t('country.game_over.civil_war') if @country.is_torn_apart %>
+	    </div>
+	    <div>
+	      <%= t('country.game_over.war') if @country.is_conquered %>
+	    </div>
+	  <% end %>
+	  <!-- Button trigger modal -->
+	<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal">
+	    <%= t('country.game_over.options') %>
+	</button>
+
+	<!-- Modal -->
+	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h3 class="modal-title" id="exampleModalLabel"></h3>
+	        <button class="float-left close" type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	        <div class="">
+	          <h3><%= t('country.game_over.options') %></h3>
+	          <% @country.options.uniq.each do |option| %>
+	          <div class="rounded-pill bg-white shadow mb-3 d-flex px-4 py-1 align-items-center justify-content-between">
+	            <div class="">
+	              <div class="text-secondary event-title">
+	                <%= option.event.title %>
+	              </div>
+	              <div class="option-title"><%= option.title %></div>
+	            </div>
+	            <% if option.amount > 0 %>
+	              <p class="card-text event-title text-success"><%= option.amount.abs.to_s + "+ " + Country.human_attribute_name(option.on_what) %></p>
+	            <% else %>
+	              <p class="card-text event-title text-danger"><%= option.amount.abs.to_s + "- " + Country.human_attribute_name(option.on_what) %></p>
+	            <% end %>
+	            <% if option.amount2.present? %>
+	              <% if option.amount2 > 0 %>
+	                <p class="card-text text-success"><%= option.amount2.abs.to_s + "+ " + Country.human_attribute_name(option.on_what2) %></p>
+	              <% else %>
+	                <p class="card-text text-danger"><%= option.amount2.abs.to_s + "- " + Country.human_attribute_name(option.on_what2) %></p>
+	              <% end %>
+	            <% end %>
+	          </div>
+	          <% end %>
+	        </div>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal"><%= t('country.game_over.close') %></button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	<hr>
+	<h1><%= t('country.game_over.hope') %></h1>
+	<h3><%= t('country.game_over.alternative') %></h3>
+	<p><%= t('country.game_over.economy') %></p>
+	<hr>
+	<h3><%= t('country.game_over.what_to_do') %></h3>
+	<ul>
+	  <li><%= link_to t('country.game_over.hashomer'), hashomer_hatzair_path %> - <%= t('country.game_over.hashomer_exp') %></li>
+	  <li><%= link_to t('country.game_over.xr'), "https://xrebellionisrael.earth/" %> - <%= t('country.game_over.xr_exp') %></li>
+	  <li><%= link_to t('country.game_over.tree'), "http://citytree.net/" %> - <%= t('country.game_over.tree_exp') %></li>
+	  <li><%= link_to t('country.game_over.change'), new_direction_path %> - <%= t('country.game_over.change_exp') %></li>
+	  <li><%= link_to t('country.game_over.this_changes'), "https://ecowiki.org.il/wiki/%D7%96%D7%94_%D7%9E%D7%A9%D7%A0%D7%94_%D7%94%D7%9B%D7%9C" %> - <%= t('country.game_over.eco_wiki') %></li>
+	  <li><%= link_to t('country.game_over.air'), "https://www.globes.co.il/news/article.aspx?did=1001245957" %></li>
+	  <li><%= link_to t('country.game_over.new_deal'), "https://youtu.be/VWtQrn-aRrM" %> <%= t('country.game_over.new_deal_exp') %></li>
+	  <li><%= link_to t('country.game_over.greta'), "https://www.youtube.com/watch?v=kR5X1n7AY3A" %></li>
+	  <li><%= link_to t('country.game_over.story'), "https://www.youtube.com/watch?v=cpkRvc-sOKk" %> - <%= t('country.game_over.story_exp') %></li>
+	</ul>
+		<div class="">
+			<%= t('country.game_over.no_more_events') if Event.where("min_deg <= ?", @country.deg).where.not(id: @country.events).sample == nil %>
+		</div>
+	<hr>
+	  <%= link_to I18n.t("country.game_over.new_game"), root_path %>
+	</div>
+ </div>
 </div>
+
+<% end %>

@@ -155,24 +155,6 @@ blockquote{
 #warning{
     animation: yourAnimation 2s infinite 0s linear;
 }
-// .parent {
-// 	display: grid;
-// 	grid-template-columns: repeat(5, 1fr);
-// 	grid-template-rows: repeat(6, 1fr);
-// 	grid-column-gap: 0px;
-// 	grid-row-gap: 0px;
-// 	background: #efefef
-// }
-//
-// .div1 { grid-area: 1 / 2 / 3 / 6; }
-// .div2 { grid-area: 3 / 3 / 5 / 5; }
-// .div3 {
-// 	 grid-area: 1 / 1 / 7 / 2;
-// 	 background: #eafff1;
-// 	 -webkit-box-shadow: -7px 0px 5px -1px rgba(0,0,0,0.19);
-// -moz-box-shadow: -7px 0px 5px -1px rgba(0,0,0,0.19);
-// box-shadow: -7px 0px 5px -1px rgba(0,0,0,0.19);
-//  }
 
 
 .div3 h4{
@@ -272,7 +254,7 @@ blockquote{
 	background-repeat: no-repeat, no-repeat;
 	background-position: center;
 	background-size: cover;
-	 background-attachment: fixed;
+  background-attachment: fixed;
 }
 .bg-overlay{
 	background: rgba(0,0,0,0.3);
@@ -297,3 +279,23 @@ blockquote{
 	left: 50%;
 	transform: translate(-50%, -50%) !important;
 }
+
+
+.parent-game-over {
+display: grid;
+grid-template-columns: repeat(12, 1fr);
+grid-template-rows: repeat(10, 1fr);
+grid-column-gap: 0px;
+grid-row-gap: 0px;
+}
+
+.div1-game-over { grid-area: 1 / 1 / 11 / 13;
+		background-image: asset_url('xr.webp');
+		background-repeat: no-repeat, no-repeat;
+		background-position: center;
+		background-size: cover;
+
+		 background-attachment: fixed;
+	 }
+.div2-game-over { grid-area: 1 / 1 / 11 / 13; }
+.div3-game-over { grid-area: 2 / 4 / 10 / 10; }

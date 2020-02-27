@@ -57,15 +57,15 @@ $(document).ready(function() {
         <% if @event.amount.present? && @event.on_what.present? %>
           <% if @event.amount > 0 %>
             <% if (@event.amount % 1).zero? %>
-              <p class="card-text text-success"><%= @event.amount.abs.to_i.to_s + "+ " + Country.human_attribute_name(@event.on_what) %></p>
+              <span class="card-text bg-success rounded text-white px-1"><%= @event.amount.abs.to_i.to_s + "+ " + Country.human_attribute_name(@event.on_what) %></span>
             <% else %>
-              <p class="card-text text-success"><%= @event.amount.abs.to_s + "+ " + Country.human_attribute_name(@event.on_what) %></p>
+              <span class="card-text bg-success rounded text-white px-1"><%= @event.amount.abs.to_s + "+ " + Country.human_attribute_name(@event.on_what) %></span>
             <% end %>
           <% else %>
             <% if (@event.amount % 1).zero? %>
-              <p class="card-text text-danger"><%= @event.amount.abs.to_i.to_s + "- " + Country.human_attribute_name(@event.on_what) %></p>
+              <span class="card-text bg-danger rounded text-white px-1"><%= @event.amount.abs.to_i.to_s + "- " + Country.human_attribute_name(@event.on_what) %></span>
             <% else %>
-              <p class="card-text text-danger"><%= @event.amount.abs.to_s + "- " + Country.human_attribute_name(@event.on_what) %></p>
+              <span class="card-text bg-danger rounded text-white px-1"><%= @event.amount.abs.to_s + "- " + Country.human_attribute_name(@event.on_what) %></span>
             <% end %>
           <% end %>
         <% end %>

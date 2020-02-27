@@ -35,7 +35,7 @@
       </div>
       <% if params[:country_id] %>
         <% country = Country.find(params[:country_id]) %>
-        <div class="req">
+        <div class="req mt-5">
           <%= I18n.t("event.show.requirements") %>:
           <span class="reqq">
             <%= tag(:br) + Country.human_attribute_name(:resilience) + " - " +  reshash[option.min_resilience.to_sym]                       if option.read_attribute_before_type_cast(:min_resilience) > 0 %>

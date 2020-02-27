@@ -38,7 +38,7 @@ $(document).ready(function() {
 <div class="parent-playing min-h-screen">
   <div class="div1-playing bg-image"></div>
   <div class="div2-playing bg-overlay"></div>
-  <div class="div3-playing bg-overlay h-100">
+  <div class="div3-playing bg-overlay h-screen">
     <div class="d-flex flex-column align-items-center">
       <div class="d-flex flex-column align-items-center h-50">
         <%= image_tag "fenix.svg", class: "w-50 mt-1" %>
@@ -51,8 +51,8 @@ $(document).ready(function() {
   <div class="div4-playing">
     <div class="card bg-transparent h-100">
     <div class="card-body h-100">
-      <h5 class="card-title"><%= @event.title %></h5>
-      <p class="card-text"><%= @event.description %></p>
+      <h1 class="card-title text-white"><%= @event.title %></h1>
+      <h3 class="card-text text-white"><%= @event.description %></h3>
       <p class="card-text">
         <% if @event.amount.present? && @event.on_what.present? %>
           <% if @event.amount > 0 %>
